@@ -8,7 +8,7 @@ import { usePathname } from "next/navigation"; // Hook to detect active page
 const BrandLogo = () => (
   <span className="text-xl font-bold">
     <span className="bg-purple-600 text-white px-2 py-1 rounded mr-1">
-      Krypto
+      Crypto
     </span>
     <span className="border border-purple-600 text-purple-600 px-2 py-1 rounded">
       Gyan

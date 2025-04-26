@@ -16,7 +16,7 @@ function Footer() {
             className="inline-block text-white text-2xl font-bold mb-4"
           >
             <span className="bg-white text-[#7c3aed] px-2 py-1 rounded mr-1">
-              Krypto
+              Crypto
             </span>
             {/* Keep comments/spacing if needed for inline-block style */}
             <span className="border border-white px-2 py-1 rounded">Gyan</span>
