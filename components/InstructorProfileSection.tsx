@@ -6,7 +6,7 @@ const instructor = {
   name: "Ms. Anya Sharma", // Fictional name
   title: "Lead Instructor & Founder of Krypto Gyan",
   description: `Anya Sharma, the founder of Krypto Gyan, launched the platform to demystify blockchain and cryptocurrency investing for everyone. She holds advanced degrees in Computer Science and Finance, coupled with over a decade of experience in fintech and crypto markets. Anya honed her expertise under leading blockchain researchers and developed a profound understanding of crypto trends, decentralized finance (DeFi), and NFT ecosystems.`,
-  imageUrl: "/images/instructor-placeholder.png", // << CHANGE TO YOUR IMAGE PATH in /public
+  imageUrl: "/image2.png", // << CHANGE TO YOUR IMAGE PATH in /public
   // Example remote URL (remember to configure next.config.mjs)
   // imageUrl: 'https://images.unsplash.com/photo-1580894742597-87bc8789db3d?&fit=crop&q=80&w=400',
   altText: "Ms. Anya Sharma, Lead Instructor at Krypto Gyan",
