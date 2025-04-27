@@ -10,7 +10,7 @@ function Footer() {
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8">
         {/* Column 1: Logo & Description */}
         <div className="md:col-span-3 lg:col-span-1">
-          {/* Krypto Gyan Logo Placeholder */}
+          {/* Crypto Gyan Logo Placeholder */}
           <Link
             href="/"
             className="inline-block text-white text-2xl font-bold mb-4"
@@ -24,7 +24,7 @@ function Footer() {
           <p className="text-sm text-[#ede9fe] leading-relaxed">
             {" "}
             {/* Lighter text */}
-            Krypto Gyan provides expert-led courses to demystify cryptocurrency
+            Crypto Gyan provides expert-led courses to demystify cryptocurrency
             and blockchain technology.
           </p>
         </div>
@@ -162,7 +162,7 @@ function Footer() {
           </h4>
           <div className="space-y-3 text-sm text-[#ede9fe]">
             <p>+91 987 654 3210</p> {/* Example Number */}
-            <p>support@kryptogyan.com</p> {/* Example Email */}
+            <p>support@Cryptogyan.com</p> {/* Example Email */}
           </div>
           {/* External Link - Keep as <a> tag */}
           <a
@@ -193,7 +193,7 @@ function Footer() {
       {/* Footer Bottom */}
       <div className="mt-12 border-t border-purple-800/50 pt-8 text-center">
         <p className="text-base text-[#ede9fe]">
-          &copy; {currentYear} Krypto Gyan. All rights reserved.
+          &copy; {currentYear} Crypto Gyan. All rights reserved.
         </p>
       </div>
     </footer>
