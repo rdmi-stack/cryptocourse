@@ -174,7 +174,7 @@ function HeroSection() {
                 whileTap={{ scale: 0.98 }}
               >
                 <Link
-                  href="#courses" // Link to courses section on the same page
+                  href="/courses" // Link to courses section on the same page
                   className="inline-flex items-center justify-center px-7 py-3.5 text-base font-semibold rounded-lg text-purple-700 bg-purple-100 shadow-md hover:bg-purple-200 dark:bg-purple-900/50 dark:text-purple-300 dark:hover:bg-purple-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 dark:focus:ring-offset-gray-900 transition-all duration-200 ease-in-out"
                 >
                   Explore Courses 👇
