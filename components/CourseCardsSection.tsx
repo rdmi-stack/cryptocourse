@@ -29,28 +29,28 @@ const containerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.15, // Stagger delay between card animations
-      delayChildren: 0.2, // Optional delay before the first child starts
+      staggerChildren: 0.1, // Slightly faster stagger for 2 columns
+      delayChildren: 0.2,
     },
   },
 };
 
 // Variants for individual cards
 const cardVariants = {
-  hidden: { opacity: 0, y: 30, scale: 0.98 }, // Start slightly down, scaled down, and transparent
+  hidden: { opacity: 0, y: 30, scale: 0.98 },
   visible: {
     opacity: 1,
     y: 0,
     scale: 1,
     transition: {
-      duration: 0.5, // Animation duration
-      ease: "easeOut", // Animation easing
+      duration: 0.5,
+      ease: "easeOut",
     },
   },
 };
 
 function CourseCardsSection() {
-  // Array of course data (same as before, potentially adjusted icons/gradients)
+  // Array of course data - Adjusted to have exactly 6 courses for the 2x3 grid
   const courses: Course[] = [
     {
       slug: "blockchain-basics",
@@ -62,7 +62,7 @@ function CourseCardsSection() {
       lessons: 12,
       duration: 4,
       rating: 4.8,
-      gradient: "from-cyan-400 to-blue-500", // Slightly adjusted gradient
+      gradient: "from-cyan-400 to-blue-500",
       badge: "Foundational",
       badgeColor: "bg-yellow-400 text-gray-900",
       icon: (
@@ -72,14 +72,15 @@ function CourseCardsSection() {
           viewBox="0 0 24 24"
           strokeWidth="1.5"
           stroke="currentColor"
-          className="w-6 h-6 text-white/90"
+          className="w-8 h-8 text-white/90"
         >
           {" "}
+          {/* Slightly larger icon */}
           <path
             strokeLinecap="round"
             strokeLinejoin="round"
             d="m21 7.5-9-5.25L3 7.5m18 0-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9"
-          />{" "}
+          />
         </svg>
       ),
     },
@@ -93,7 +94,7 @@ function CourseCardsSection() {
       lessons: 25,
       duration: 10,
       rating: 4.9,
-      gradient: "from-purple-500 to-indigo-600", // Adjusted gradient
+      gradient: "from-purple-500 to-indigo-600",
       badge: "Popular",
       badgeColor: "bg-pink-500 text-white",
       icon: (
@@ -103,14 +104,15 @@ function CourseCardsSection() {
           viewBox="0 0 24 24"
           strokeWidth="1.5"
           stroke="currentColor"
-          className="w-6 h-6 text-white/90"
+          className="w-8 h-8 text-white/90"
         >
           {" "}
+          {/* Slightly larger icon */}
           <path
             strokeLinecap="round"
             strokeLinejoin="round"
             d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75v4.5m0-4.5h-4.5m4.5 0L15 9m5.25 11.25v-4.5m0 4.5h-4.5m4.5 0L15 15"
-          />{" "}
+          />
         </svg>
       ),
     },
@@ -124,7 +126,7 @@ function CourseCardsSection() {
       lessons: 15,
       duration: 6,
       rating: 4.7,
-      gradient: "from-rose-400 to-red-500", // Kept gradient
+      gradient: "from-rose-400 to-red-500",
       badge: null,
       badgeColor: "",
       icon: (
@@ -134,14 +136,15 @@ function CourseCardsSection() {
           viewBox="0 0 24 24"
           strokeWidth="1.5"
           stroke="currentColor"
-          className="w-6 h-6 text-white/90"
+          className="w-8 h-8 text-white/90"
         >
           {" "}
+          {/* Slightly larger icon */}
           <path
             strokeLinecap="round"
             strokeLinejoin="round"
             d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm16.5-1.5L12 12.75M2.25 15.75l12-12"
-          />{" "}
+          />
         </svg>
       ),
     },
@@ -155,7 +158,7 @@ function CourseCardsSection() {
       lessons: 30,
       duration: 18,
       rating: 4.8,
-      gradient: "from-emerald-500 to-green-600", // Adjusted gradient
+      gradient: "from-emerald-500 to-green-600",
       badge: "Pro Level",
       badgeColor: "bg-orange-500 text-white",
       icon: (
@@ -165,8 +168,10 @@ function CourseCardsSection() {
           viewBox="0 0 24 24"
           strokeWidth="1.5"
           stroke="currentColor"
-          className="w-6 h-6 text-white/90"
+          className="w-8 h-8 text-white/90"
         >
+          {" "}
+          {/* Slightly larger icon */}
           <path
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -175,15 +180,82 @@ function CourseCardsSection() {
         </svg>
       ),
     },
+    // --- Added Courses for 2x3 Grid ---
+    {
+      slug: "smart-contract-dev",
+      title: "Smart Contract Development (Solidity)",
+      level: "Intermediate",
+      price: "₹6,499",
+      description:
+        "Learn Solidity programming to build and deploy smart contracts on Ethereum-compatible blockchains.",
+      lessons: 28,
+      duration: 15,
+      rating: 4.9,
+      gradient: "from-amber-400 to-orange-500",
+      badge: "Developer Track",
+      badgeColor: "bg-blue-500 text-white",
+      icon: (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth="1.5"
+          stroke="currentColor"
+          className="w-8 h-8 text-white/90"
+        >
+          {" "}
+          {/* Slightly larger icon */}
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5"
+          />
+        </svg>
+      ),
+    },
+    {
+      slug: "web3-security-essentials",
+      title: "Web3 Security Essentials",
+      level: "Advanced",
+      price: "₹8,999",
+      description:
+        "Understand common vulnerabilities in smart contracts and dApps, and learn best practices for secure development.",
+      lessons: 22,
+      duration: 12,
+      rating: 4.7,
+      gradient: "from-red-500 to-pink-600",
+      badge: "Critical Skills",
+      badgeColor: "bg-gray-700 text-white",
+      icon: (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth="1.5"
+          stroke="currentColor"
+          className="w-8 h-8 text-white/90"
+        >
+          {" "}
+          {/* Slightly larger icon */}
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z"
+          />
+        </svg>
+      ),
+    },
   ];
 
+  // Ensure we only render the first 6 courses if more are accidentally added
+  const displayedCourses = courses.slice(0, 6);
+
   return (
-    // Use motion.section for potential section-level animations (optional)
     <motion.section
-      className="py-20 sm:py-28 bg-white dark:bg-gray-950" // Adjusted padding and dark bg
+      className="py-20 sm:py-28 bg-white dark:bg-gray-950"
       id="courses"
       initial="hidden"
-      animate="visible" // Can replace with whileInView={{ once: true, amount: 0.1 }} if preferred
+      animate="visible" // Can replace with whileInView
       variants={containerVariants} // Apply container variants here IF animating section itself
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -192,65 +264,77 @@ function CourseCardsSection() {
           <h2 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-4xl lg:text-5xl">
             Unlock Your Potential
           </h2>
-          <p className="mt-4 text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            High-quality courses designed to take you from beginner to expert.
+          <p className="mt-4 text-lg text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+            {" "}
+            {/* Slightly wider max-width for title description */}
+            High-quality courses designed to take you from beginner to expert in
+            the Web3 space.
           </p>
         </div>
-        {/* Grid Container - Applying motion variants for stagger effect */}
+        {/* Grid Container - Adjusted for 2 columns on medium screens and up */}
         <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10"
-          // variants applied here for staggering children
+          className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12" // Use md:grid-cols-2, larger gap on larger screens
           variants={containerVariants}
           initial="hidden"
-          animate="visible" // Animate when the section becomes visible
-          // Or use whileInView for animation trigger on scroll:
-          // initial="hidden"
+          animate="visible" // Or use whileInView for scroll trigger
           // whileInView="visible"
-          // viewport={{ once: true, amount: 0.1 }} // Adjust amount as needed
+          // viewport={{ once: true, amount: 0.1 }}
         >
-          {courses.map((course) => (
+          {displayedCourses.map((course) => (
             // Course Card - Applying motion variants and hover effects
             <motion.div
               key={course.slug}
-              className={`group relative rounded-xl overflow-hidden shadow-lg hover:shadow-2xl dark:shadow-black/40 dark:hover:shadow-black/60 bg-gradient-to-br ${course.gradient} text-white flex flex-col h-full`} // Ensure full height for flex items
-              variants={cardVariants} // Apply card entrance animation variants
+              // Increased min-height and adjusted padding for better look with 2 columns
+              className="group relative rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl dark:shadow-black/40 dark:hover:shadow-black/60 bg-gradient-to-br text-white flex flex-col h-full min-h-[450px] sm:min-h-[480px]" // Added min-height
+              variants={cardVariants}
               whileHover={{
-                scale: 1.04, // Scale up slightly
-                y: -6, // Lift up slightly
-                transition: { duration: 0.25, ease: "easeOut" }, // Smooth hover transition
+                scale: 1.03, // Slightly less scale increase
+                y: -8, // Lift up slightly more
+                transition: { duration: 0.25, ease: "easeOut" },
               }}
-              layout // Animate layout changes if content size changes (optional but nice)
+              layout
             >
               {/* Badge */}
               {course.badge && (
                 <div
-                  className={`absolute top-4 right-4 ${course.badgeColor} text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full z-10 shadow-md`}
+                  className={`absolute top-5 right-5 ${course.badgeColor} text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full z-10 shadow-md`} // Adjusted position slightly
                 >
                   {course.badge}
                 </div>
               )}
               {/* Card Content Wrapper */}
-              <div className="p-6 flex flex-col flex-grow">
-                {/* Icon (larger, maybe styled background) */}
-                <div className="mb-5 w-14 h-14 rounded-xl bg-white/10 dark:bg-black/20 flex items-center justify-center shadow-inner">
+              <div
+                className={`p-6 lg:p-8 flex flex-col flex-grow bg-gradient-to-br ${course.gradient}`}
+              >
+                {" "}
+                {/* Gradient on wrapper */}
+                {/* Icon */}
+                <div className="mb-6 w-16 h-16 rounded-xl bg-white/10 dark:bg-black/20 flex items-center justify-center shadow-inner">
+                  {" "}
+                  {/* Larger icon container */}
                   {course.icon}
                 </div>
-
                 {/* Title and Meta */}
-                <h3 className="font-bold text-xl leading-tight mb-2">
+                <h3 className="font-bold text-2xl leading-tight mb-2">
+                  {" "}
+                  {/* Larger title */}
                   {course.title}
                 </h3>
-                <p className="text-sm text-white/80 mb-4">
+                <p className="text-base text-white/80 mb-5">
+                  {" "}
+                  {/* Slightly larger meta text */}
                   {course.level} | {course.price}
                 </p>
-
                 {/* Description */}
-                <p className="text-sm text-white/95 font-light leading-relaxed mt-1 mb-5 flex-grow">
+                <p className="text-base text-white/95 font-light leading-relaxed mt-1 mb-6 flex-grow">
+                  {" "}
+                  {/* Slightly larger description */}
                   {course.description}
                 </p>
-
-                {/* Stats Row (cleaner look) */}
-                <div className="mt-auto pt-5 border-t border-white/15 flex items-center justify-between text-xs font-medium text-white/80 space-x-4">
+                {/* Stats Row */}
+                <div className="mt-auto pt-6 border-t border-white/20 flex flex-wrap items-center justify-between text-sm font-medium text-white/80 gap-y-3 gap-x-4">
+                  {" "}
+                  {/* Adjusted stats row styles */}
                   <div
                     className="flex items-center space-x-1.5"
                     title={`${course.lessons} Lessons`}
@@ -304,7 +388,7 @@ function CourseCardsSection() {
                 </div>
               </div>{" "}
               {/* End Card Content Wrapper */}
-              {/* Link - Stretched over card using pseudo-element technique if preferred, or keep explicit button */}
+              {/* Link Overlay */}
               <Link
                 href={`/courses/${course.slug}`}
                 className="absolute inset-0 z-0"
@@ -312,17 +396,10 @@ function CourseCardsSection() {
               >
                 <span className="sr-only">View course: {course.title}</span>
               </Link>
-              {/* You might want a more subtle way to link, like making the title clickable or using the overlay above */}
-              {/* If keeping button: */}
-              {/* <div className="p-4 pt-0 relative z-10">
-                  <Link href={`/courses/${course.slug}`} className="block w-full text-center px-4 py-2 text-sm font-semibold bg-white/20 text-white rounded-md hover:bg-white/30 transition-colors duration-200">
-                    View Details
-                  </Link>
-              </div> */}
-            </motion.div> // End Course Card (motion.div)
+            </motion.div> // End Course Card
           ))}
         </motion.div>{" "}
-        {/* End Grid (motion.div) */}
+        {/* End Grid */}
       </div>{" "}
       {/* End Container */}
     </motion.section>
