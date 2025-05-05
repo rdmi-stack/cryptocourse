@@ -1,203 +1,110 @@
-import Link from "next/link"; // Import Link for internal navigation
+// components/Footer.tsx
+import React from 'react';
+import Link from 'next/link';
 
-function Footer() {
-  const currentYear = new Date().getFullYear(); // Get current year for copyright
+// --- SVG Icon Components defined above ---
+const FacebookIcon = () => (/* ...SVG code... */ <svg fill="currentColor" viewBox="0 0 24 24" className="w-5 h-5" aria-hidden="true"><path fillRule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12Z" clipRule="evenodd" /></svg>);
+const TwitterIcon = () => (/* ...SVG code... */ <svg fill="currentColor" viewBox="0 0 24 24" className="w-5 h-5" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" /></svg>);
+const InstagramIcon = () => (/* ...SVG code... */ <svg fill="currentColor" viewBox="0 0 24 24" className="w-5 h-5" aria-hidden="true"><path fillRule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 0 1 1.772 1.153 4.902 4.902 0 0 1 1.153 1.772c.247.636.416 1.363.465 2.427.048 1.024.06 1.378.06 3.808s-.012 2.784-.06 3.808c-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 0 1-1.153 1.772 4.902 4.902 0 0 1-1.772 1.153c-.636.247-1.363.416-2.427.465-1.024.048-1.378.06-3.808.06s-2.784-.012-3.808-.06c-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 0 1-1.772-1.153 4.902 4.902 0 0 1-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.048-1.024-.06-1.378-.06-3.808s.012-2.784.06-3.808c.049-1.064.218-1.791.465-2.427a4.902 4.902 0 0 1 1.153-1.772A4.902 4.902 0 0 1 5.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.023.047 1.351.058 3.807.058h.468c2.456 0 2.784-.011 3.807-.058.975-.045 1.504-.207 1.857-.344.467-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.047-1.023.058-1.351.058-3.807v-.468c0-2.456-.011-2.784-.058-3.807-.045-.975-.207-1.504-.344-1.857-.182-.467-.399-.8-.748-1.15-.35-.35-.683-.566-1.15-.748-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 1 0 0 10.27 5.135 5.135 0 0 0 0-10.27zm0 1.802a3.333 3.333 0 1 1 0 6.666 3.333 3.333 0 0 1 0-6.666zm5.338-3.205a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4z" clipRule="evenodd" /></svg>);
+const LinkedInIcon = () => (/* ...SVG code... */ <svg fill="currentColor" viewBox="0 0 24 24" className="w-5 h-5" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>);
+// ----------------------------------------
+
+const Footer: React.FC = () => {
+  const yellowAccentColor = 'text-yellow-400';
+
+  // Define Link structures (same as before)
+  const pagesLinks = [ { href: '/', label: 'Home' }, { href: '/portfolios/10x-alphas', label: 'Portfolios' }];
+  const supportLinks = [ { href: '/about', label: 'About us' }, { href: '/career', label: 'Career' }];
+  const legalLinks = [ { href: '/privacy-policy', label: 'Privacy Policy' }, { href: '/refund-policy', label: 'Refund Policy' }, { href: '/terms-conditions', label: 'Terms & Conditions' }];
+
+  // Updated social links with actual SVG components
+  const socialLinks = [
+     { href: '#', label: 'Facebook', Icon: FacebookIcon },
+     { href: '#', label: 'Twitter', Icon: TwitterIcon },
+     { href: '#', label: 'Instagram', Icon: InstagramIcon },
+     { href: '#', label: 'LinkedIn', Icon: LinkedInIcon },
+  ];
+
 
   return (
-    <footer className="bg-[#7c3aed] text-[#f5f3ff] py-16 px-4 sm:px-6 lg:px-8">
-      {" "}
-      {/* Using crypto purple */}
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8">
-        {/* Column 1: Logo & Description */}
-        <div className="md:col-span-3 lg:col-span-1">
-          {/* Crypto Gyan Logo Placeholder */}
-          <Link
-            href="/"
-            className="inline-block text-white text-2xl font-bold mb-4"
-          >
-            <span className="bg-white text-[#7c3aed] px-2 py-1 rounded mr-1">
-              Crypto
-            </span>
-            {/* Keep comments/spacing if needed for inline-block style */}
-            <span className="border border-white px-2 py-1 rounded">Gyan</span>
-          </Link>
-          <p className="text-sm text-[#ede9fe] leading-relaxed">
-            {" "}
-            {/* Lighter text */}
-            Crypto Gyan provides expert-led courses to demystify cryptocurrency
-            and blockchain technology.
+    <footer className="relative bg-black text-neutral-300 pt-16 pb-8 overflow-hidden">
+       {/* Optional: Subtle background pattern */}
+       <div className="absolute inset-0 opacity-[0.03] bg-[url('/path/to/dark-pattern.svg')] bg-repeat"></div>
+
+      <div className="container mx-auto px-4 sm:px-6 relative z-10">
+        {/* Top Section: Logo, Tagline, Links */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 mb-10">
+          {/* Column 1: Logo & Tagline */}
+          <div className="lg:col-span-2 pr-8">
+             {/* Logo Link */}
+             <Link href="/" legacyBehavior>
+                <a className={`font-serif text-3xl font-bold ${yellowAccentColor} mb-3 inline-block`} aria-label="Dubai Club Home">
+                   DUBAİ CLUB {/* Using spelling from PDF Page 11 */}
+                </a>
+             </Link>
+            <p className="text-sm text-neutral-400 leading-relaxed">
+              Dubai Club is a professional Research Analyst who simplifies Crypto Investing & more.
+            </p>
+          </div>
+
+          {/* Columns 2-4: Links (No changes needed here) */}
+          <div>
+             <h4 className="font-semibold text-neutral-100 mb-4 uppercase tracking-wider text-sm">Pages</h4>
+             <ul className="space-y-2">
+                {pagesLinks.map(link => (<li key={link.label}><Link href={link.href} legacyBehavior><a className="hover:text-yellow-400 transition-colors duration-200 text-sm">{link.label}</a></Link></li>))}
+             </ul>
+          </div>
+          <div>
+             <h4 className="font-semibold text-neutral-100 mb-4 uppercase tracking-wider text-sm">Support</h4>
+             <ul className="space-y-2">
+               {supportLinks.map(link => (<li key={link.label}><Link href={link.href} legacyBehavior><a className="hover:text-yellow-400 transition-colors duration-200 text-sm">{link.label}</a></Link></li>))}
+             </ul>
+          </div>
+          <div>
+            <h4 className="font-semibold text-neutral-100 mb-4 uppercase tracking-wider text-sm">Legal</h4>
+            <ul className="space-y-2">
+               {legalLinks.map(link => (<li key={link.label}><Link href={link.href} legacyBehavior><a className="hover:text-yellow-400 transition-colors duration-200 text-sm">{link.label}</a></Link></li>))}
+            </ul>
+          </div>
+        </div>
+
+        {/* Bottom Section: Social Icons & Copyright */}
+        <hr className="border-t border-gray-700/50 my-8" />
+        <div className="flex flex-col md:flex-row justify-between items-center text-sm">
+          {/* Social Icons - Now using SVGs */}
+          <div className="flex space-x-5 mb-6 md:mb-0"> {/* Increased spacing */}
+            {socialLinks.map(social => (
+              <a
+                 key={social.label}
+                 href={social.href}
+                 aria-label={social.label}
+                 target="_blank" // Open social links in new tab
+                 rel="noopener noreferrer" // Security best practice
+                 className="text-neutral-400 hover:text-yellow-400 transition-colors duration-200"
+              >
+                <social.Icon /> {/* Render the SVG component */}
+              </a>
+            ))}
+          </div>
+
+          {/* Copyright Notice */}
+          <p className="text-neutral-500 text-center md:text-right">
+            © {new Date().getFullYear()} DUBAI CLUB VENTURES All Rights Reserved.
           </p>
         </div>
 
-        {/* Column 2: Courses */}
-        <div>
-          <h4 className="text-sm font-semibold text-white uppercase tracking-wider mb-4">
-            Courses
-          </h4>
-          <ul className="space-y-3">
-            <li>
-              <Link
-                href="/courses/blockchain"
-                className="text-sm text-[#ede9fe] hover:text-white"
-              >
-                Blockchain Basics
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/courses/defi"
-                className="text-sm text-[#ede9fe] hover:text-white"
-              >
-                DeFi Courses
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/courses/nfts"
-                className="text-sm text-[#ede9fe] hover:text-white"
-              >
-                NFTs & Metaverse
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/courses/trading"
-                className="text-sm text-[#ede9fe] hover:text-white"
-              >
-                Trading Strategies
-              </Link>
-            </li>
-          </ul>
+        {/* Disclaimer Section */}
+        <hr className="border-t border-gray-800 my-8" /> {/* Thinner divider */}
+        <div className="text-center text-xs text-neutral-600 leading-relaxed">
+           <p className="font-semibold mb-2 uppercase tracking-wider">Disclaimer</p>
+           <p>
+              Dubai Club provides investment guidance and model portfolios for educational and informational purposes only. We are not financial advisors registered with SEBI or any other regulatory body, and investments involve risk, including the possible loss of principal. Past performance is not indicative of future results. Please conduct your own research or consult with a qualified financial advisor before making any investment decisions. Dubai Club does not execute trades or handle client funds. All investment decisions are solely yours.
+           </p>
         </div>
 
-        {/* Column 3: Company */}
-        <div>
-          {/* Empty heading placeholder for alignment - invisible on mobile */}
-          <h4 className="text-sm font-semibold text-white uppercase tracking-wider mb-4 invisible md:visible">
-            Company
-          </h4>
-          <ul className="space-y-3 md:mt-[36px]">
-            {" "}
-            {/* Adjust top margin to align with column 2 links */}
-            <li>
-              <Link
-                href="/about"
-                className="text-sm text-[#ede9fe] hover:text-white"
-              >
-                About Us
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/privacy-policy"
-                className="text-sm text-[#ede9fe] hover:text-white"
-              >
-                Privacy Policy
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/terms-of-service"
-                className="text-sm text-[#ede9fe] hover:text-white"
-              >
-                Terms of Service
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/careers"
-                className="text-sm text-[#ede9fe] hover:text-white"
-              >
-                Careers
-              </Link>
-            </li>
-          </ul>
-        </div>
-
-        {/* Column 4: Resources */}
-        <div>
-          <h4 className="text-sm font-semibold text-white uppercase tracking-wider mb-4">
-            Resources
-          </h4>
-          <ul className="space-y-3">
-            <li>
-              <Link
-                href="/blog"
-                className="text-sm text-[#ede9fe] hover:text-white"
-              >
-                Blog
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/glossary"
-                className="text-sm text-[#ede9fe] hover:text-white"
-              >
-                Crypto Glossary
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/testimonials"
-                className="text-sm text-[#ede9fe] hover:text-white"
-              >
-                Testimonials
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/faq"
-                className="text-sm text-[#ede9fe] hover:text-white"
-              >
-                FAQs
-              </Link>
-            </li>
-          </ul>
-        </div>
-
-        {/* Column 5: Contact Us */}
-        <div>
-          <h4 className="text-sm font-semibold text-white uppercase tracking-wider mb-4">
-            Contact Us
-          </h4>
-          <div className="space-y-3 text-sm text-[#ede9fe]">
-            <p>+91 987 654 3210</p> {/* Example Number */}
-            <p>support@Cryptogyan.com</p> {/* Example Email */}
-          </div>
-          {/* External Link - Keep as <a> tag */}
-          <a
-            href="https://play.google.com/store/apps" // Replace with your actual Play Store link
-            target="_blank" // Open in new tab
-            rel="noopener noreferrer" // Security best practice for target="_blank"
-            className="inline-flex items-center mt-4 px-4 py-2 bg-white text-purple-900 rounded-md text-sm font-medium hover:bg-gray-100 shadow transition-colors"
-          >
-            {/* Google Play SVG Icon */}
-            <svg
-              className="w-5 h-5 mr-2"
-              fill="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-              aria-hidden="true"
-            >
-              <path d="M6.001 3.002a1.2 1.2 0 0 0-1.123 1.51l3.469 6.482-3.469 6.482a1.2 1.2 0 1 0 2.13.922l3.499-6.53 3.499 6.53a1.2 1.2 0 1 0 2.13-.922l-3.469-6.482 3.469-6.482a1.2 1.2 0 1 0-2.13-.922l-3.499 6.53-3.499-6.53A1.198 1.198 0 0 0 6 3.002Z"></path>
-              <path d="m20.989 8.51-5.656-3.27a1.2 1.2 0 0 0-1.2.106L3.01 11.878a1.2 1.2 0 0 0 0 2.244l11.123 6.532a1.2 1.2 0 0 0 1.2.106l5.656-3.27a1.2 1.2 0 0 0 0-2.13Z"></path>
-            </svg>
-            {/* Using spans for better control over text layout */}
-            <span className="text-left leading-tight">
-              <span className="block text-xs">GET IT ON</span>
-              <span className="block font-semibold">Google Play</span>
-            </span>
-          </a>
-        </div>
-      </div>
-      {/* Footer Bottom */}
-      <div className="mt-12 border-t border-purple-800/50 pt-8 text-center">
-        <p className="text-base text-[#ede9fe]">
-          &copy; {currentYear} Crypto Gyan. All rights reserved.
-        </p>
       </div>
     </footer>
   );
-}
+};
 
 export default Footer;

@@ -2,10 +2,14 @@
 
 // Import the components (adjust paths if necessary)
 import HeroSection from "@/components/herosection";
-import CourseCardsSection from "@/components/CourseCardsSection";
-import InstructorProfileSection from "@/components/InstructorProfileSection";
-import SupportStatsSection from "@/components/SupportStatsSection";
+import PortfolioSectionRealKings from "@/components/PortfolioSectionRealKings";
 import NewsletterSection from "@/components/NewsletterSection";
+import PortfolioOverview from '@/components/PortfolioOverview'; // Import the new component
+import PortfolioSectionBreChealga from '@/components/PortfolioSectionBreChealga'; // Import the new section
+import PortfolioSectionSkyBreakers from '@/components/PortfolioSectionSkyBreakers'; // Import the new section
+import HowItWorksSection from '@/components/HowItWorksSection'; // Import the new section
+import AboutSection from '@/components/AboutSection'; // Import the new section
+import CallToActionSection from '@/components/CallToActionSection'; // Import CTA
 
 // Define types for the stats data if using TypeScript
 // (These should ideally live in a separate types file)
@@ -87,21 +91,20 @@ export default async function HomePage() {
     <main>
       {/* --- Hero Section --- */}
       <HeroSection />
+      <PortfolioOverview /> {/* Add the portfolio section here */}
 
       {/* --- Course Cards Section --- */}
-      <CourseCardsSection />
+      <PortfolioSectionRealKings />
+      <PortfolioSectionBreChealga /> {/* Add the third portfolio section */}
+      <PortfolioSectionSkyBreakers /> {/* Add the fourth portfolio section */}
+      <HowItWorksSection /> {/* Add the How It Works section */}
+      <AboutSection /> {/* Add the About section */}
+      <CallToActionSection /> {/* Add the CTA section before the end */}
 
-      {/* --- Instructor Profile Section --- */}
-      <InstructorProfileSection />
-
+    
       {/* --- Support Stats Section --- */}
       {/* Pass the fetched data as props */}
-      <SupportStatsSection
-        month={supportReport.month}
-        year={supportReport.year}
-        statsData={supportReport.statsData}
-        totalStats={supportReport.totalStats}
-      />
+  
 
       {/* --- Newsletter Section --- */}
       {/* This is a Client Component due to useState */}
