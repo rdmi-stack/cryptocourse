@@ -1,34 +1,50 @@
-// components/NewsletterSection.tsx
-"use client";
+// components/NewsletterSectionLight.tsx
+"use client"; // Needed for useState and Framer Motion
 
 import React, { useState } from "react";
-// CORRECTED IMPORT: Add AnimatePresence
+// CORRECTED: Added import for motion and AnimatePresence
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from "next/link";
 
 // Animation Variants (same as before)
-const sectionVariant = { /* ... */ };
-const itemVariant = { /* ... */ };
+const sectionVariant = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.7, ease: "easeOut", staggerChildren: 0.2 }
+  }
+};
 
-function NewsletterSection() {
+const itemVariant = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } }
+};
+
+
+function NewsletterSectionLight() { // Renamed component for clarity
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState({ type: '', text: '' });
   const [loading, setLoading] = useState(false);
 
-  // Theme colors (same as before)
-  const yellowColor = 'text-yellow-400';
-  const yellowBgColor = 'bg-yellow-500';
+  // Theme colors adjusted for light theme
+  const primaryTextColor = 'text-gray-900'; // Dark text for headlines
+  const secondaryTextColor = 'text-gray-600'; // Lighter dark text for paragraphs
+  const tertiaryTextColor = 'text-gray-500'; // Even lighter for less emphasis
+  const yellowBgColor = 'bg-yellow-500'; // Keep yellow button
   const yellowHoverBgColor = 'hover:bg-yellow-600';
   const yellowFocusRing = 'focus:ring-yellow-500';
+  const errorColor = 'text-red-600';
+  const successColor = 'text-green-600';
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     setLoading(true);
     setMessage({ type: '', text: '' });
 
-    // --- Placeholder for actual newsletter signup logic ---
+    // --- Placeholder signup logic (same as before) ---
     console.log("Subscribing with email:", email);
-    await new Promise(res => setTimeout(res, 1000)); // Simulate API
+    await new Promise(res => setTimeout(res, 1000));
     if (email.includes('@') && email.includes('.')) {
       setMessage({ type: 'success', text: 'Subscription successful! Check your inbox.' });
       setEmail('');
@@ -40,74 +56,76 @@ function NewsletterSection() {
   };
 
   return (
-    // Apply consistent dark gradient background
+    // Apply light background (e.g., light gray)
     <motion.section
-      className="relative bg-gradient-to-b from-gray-950 via-black to-gray-950 py-16 sm:py-20 px-4 sm:px-6 lg:px-8 overflow-hidden"
+      className="relative bg-gradient-to-b from-white via-gray-50 to-white py-16 sm:py-24 px-4 sm:px-6 lg:px-8 overflow-hidden" // Light gradient
       variants={sectionVariant}
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.3 }}
     >
-      {/* Optional subtle pattern */}
-       <div className="absolute inset-0 opacity-[0.02] bg-[url('/path/to/subtle-pattern.svg')] bg-repeat"></div>
+      {/* Optional: Subtle light background pattern */}
+      {/* <div className="absolute inset-0 opacity-30 bg-[url('/path/to/light-pattern.svg')] bg-repeat"></div> */}
 
-      <div className="max-w-2xl mx-auto text-center relative z-10">
+      <div className="max-w-xl mx-auto text-center relative z-10">
         <motion.h2
-          // Apply serif font to headline
-          className={`font-serif text-4xl sm:text-5xl font-bold ${yellowColor} mb-4`}
-          style={{ textShadow: '0 0 10px rgba(250, 204, 21, 0.2)' }}
+          // Apply serif font and dark color to headline
+          className={`font-serif text-4xl sm:text-5xl font-bold ${primaryTextColor} mb-4`}
           variants={itemVariant}
         >
-          Stay Ahead with Dubai Club Insights {/* Updated Copy */}
+          Stay Ahead with Dubai Club Insights
         </motion.h2>
-        <motion.p className="mt-4 text-lg text-neutral-300 leading-relaxed" variants={itemVariant}>
-           Subscribe for weekly market analysis, portfolio updates, and AI-driven crypto insights delivered to your inbox. {/* Updated Copy */}
+        <motion.p className={`mt-4 text-lg ${secondaryTextColor} leading-relaxed`} variants={itemVariant}>
+           Subscribe for weekly market analysis, portfolio updates, and AI-driven crypto insights delivered to your inbox.
         </motion.p>
-        <motion.form
-          className="mt-10 sm:flex sm:justify-center"
-          onSubmit={handleSubmit}
-          variants={itemVariant}
-        >
-          <label htmlFor="newsletter-email-address" className="sr-only">
-            Email address
-          </label>
-          <input
-            id="newsletter-email-address"
-            name="email"
-            type="email"
-            autoComplete="email"
-            required
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            // Consistent dark input styling
-            className={`w-full sm:max-w-xs px-5 py-3 rounded-md bg-gray-800/70 border border-gray-700 text-neutral-100 placeholder-gray-500 focus:outline-none focus:ring-2 ${yellowFocusRing} focus:border-transparent transition duration-200 shadow-sm`}
-            placeholder="Your Email Address"
-          />
-          <motion.div
-            className="mt-3 rounded-md shadow sm:mt-0 sm:ml-3 sm:flex-shrink-0"
-            whileHover={{ scale: loading ? 1 : 1.05 }}
-            whileTap={{ scale: loading ? 1 : 0.98 }}
-          >
-            <button
-              type="submit"
-              disabled={loading}
-              // Consistent yellow button styling
-              className={`w-full flex items-center justify-center px-5 py-3 border border-transparent text-base font-bold rounded-md text-black ${yellowBgColor} transition duration-150 ease-in-out shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-black ${yellowFocusRing} ${
-                loading ? 'opacity-60 cursor-not-allowed' : `${yellowHoverBgColor} hover:shadow-yellow-500/30`
-              }`}
-            >
-              {loading ? 'Subscribing...' : 'Get Insights'} {/* Updated Copy */}
-            </button>
-          </motion.div>
-        </motion.form>
 
-         {/* Success/Error Message Display */}
-        {/* AnimatePresence requires explicit import */}
+        {/* Form wrapped in a subtle card for structure */}
+        <motion.div className="mt-10" variants={itemVariant}>
+           <form
+            className="relative sm:flex sm:justify-center"
+            onSubmit={handleSubmit}
+           >
+             <label htmlFor="newsletter-email-address-light" className="sr-only">
+               Email address
+             </label>
+             <input
+               id="newsletter-email-address-light" // Unique ID if using multiple forms
+               name="email"
+               type="email"
+               autoComplete="email"
+               required
+               value={email}
+               onChange={(e) => setEmail(e.target.value)}
+               // Light input styling
+               className={`w-full sm:max-w-xs px-5 py-3.5 rounded-md bg-white border border-gray-300 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 ${yellowFocusRing} focus:border-transparent transition duration-200 shadow-sm`}
+               placeholder="Your Email Address"
+             />
+             <motion.div
+               className="mt-3 rounded-md shadow-sm sm:mt-0 sm:ml-3 sm:flex-shrink-0"
+               whileHover={{ scale: loading ? 1 : 1.05 }}
+               whileTap={{ scale: loading ? 1 : 0.98 }}
+             >
+               <button
+                 type="submit"
+                 disabled={loading}
+                 // Yellow button styling
+                 className={`w-full flex items-center justify-center px-6 py-3.5 border border-transparent text-base font-bold rounded-md text-black ${yellowBgColor} transition duration-150 ease-in-out shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 ${yellowFocusRing} ${
+                   loading ? 'opacity-70 cursor-not-allowed' : `${yellowHoverBgColor} hover:shadow-lg`
+                 }`}
+               >
+                 {loading ? 'Subscribing...' : 'Get Insights'}
+               </button>
+             </motion.div>
+           </form>
+        </motion.div>
+
+
+         {/* Success/Error Message Display - Adjusted for light theme */}
         <AnimatePresence>
           {message.text && (
             <motion.p
-              key="message"
-              className={`mt-4 text-sm ${message.type === 'success' ? 'text-green-400' : 'text-red-400'}`}
+              key="message-light"
+              className={`mt-4 text-sm font-medium ${message.type === 'success' ? successColor : errorColor}`}
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
@@ -117,11 +135,11 @@ function NewsletterSection() {
           )}
         </AnimatePresence>
 
-        {/* Updated privacy notice with link */}
-        <motion.p className="mt-6 text-xs text-neutral-500" variants={itemVariant}>
+        {/* Updated privacy notice with link - Adjusted text color */}
+        <motion.p className={`mt-6 text-xs ${tertiaryTextColor}`} variants={itemVariant}>
           Your privacy matters. Read our{' '}
           <Link href="/privacy-policy" legacyBehavior>
-            <a target="_blank" rel="noopener noreferrer" className="underline hover:text-neutral-300">Privacy Policy</a>
+            <a target="_blank" rel="noopener noreferrer" className="underline hover:text-gray-800">Privacy Policy</a>
           </Link>
           . Unsubscribe anytime.
         </motion.p>
@@ -130,4 +148,5 @@ function NewsletterSection() {
   );
 }
 
-export default NewsletterSection;
+// Ensure component name matches export if you renamed it earlier
+export default NewsletterSectionLight;
