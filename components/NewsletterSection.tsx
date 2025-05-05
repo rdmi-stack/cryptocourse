@@ -1,64 +1,132 @@
-"use client"; // Needed because we're using useState
+// components/NewsletterSection.tsx
+"use client";
 
 import React, { useState } from "react";
+// CORRECTED IMPORT: Add AnimatePresence
+import { motion, AnimatePresence } from 'framer-motion';
+import Link from "next/link";
+
+// Animation Variants (same as before)
+const sectionVariant = { /* ... */ };
+const itemVariant = { /* ... */ };
 
 function NewsletterSection() {
   const [email, setEmail] = useState("");
+  const [message, setMessage] = useState({ type: '', text: '' });
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (event) => {
+  // Theme colors (same as before)
+  const yellowColor = 'text-yellow-400';
+  const yellowBgColor = 'bg-yellow-500';
+  const yellowHoverBgColor = 'hover:bg-yellow-600';
+  const yellowFocusRing = 'focus:ring-yellow-500';
+
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    // TODO: Implement your actual newsletter signup logic here
-    // e.g., send the email to your API route or mailing list service
+    setLoading(true);
+    setMessage({ type: '', text: '' });
+
+    // --- Placeholder for actual newsletter signup logic ---
     console.log("Subscribing with email:", email);
-    // You might want to add success/error/loading states here
-    // setEmail(''); // Optionally clear input after submission
+    await new Promise(res => setTimeout(res, 1000)); // Simulate API
+    if (email.includes('@') && email.includes('.')) {
+      setMessage({ type: 'success', text: 'Subscription successful! Check your inbox.' });
+      setEmail('');
+    } else {
+      setMessage({ type: 'error', text: 'Please enter a valid email address.' });
+    }
+    setLoading(false);
+    // --- End Placeholder ---
   };
 
   return (
-    // Using the custom dark blue from previous step, adjust hex if needed
-    <section className="bg-[#1a202c] py-16 sm:py-20 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-2xl mx-auto text-center">
-        <h2 className="text-3xl font-extrabold text-white sm:text-4xl">
-          Unlock Crypto Knowledge Weekly
-        </h2>
-        <p className="mt-4 text-lg text-indigo-200">
-          Subscribe for course updates, market analysis, and crypto learning
-          tips.
-        </p>
-        <form
+    // Apply consistent dark gradient background
+    <motion.section
+      className="relative bg-gradient-to-b from-gray-950 via-black to-gray-950 py-16 sm:py-20 px-4 sm:px-6 lg:px-8 overflow-hidden"
+      variants={sectionVariant}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.3 }}
+    >
+      {/* Optional subtle pattern */}
+       <div className="absolute inset-0 opacity-[0.02] bg-[url('/path/to/subtle-pattern.svg')] bg-repeat"></div>
+
+      <div className="max-w-2xl mx-auto text-center relative z-10">
+        <motion.h2
+          // Apply serif font to headline
+          className={`font-serif text-4xl sm:text-5xl font-bold ${yellowColor} mb-4`}
+          style={{ textShadow: '0 0 10px rgba(250, 204, 21, 0.2)' }}
+          variants={itemVariant}
+        >
+          Stay Ahead with Dubai Club Insights {/* Updated Copy */}
+        </motion.h2>
+        <motion.p className="mt-4 text-lg text-neutral-300 leading-relaxed" variants={itemVariant}>
+           Subscribe for weekly market analysis, portfolio updates, and AI-driven crypto insights delivered to your inbox. {/* Updated Copy */}
+        </motion.p>
+        <motion.form
           className="mt-10 sm:flex sm:justify-center"
           onSubmit={handleSubmit}
+          variants={itemVariant}
         >
-          <label htmlFor="email-address" className="sr-only">
+          <label htmlFor="newsletter-email-address" className="sr-only">
             Email address
           </label>
           <input
-            id="email-address"
+            id="newsletter-email-address"
             name="email"
             type="email"
             autoComplete="email"
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full px-5 py-3 placeholder-gray-500 focus:ring-cyan-500 focus:border-cyan-500 border-gray-300 rounded-md shadow-sm sm:max-w-xs text-gray-900" // Added text color
+            // Consistent dark input styling
+            className={`w-full sm:max-w-xs px-5 py-3 rounded-md bg-gray-800/70 border border-gray-700 text-neutral-100 placeholder-gray-500 focus:outline-none focus:ring-2 ${yellowFocusRing} focus:border-transparent transition duration-200 shadow-sm`}
             placeholder="Your Email Address"
           />
-          <div className="mt-3 rounded-md shadow sm:mt-0 sm:ml-3 sm:flex-shrink-0">
+          <motion.div
+            className="mt-3 rounded-md shadow sm:mt-0 sm:ml-3 sm:flex-shrink-0"
+            whileHover={{ scale: loading ? 1 : 1.05 }}
+            whileTap={{ scale: loading ? 1 : 0.98 }}
+          >
             <button
               type="submit"
-              // Using cyan color consistent with some crypto themes
-              className="w-full flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-cyan-500 hover:bg-cyan-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-[#1a202c] focus:ring-cyan-500 transition duration-150 ease-in-out"
+              disabled={loading}
+              // Consistent yellow button styling
+              className={`w-full flex items-center justify-center px-5 py-3 border border-transparent text-base font-bold rounded-md text-black ${yellowBgColor} transition duration-150 ease-in-out shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-black ${yellowFocusRing} ${
+                loading ? 'opacity-60 cursor-not-allowed' : `${yellowHoverBgColor} hover:shadow-yellow-500/30`
+              }`}
             >
-              SUBSCRIBE
+              {loading ? 'Subscribing...' : 'Get Insights'} {/* Updated Copy */}
             </button>
-          </div>
-        </form>
-        {/* Optional: Add privacy notice */}
-        <p className="mt-6 text-xs text-indigo-200/80">
-          We respect your privacy. Unsubscribe at any time.
-        </p>
+          </motion.div>
+        </motion.form>
+
+         {/* Success/Error Message Display */}
+        {/* AnimatePresence requires explicit import */}
+        <AnimatePresence>
+          {message.text && (
+            <motion.p
+              key="message"
+              className={`mt-4 text-sm ${message.type === 'success' ? 'text-green-400' : 'text-red-400'}`}
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+            >
+              {message.text}
+            </motion.p>
+          )}
+        </AnimatePresence>
+
+        {/* Updated privacy notice with link */}
+        <motion.p className="mt-6 text-xs text-neutral-500" variants={itemVariant}>
+          Your privacy matters. Read our{' '}
+          <Link href="/privacy-policy" legacyBehavior>
+            <a target="_blank" rel="noopener noreferrer" className="underline hover:text-neutral-300">Privacy Policy</a>
+          </Link>
+          . Unsubscribe anytime.
+        </motion.p>
       </div>
-    </section>
+    </motion.section>
   );
 }
 
