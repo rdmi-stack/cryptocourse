@@ -19,3 +19,13 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+/* In your global CSS or a relevant CSS module */
+.torn-paper-effect {
+  clip-path: url(#portfolioTornEffect);
+}
+
+@media (max-width: 767px) { /* Adjust breakpoint as needed for 'md' */
+  .torn-paper-effect-mobile-none { /* New class to remove it */
+    clip-path: none !important; /* Or set to a simple rectangle if preferred */
+  }
+}

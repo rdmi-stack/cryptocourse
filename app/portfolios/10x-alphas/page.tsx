@@ -88,8 +88,8 @@ const Portfolio10XAlphasPage: React.FC = () => {
                 className="relative z-10 shadow-2xl group transform transition-transform duration-500 hover:scale-[1.02]"
                 style={{ clipPath: 'url(#portfolioTornEffectHero)' }}
               >
-                <div className="aspect-w-4 aspect-h-3 md:aspect-w-16 md:aspect-h-10 lg:aspect-w-4 lg:aspect-h-3 relative"> {/* Adjusted aspect ratio */}
-                  <Image
+<div className="aspect-[4/3] md:aspect-[16/10] lg:aspect-[4/3] relative"> {/* Or aspect-video, aspect-square etc. */}
+<Image
                     src="/images/image3.jpg" // Original image, ensure it exists
                     alt="10X Alphas Portfolio Visual"
                     layout="fill"

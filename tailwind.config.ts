@@ -18,6 +18,6 @@ module.exports = {
     },
   },
   plugins: [
-    require('@tailwindcss/aspect-ratio'), // <--- ADD THIS LINE
+    // require('@tailwindcss/aspect-ratio'), // <--- REMOVE OR COMMENT OUT THIS LINE
   ],
 };

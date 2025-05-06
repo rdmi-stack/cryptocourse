@@ -7,8 +7,13 @@ import Link from 'next/link';
 const TornPaperClipPathComponent: React.FC = () => (
   <svg width="0" height="0" className="absolute" aria-hidden="true">
     <defs>
+      {/*
+        MOBILE DEBUGGING for clipPath:
+        1. The complexity of this path might be an issue on some mobile renderers.
+        2. If the element this is applied to has a zero width/height on mobile,
+           objectBoundingBox units can lead to nothing being visible.
+      */}
       <clipPath id="portfolioTornEffect" clipPathUnits="objectBoundingBox">
-        {/* Adjusted path to show more of the image while keeping torn edges */}
         <path d="
             M0.005,0.005 L0.03,0.000 L0.06,0.005 L0.09,0.000 L0.12,0.007
             L0.15,0.002 L0.18,0.008 L0.21,0.003 L0.24,0.009 L0.27,0.001
@@ -37,47 +42,60 @@ const TornPaperClipPathComponent: React.FC = () => (
 );
 
 const PortfolioSection10XAlphasUnique: React.FC = () => {
-  // Define yellow color for consistency
   const yellowColor = 'text-yellow-400';
   const yellowBgColor = 'bg-yellow-500';
   const yellowHoverBgColor = 'hover:bg-yellow-600';
 
   return (
     <section className="relative py-20 md:py-28 bg-black text-neutral-100 overflow-hidden">
-      {/* Add the SVG definitions to the DOM */}
       <TornPaperClipPathComponent />
-
-      {/* Optional: Subtle background pattern */}
       <div
         className="absolute inset-0 opacity-[0.03] bg-[url('/path/to/subtle-pattern.svg')] bg-repeat"
       ></div>
 
       <div className="container mx-auto px-6 relative z-10">
+        {/* On mobile, this grid becomes `grid-cols-1` */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 items-center">
 
-          {/* Left Column: Image with unique styling */}
+          {/* Left Column: Image */}
+          {/* On mobile, this div (`md:col-span-7`) will act as a single grid item, taking full width of its column. */}
           <div className="md:col-span-7 order-1">
-            {/* Purple border wrapper */}
             <div className="relative">
-              {/* Purple border element */}
-              <div className="absolute -inset-1 bg-black rounded-lg" style={{                transform: 'scale(1.01)',
+              <div className="absolute -inset-1 bg-black rounded-lg" style={{
+                transform: 'scale(1.01)',
                 zIndex: 1
               }}></div>
               
               {/* Torn paper effect with image */}
+              {/* MOBILE DEBUGGING STEP 1: Temporarily remove the style attribute to disable clipPath */}
+              {/* Try commenting out the style prop below:
+                  style={{ clipPath: 'url(#portfolioTornEffect)' }}
+                  If the image appears, the clipPath is the primary issue on mobile.
+              */}
               <div 
                 className="relative z-10 shadow-2xl group transform transition-transform duration-500 hover:scale-[1.02]"
                 style={{ clipPath: 'url(#portfolioTornEffect)' }}
+                // MOBILE DEBUGGING: If you suspect this div has no width/height on mobile,
+                // add a temporary border to see its bounds: e.g., className="... border-2 border-red-500"
               >
+                {/*
+                  MOBILE DEBUGGING STEP 2: Check this div's dimensions.
+                  This div provides the aspect ratio. `aspect-video` is 16/9.
+                  On mobile, its width is determined by its parent (the clipped div, then the grid column).
+                  If its calculated width or height is 0, the Next/Image with layout="fill" won't show.
+                  Use browser dev tools on mobile view to inspect its computed width and height.
+                  You can also add a temporary background color: e.g., className="... bg-blue-500"
+                */}
                 <div className="aspect-video md:aspect-[16/10] relative">
                   <Image
-                    src="/images/image2.jpg"
+                    src="/images/image2.jpg" // Double-check this path! Must be in `public/images/image2.jpg`
                     alt="10X Alphas Portfolio Visual"
                     layout="fill"
                     objectFit="cover"
                     quality={85}
+                    // MOBILE DEBUGGING STEP 3: Forcing unoptimized can sometimes help rule out optimization issues
+                    // unoptimized={true} // Uncomment this temporarily
                   />
-                  {/* Image Overlay - subtle gradient */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent"></div>
                 </div>
               </div>
@@ -86,21 +104,16 @@ const PortfolioSection10XAlphasUnique: React.FC = () => {
 
           {/* Right Column: Text Content Panel */}
           <div className="md:col-span-5 order-2 flex flex-col justify-center">
-            {/* Text Panel Styling */}
             <div className="bg-gray-900/60 backdrop-blur-sm border border-gray-800 rounded-lg p-6 md:p-8 shadow-lg">
-              {/* Headline - Yellow & Glowing */}
               <h2
                 className={`text-4xl sm:text-5xl font-extrabold ${yellowColor} mb-4 leading-tight`}
                 style={{ textShadow: '0 0 15px rgba(250, 204, 21, 0.4)' }}
               >
                 10X Alphas
               </h2>
-              {/* Tagline */}
               <p className="text-neutral-400 font-medium mb-6 text-sm sm:text-base">
                 Fundamentals-Backed | High-Growth Crypto | Long-Term Alpha Generation
               </p>
-
-              {/* Key Stats - Dark Theme */}
               <div className="grid grid-cols-2 gap-3 sm:gap-4 mb-8 text-sm sm:text-base">
                 <div className="border border-gray-700 bg-gray-800/70 p-3 rounded text-center transition-colors hover:border-yellow-700/50">
                   <span className="font-semibold block text-neutral-100">Volatility</span>
@@ -111,13 +124,9 @@ const PortfolioSection10XAlphasUnique: React.FC = () => {
                   <span className="text-neutral-300">122%</span>
                 </div>
               </div>
-
-              {/* Description */}
               <p className="text-neutral-300 mb-8 text-base md:text-lg leading-relaxed">
                 Focused on high-quality crypto assets engineered to generate alpha returns with exponential growth potential for long-term wealth building.
               </p>
-
-              {/* CTA Button - Styled for Dark Theme */}
               <Link href="/portfolios/10x-alphas" legacyBehavior>
                 <a className={`inline-block ${yellowBgColor} ${yellowHoverBgColor} text-black font-bold py-3 px-8 rounded-md transition duration-300 ease-in-out transform hover:scale-105 self-start shadow-lg hover:shadow-yellow-500/30`}>
                   Know More &rarr;
