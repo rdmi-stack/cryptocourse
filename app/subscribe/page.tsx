@@ -130,7 +130,7 @@ const SubscribePage: React.FC = () => {
       >
         {/* Logo */}
         <div className="flex justify-center mb-6">
-           <Link href="/" legacyBehavior><a aria-label="Dubai Club Home"><Image src="/dubai-club-logo.png" alt="Dubai Club Logo" width={180} height={45} quality={95}/></a></Link>
+           <Link href="/" legacyBehavior><a aria-label="Dubai Club Home"><Image src="/dubaiclublogo.png" alt="Dubai Club Logo" width={180} height={45} quality={95}/></a></Link>
         </div>
 
         <h2 className={`text-center text-3xl font-bold ${yellowColor} mb-2`}>

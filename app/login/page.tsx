@@ -12,7 +12,7 @@ const LoginPage: React.FC = () => {
   const [error, setError] = useState(''); // To display login errors
 
   // Styles (consistent with theme)
-  const yellowColor = 'text-yellow-400';
+  const yellowColor = 'text-white';
   const yellowBgColor = 'bg-yellow-500';
   const yellowHoverBgColor = 'hover:bg-yellow-600';
   const yellowFocusRing = 'focus:ring-yellow-500';
@@ -72,7 +72,7 @@ const LoginPage: React.FC = () => {
           <Link href="/" legacyBehavior>
             <a aria-label="Dubai Club Home">
               <Image
-                src="/dubai-club-logo.png" // Path to your logo
+                src="/dubaiclublogo.png" // Path to your logo
                 alt="Dubai Club Logo"
                 width={180}
                 height={45}
