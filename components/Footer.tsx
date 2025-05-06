@@ -13,7 +13,7 @@ const LinkedInIcon = () => (<svg fill="currentColor" viewBox="0 0 24 24" classNa
 const Footer: React.FC = () => {
   // Link structures remain the same
   const pagesLinks = [ { href: '/', label: 'Home' }, { href: '/portfolios/10x-alphas', label: 'Portfolios' }];
-  const supportLinks = [ { href: '/about', label: 'About us' }, { href: '/career', label: 'Career' }];
+  const supportLinks = [ { href: '/about', label: 'About us' }, { href: '/careers', label: 'Career' }];
   const legalLinks = [ { href: '/privacy-policy', label: 'Privacy Policy' }, { href: '/refund-policy', label: 'Refund Policy' }, { href: '/terms-conditions', label: 'Terms & Conditions' }];
   const socialLinks = [
      { href: '#', label: 'Facebook', Icon: FacebookIcon },
