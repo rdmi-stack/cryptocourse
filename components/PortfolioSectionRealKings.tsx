@@ -36,12 +36,14 @@ const PortfolioSectionRealKings: React.FC = () => {
   const rippedEdgeClipPath =
     'polygon(0% 0%, 90% 0%, 94% 6%, 91% 12%, 95% 18%, 90% 24%, 97% 30%, 92% 36%, 96% 42%, 91% 48%, 95% 54%, 90% 60%, 96% 66%, 92% 72%, 97% 78%, 93% 84%, 95% 90%, 91% 96%, 94% 100%, 0% 100%)';
 
+  // Torn paper effect for image
+  const tornPaperClipPath = 'polygon(0% 5%, 3% 0%, 20% 2%, 40% 0%, 60% 2%, 75% 0%, 95% 1%, 100% 5%, 98% 20%, 100% 60%, 99% 82%, 100% 100%, 95% 98%, 65% 100%, 40% 99%, 20% 100%, 5% 98%, 0 100%, 1% 80%, 0% 50%, 2% 30%)';
+
   return (
     <section className="relative py-20 md:py-28 bg-black text-neutral-100 overflow-hidden">
       {/* Optional: Subtle background pattern */}
       <div
         className="absolute inset-0 opacity-[0.03] bg-[url('/path/to/subtle-pattern.svg')] bg-repeat"
-        // style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px)', backgroundSize: '20px 20px' }}
       ></div>
 
       <div className="container mx-auto px-6 relative z-10">
@@ -93,20 +95,32 @@ const PortfolioSectionRealKings: React.FC = () => {
             viewport={{ once: true, amount: 0.3 }}
             variants={imageVariants}
           >
-            {/* Image Wrapper with styling */}
-            <div className="relative rounded-xl shadow-2xl overflow-hidden group transform transition-transform duration-500 hover:scale-[1.02]">
-              <div className="aspect-video md:aspect-[16/10]">
-                <Image
-                  src="/images/image3.jpg" // Image path updated previously
-                  alt="Real Kings Portfolio Visual"
-                  layout="fill"
-                  objectFit="cover"
-                  quality={85}
-                  className="rounded-xl"
-                />
+            {/* Image Wrapper with torn paper effect and purple border */}
+            <div className="relative">
+              {/* Purple outer border */}
+              <div className="absolute inset-0 bg-purple-700 rounded-lg" style={{ 
+                padding: '4px',
+                transform: 'scale(1.02)',
+                zIndex: 0
+              }}></div>
+              
+              {/* Torn paper effect container */}
+              <div className="relative bg-black overflow-hidden" style={{
+                clipPath: tornPaperClipPath
+              }}>
+                {/* Image content */}
+                <div className="aspect-video md:aspect-[16/10] relative">
+                  <Image
+                    src="/images/image3.jpg"
+                    alt="Real Kings Portfolio Visual"
+                    layout="fill"
+                    objectFit="cover"
+                    quality={85}
+                  />
+                  {/* Image Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent"></div>
+                </div>
               </div>
-              {/* Image Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent"></div>
             </div>
           </motion.div>
 

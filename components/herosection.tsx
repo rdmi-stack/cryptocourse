@@ -1,168 +1,350 @@
-"use client"; // <--- ADD THIS DIRECTIVE AT THE VERY TOP
+"use client";
 
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { motion } from 'framer-motion'; // Import motion
+import { motion, useScroll, useTransform, useMotionValueEvent } from 'framer-motion';
 
-const VisualHero: React.FC = () => {
-  const yellowBgColor = 'bg-yellow-500';
-  const yellowHoverBgColor = 'hover:bg-yellow-600';
+const VisualHero = () => {
+  // Refs for parallax effects
+  const sectionRef = useRef(null);
+  const textRef = useRef(null);
+  
+  // Scroll-based animations
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"]
+  });
+  
+  const y = useTransform(scrollYProgress, [0, 1], [0, 100]);
+  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+  
+  // Gradient animation states
+  const [gradientPosition, setGradientPosition] = React.useState({ x: 0, y: 0 });
+  
+  // Track mouse movement for dynamic gradient
+  const handleMouseMove = (e) => {
+    const { clientX, clientY } = e;
+    const { innerWidth, innerHeight } = window;
+    setGradientPosition({
+      x: clientX / innerWidth,
+      y: clientY / innerHeight
+    });
+  };
+  
+  useEffect(() => {
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
 
-  // Framer Motion Variants
+  // Animation variants
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2, // Stagger delay between children
+        staggerChildren: 0.15,
+        delayChildren: 0.3
       },
     },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 }, // Start slightly down and transparent
+    hidden: { opacity: 0, y: 30 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.5,
-        ease: 'easeOut',
+        duration: 0.7,
+        ease: [0.25, 0.1, 0.25, 1], // Custom cubic bezier for premium feel
       },
     },
   };
 
   const imageVariants = {
-    hidden: { opacity: 0, x: 100 }, // Start off-screen right and transparent
+    hidden: { opacity: 0, scale: 1.05 },
     visible: {
       opacity: 1,
-      x: 0,
+      scale: 1,
       transition: {
-        duration: 0.8,
-        ease: 'easeOut',
-        delay: 0.4, // Slight delay after text starts animating
+        duration: 1.2,
+        ease: [0.23, 1, 0.32, 1], // Custom cubic bezier for premium feel
+        delay: 0.6,
       },
     },
   };
 
-  return (
-    // Added min-h-[650px] to ensure enough space, especially on mobile
-    <section className="relative h-screen min-h-[650px] flex items-center overflow-hidden bg-black pt-24 md:pt-0">
+  const glowVariants = {
+    initial: { opacity: 0.5 },
+    animate: { 
+      opacity: [0.5, 0.8, 0.5], 
+      transition: { 
+        duration: 5, 
+        repeat: Infinity,
+        ease: "easeInOut" 
+      }
+    }
+  };
 
-      {/* Background Image & Overlay (Not animated for simplicity/performance) */}
-      <div className="absolute inset-0 z-0">
-        <Image
-          src="/images/herobg.jpg" // Your background image
-          alt="Dubai City Skyline Background"
-          layout="fill"
-          objectFit="cover"
-          quality={85}
-          priority
+  const buttonVariants = {
+    initial: { 
+      scale: 1, 
+      boxShadow: "0 4px 14px rgba(255, 214, 0, 0.3)"
+    },
+    hover: { 
+      scale: 1.05, 
+      boxShadow: "0 8px 30px rgba(255, 214, 0, 0.6)"
+    },
+    tap: { 
+      scale: 0.98
+    }
+  };
+
+  return (
+    <section 
+      ref={sectionRef} 
+      className="relative h-screen min-h-[780px] flex items-center overflow-hidden bg-black"
+    >
+      {/* Dynamic gradient background with responsive blur effect */}
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        <div 
+          className="absolute inset-0 bg-gradient-to-br from-blue-900/40 via-black to-purple-900/30"
+          style={{
+            backgroundPosition: `${gradientPosition.x * 100}% ${gradientPosition.y * 100}%`,
+            transition: 'background-position 0.3s ease-out'
+          }}
         />
-        {/* Main background overlay */}
-        <div className="absolute inset-0 bg-black opacity-70 mix-blend-multiply z-10"></div>
+        
+        {/* Background Image with Parallax Effect */}
+        <motion.div 
+          className="absolute inset-0" 
+          style={{ y }}
+        >
+          <Image
+            src="/images/herobg.jpg"
+            alt="Crypto Trading Background"
+            layout="fill"
+            objectFit="cover"
+            quality={90}
+            priority
+            className="opacity-60"
+          />
+        </motion.div>
+        
+        {/* Premium overlay with noise texture */}
+        <div className="absolute inset-0 bg-black opacity-65 mix-blend-overlay z-5"></div>
+        
+        {/* Noise texture for premium feel */}
+        <div className="absolute inset-0 bg-[url('/images/noise-texture.png')] opacity-5 mix-blend-overlay z-5"></div>
       </div>
+
+      {/* Animated glow effects */}
+      <motion.div 
+        className="absolute top-[30%] left-[15%] w-[300px] h-[300px] rounded-full bg-blue-500/10 blur-[80px]"
+        variants={glowVariants}
+        initial="initial"
+        animate="animate"
+      />
+      <motion.div 
+        className="absolute bottom-[20%] right-[25%] w-[250px] h-[250px] rounded-full bg-yellow-500/10 blur-[100px]"
+        variants={glowVariants}
+        initial="initial"
+        animate="animate"
+        style={{ animationDelay: "-2.5s" }}
+      />
 
       {/* Content Container */}
       <div className="container mx-auto px-6 relative z-20 h-full">
-        {/* Grid Layout */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 h-full items-center"> {/* Use gap-x-8 for horizontal gap only */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-x-8 h-full items-center"> 
 
-          {/* Left Column: Text - WRAPPED IN MOTION.DIV */}
+          {/* Left Column: Text - 7 columns on desktop */}
           <motion.div
-            className="flex flex-col justify-center h-auto md:h-full text-white relative z-30 pt-8 md:pt-0" // Added padding-top for mobile spacing
-            variants={containerVariants} // Apply container variants
-            initial="hidden"             // Initial state
-            animate="visible"            // Animate to this state
+            ref={textRef}
+            className="flex flex-col justify-center md:col-span-7 h-auto md:h-full text-white relative z-30 pt-12 md:pt-0"
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
           >
-            {/* Headline */}
-            <motion.h1
-              className="text-4xl sm:text-5xl lg:text-6xl font-extrabold mb-4 leading-tight uppercase text-yellow-400"
-              variants={itemVariants} // Apply item variants
+            {/* Animated badge/tag */}
+            <motion.div 
+              className="mb-6"
+              variants={itemVariants}
             >
-              UNLOCK THE FUTURE <br /> OF WEALTH
+              <span className="inline-flex items-center px-3 py-1 rounded-full bg-gradient-to-r from-yellow-500/90 to-yellow-600/90 text-xs font-semibold text-black backdrop-blur-sm">
+                <span className="w-2 h-2 bg-white rounded-full animate-pulse mr-2"></span>
+                LIVE TRADING SIGNALS
+              </span>
+            </motion.div>
+
+            {/* Headline with gradient text */}
+            <motion.h1
+              className="text-5xl sm:text-6xl lg:text-7xl font-extrabold mb-5 leading-tight"
+              variants={itemVariants}
+            >
+              <span className="inline-block bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-500">
+                UNLOCK THE FUTURE
+              </span>
+              <br />
+              <span className="text-white">OF WEALTH</span>
             </motion.h1>
 
-            {/* Sub-headline */}
+            {/* Sub-headline with improved styling */}
             <motion.p
-              className="text-lg sm:text-xl lg:text-2xl mb-6 font-light text-neutral-100 italic"
-              variants={itemVariants} // Apply item variants
+              className="text-xl sm:text-2xl lg:text-3xl mb-6 font-light text-neutral-100"
+              variants={itemVariants}
             >
-              AI-Powered Crypto Insights & Profitable Strategies!
+              <span className="italic font-medium">AI-Powered</span> Crypto Insights & 
+              <span className="relative">
+                <span className="relative z-10"> Profitable Strategies</span>
+                <span className="absolute bottom-1 left-0 w-full h-2 bg-yellow-500/30 -z-0"></span>
+              </span>
             </motion.p>
 
-            {/* Description */}
+            {/* Description with better typography */}
             <motion.p
-              className="text-base sm:text-lg max-w-lg text-neutral-200 leading-relaxed"
-              variants={itemVariants} // Apply item variants
+              className="text-base sm:text-lg max-w-lg text-neutral-200 leading-relaxed font-light"
+              variants={itemVariants}
             >
-              With Dubai Club, invest in the Crypto market through our professionally
-              tailored portfolio of top-performing Cryptocurrencies.
-              Just invest, sit back & watch your investments grow.
+              Join <span className="font-medium">Dubai Club</span> and invest in the crypto market through our AI-analyzed, 
+              professionally tailored portfolio of premium cryptocurrencies. 
+              <span className="block mt-2 opacity-90">Simply invest, then watch your digital assets grow.</span>
             </motion.p>
 
-            {/* CTA Button - WRAPPED IN MOTION.DIV */}
+            {/* Stats showcase */}
+            <motion.div 
+              className="flex flex-wrap gap-5 mt-8 mb-8"
+              variants={itemVariants}
+            >
+              <div className="flex flex-col">
+                <span className="text-yellow-400 text-2xl font-bold">93%</span>
+                <span className="text-neutral-400 text-sm">Success Rate</span>
+              </div>
+              <div className="flex flex-col">
+                <span className="text-yellow-400 text-2xl font-bold">24/7</span>
+                <span className="text-neutral-400 text-sm">Market Analysis</span>
+              </div>
+              <div className="flex flex-col">
+                <span className="text-yellow-400 text-2xl font-bold">$1.2M+</span>
+                <span className="text-neutral-400 text-sm">Daily Volume</span>
+              </div>
+            </motion.div>
+
+            {/* CTA Buttons with enhanced styling */}
             <motion.div
-              className="mt-8 mb-8 md:mb-0" // Added margin-bottom for mobile spacing
-              variants={itemVariants} // Apply item variants
+              className="flex flex-wrap gap-4 mt-2 mb-10 md:mb-0"
+              variants={itemVariants}
             >
-              {/* Link remains standard */}
-              <Link
-                href="/#portfolios"
-                className={`${yellowBgColor} ${yellowHoverBgColor} text-gray-900 font-bold py-3 px-8 rounded-lg transition duration-300 ease-in-out transform hover:scale-105 shadow-lg inline-block`}
+              <motion.div
+                variants={buttonVariants}
+                initial="initial"
+                whileHover="hover"
+                whileTap="tap"
+                className="relative group"
               >
-                Get Started
-              </Link>
+                <div className="absolute -inset-0.5 bg-gradient-to-r from-yellow-500 to-yellow-300 rounded-lg blur-sm opacity-75 group-hover:opacity-100 transition duration-300"></div>
+                <Link
+                  href="/#portfolios"
+                  className="relative flex items-center bg-gradient-to-br from-yellow-400 to-yellow-600 text-gray-900 font-bold py-3.5 px-8 rounded-lg transition duration-300 ease-in-out"
+                >
+                  <span>Get Started</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                  </svg>
+                </Link>
+              </motion.div>
+              
+              <motion.div
+                variants={buttonVariants}
+                initial="initial"
+                whileHover="hover"
+                whileTap="tap"
+              >
+                <Link
+                  href="/about"
+                  className="inline-flex items-center text-white hover:text-yellow-400 font-medium py-3.5 px-6 border border-white/20 hover:border-yellow-400/40 rounded-lg transition duration-300 ease-in-out backdrop-blur-sm bg-white/5"
+                >
+                  <span>Learn More</span>
+                </Link>
+              </motion.div>
             </motion.div>
           </motion.div>
 
-          {/* Right Column: Man Image - WRAPPED CONTAINER IN MOTION.DIV */}
-          {/* items-stretch helps the absolute child take full height */}
-          <div className="flex relative w-full h-full items-center justify-center md:items-stretch">
-
-            {/* Image Container: Wrapped in motion.div for animation */}
+          {/* Right Column: Crypto Trader Image - 5 columns on desktop */}
+          <div className="md:col-span-5 flex relative w-full h-full items-center justify-center md:items-stretch">
             <motion.div
               className="
-                relative                     {/* Base relative for overlay */}
-                md:mt-0                      {/* Reset mobile margin */}
-
-                {/* --- SIZING --- */}
-                w-full max-w-[420px]       {/* Mobile: Slightly wider max-width */}
-                h-[50vh]                   {/* Mobile: Slightly shorter fixed height */}
-                md:w-[80%]                 {/* Desktop: Base width percentage */}
-                lg:w-[90%]                 {/* Desktop: Wider on large screens */}
-                xl:w-[100%]                {/* Desktop: Even wider on XL screens */}
-                md:h-full                  {/* Desktop: Takes full height */}
-                md:max-w-none              {/* Desktop: No max-width */}
-
-                mx-auto md:mx-0            {/* Mobile centering */}
-
-                {/* --- POSITIONING --- */}
-                md:absolute md:bottom-0     {/* Desktop: Absolute position at bottom */}
-                {/* Increased negative offsets significantly */}
-                md:right-[-15%]             {/* Desktop: More bleed off right edge */}
-                lg:right-[-25%]
-                xl:right-[-35%]
+                relative
+                w-full max-w-[450px]
+                h-[45vh]
+                md:w-[120%]
+                lg:w-[130%]
+                xl:w-[140%]
+                md:h-[110%]
+                md:max-w-none
+                mx-auto md:mx-0
+                md:absolute md:bottom-0
+                md:right-[-20%]
+                lg:right-[-30%]
+                xl:right-[-40%]
               "
-              variants={imageVariants} // Apply image variants
-              initial="hidden"         // Initial state
-              animate="visible"        // Animate to this state
+              variants={imageVariants}
+              initial="hidden"
+              animate="visible"
             >
-              {/* The Image itself */}
+              {/* Hero Image */}
               <Image
-                 src="/images/hero.png" // Your man image
-                 alt="Man looking towards the future"
-                 layout="fill"             // Fill the container div
-                 objectFit="cover"          // Cover the container
-                 objectPosition="top right" // Position image focusing on TOP right
-                 quality={90}
-                 className="relative z-10"   // Position below overlay
-               />
-               {/* Light Overlay specifically for the man image */}
-               <div className="absolute inset-0 bg-black opacity-15 z-20 pointer-events-none"></div>
+                src="/images/hero.png"
+                alt="Crypto Trading Expert"
+                layout="fill"
+                objectFit="contain"
+                objectPosition="bottom right"
+                quality={95}
+                className="relative z-10"
+              />
+              
+              {/* Circular gradient glow behind the person */}
+              <div className="absolute bottom-0 right-0 w-full h-[80%] rounded-full bg-gradient-radial from-yellow-500/20 to-transparent blur-3xl"></div>
+              
+              {/* Digital overlay elements */}
+              <div className="absolute -left-10 top-1/4 bg-black/30 backdrop-blur-md px-4 py-3 rounded-xl border border-white/10 shadow-lg">
+                <div className="flex items-center">
+                  <div className="w-8 h-8 rounded-full bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center mr-3">
+                    <span className="text-white text-xs">↗</span>
+                  </div>
+                  <div>
+                    <div className="text-white text-sm font-medium">BTC/USDT</div>
+                    <div className="text-green-400 text-xs">+12.4%</div>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="absolute right-10 top-1/3 bg-black/30 backdrop-blur-md px-4 py-3 rounded-xl border border-white/10 shadow-lg hidden md:block">
+                <div className="flex items-center">
+                  <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center mr-3">
+                    <span className="text-white text-xs">↗</span>
+                  </div>
+                  <div>
+                    <div className="text-white text-sm font-medium">ETH/USDT</div>
+                    <div className="text-blue-400 text-xs">+8.7%</div>
+                  </div>
+                </div>
+              </div>
             </motion.div>
           </div>
 
+        </div>
+      </div>
+      
+      {/* Scrolling crypto price ticker */}
+      <div className="absolute bottom-0 left-0 right-0 bg-black/60 backdrop-blur-sm border-t border-white/10 py-2 hidden md:block">
+        <div className="flex animate-marquee">
+          {['BTC $86,420 +2.4%', 'ETH $5,240 +3.1%', 'SOL $320 +5.2%', 'BNB $580 +1.7%', 'ADA $2.10 +4.3%', 'XRP $1.35 +2.8%'].map((item, index) => (
+            <div key={index} className="flex items-center mx-6">
+              <span className="text-white mr-2">{item.split(' ')[0]}</span>
+              <span className="text-neutral-300">{item.split(' ')[1]}</span>
+              <span className={`${item.includes('+') ? 'text-green-400' : 'text-red-400'} ml-1`}>{item.split(' ')[2]}</span>
+            </div>
+          ))}
         </div>
       </div>
     </section>
