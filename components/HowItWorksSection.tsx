@@ -10,25 +10,28 @@ interface HowItWorksStep {
   imageSrc: string;
 }
 
-// Data for the steps (same as before)
+// Data for the steps (UPDATED imageSrc paths)
 const steps: HowItWorksStep[] = [
   {
     id: 1,
     title: 'Invest in a tailor made portfolio',
     description: 'Dubai Club professionals will create a portfolio based on your risk appetite.',
-    imageSrc: '/how-it-works-step1.jpg',
+    // --- UPDATED IMAGE ---
+    imageSrc: '/images/image9.jpg',
   },
   {
     id: 2,
     title: 'Execute regular rebalance',
     description: 'Get rebalance updates on Dubai Club web, mail and approve and execute the actions.',
-    imageSrc: '/how-it-works-step2.jpg',
+    // --- UPDATED IMAGE ---
+    imageSrc: '/images/image10.jpg',
   },
   {
     id: 3,
     title: 'Invest regularly with SIP or Lumpsum',
     description: "Keep Investing and watch your wealth grow, It's that easy!",
-    imageSrc: '/how-it-works-step3.jpg',
+    // --- UPDATED IMAGE ---
+    imageSrc: '/images/image11.jpg',
   },
 ];
 

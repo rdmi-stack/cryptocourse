@@ -29,8 +29,10 @@ const PortfolioSection10XAlphasUnique: React.FC = () => {
                {/* <div className="absolute inset-0 border-2 border-yellow-500/30 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10"></div> */}
                <div className="aspect-video md:aspect-[16/10]"> {/* Adjusted aspect ratio */}
                  <Image
-                   src="/portfolio-10x-alphas.jpg" // Your image path
-                   alt="10X Alphas Portfolio Visual"
+                   // --- UPDATE IMAGE SOURCE HERE ---
+                   src="/images/image2.jpg" // Your NEW image path
+                   // --- END UPDATE ---
+                   alt="10X Alphas Portfolio Visual" // Consider updating alt text if needed
                    layout="fill"
                    objectFit="cover"
                    quality={85}

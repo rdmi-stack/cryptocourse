@@ -1,17 +1,44 @@
 // components/PortfolioSectionRealKings.tsx
+"use client"; // Required for Framer Motion
+
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { motion } from 'framer-motion'; // Import motion
 
 const PortfolioSectionRealKings: React.FC = () => {
   // Define yellow color for consistency
-  const yellowColor = 'text-yellow-400'; // Consistent with previous section
+  const yellowColor = 'text-yellow-400';
   const yellowBgColor = 'bg-yellow-500';
   const yellowHoverBgColor = 'hover:bg-yellow-600';
 
+  // --- Framer Motion Variants ---
+  const textVariants = {
+    hidden: { opacity: 0, x: -50 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: { duration: 0.6, ease: 'easeOut' },
+    },
+  };
+
+  const imageVariants = {
+    hidden: { opacity: 0, x: 50 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: { duration: 0.6, ease: 'easeOut', delay: 0.1 }, // Slight delay
+    },
+  };
+
+  // --- Ripped Edge Clip Path ---
+  // Adjust these polygon points to fine-tune the ripped look
+  const rippedEdgeClipPath =
+    'polygon(0% 0%, 90% 0%, 94% 6%, 91% 12%, 95% 18%, 90% 24%, 97% 30%, 92% 36%, 96% 42%, 91% 48%, 95% 54%, 90% 60%, 96% 66%, 92% 72%, 97% 78%, 93% 84%, 95% 90%, 91% 96%, 94% 100%, 0% 100%)';
+
   return (
     <section className="relative py-20 md:py-28 bg-black text-neutral-100 overflow-hidden">
-      {/* Optional: Subtle background pattern (ensure consistency or variation) */}
+      {/* Optional: Subtle background pattern */}
       <div
         className="absolute inset-0 opacity-[0.03] bg-[url('/path/to/subtle-pattern.svg')] bg-repeat"
         // style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px)', backgroundSize: '20px 20px' }}
@@ -20,56 +47,68 @@ const PortfolioSectionRealKings: React.FC = () => {
       <div className="container mx-auto px-6 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 items-center">
 
-          {/* Left Column: Text Content Panel (Order reversed) */}
-          <div className="md:col-span-5 order-2 md:order-1 flex flex-col justify-center">
-            {/* Text Panel Styling */}
-            <div className="bg-gray-900/60 backdrop-blur-sm border border-gray-800 rounded-lg p-6 md:p-8 shadow-lg">
-              {/* Headline - Yellow & Glowing */}
-              <h2
-                className={`text-4xl sm:text-5xl font-extrabold ${yellowColor} mb-4 leading-tight`}
-                style={{ textShadow: '0 0 15px rgba(250, 204, 21, 0.4)' }} // Yellow glow
-              >
-                Real Kings
-              </h2>
-              {/* Tagline (Optional - Add if applicable, otherwise remove) */}
-              {/* <p className="text-neutral-400 font-medium mb-6 text-sm sm:text-base">
-                 Low-Risk | Blue-Chip Stablecoins | Passive Income Focus
-               </p> */}
+          {/* Left Column: Text Content Panel (Animated + Clipped) */}
+          <motion.div
+            className="md:col-span-5 order-2 md:order-1 flex flex-col justify-center"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }} // Trigger animation when 30% visible, only once
+            variants={textVariants}
+          >
+            {/* Text Panel Styling with Clip Path */}
+            <div
+              className="bg-gray-900/80 backdrop-blur-sm border border-gray-800 rounded-lg p-6 md:p-8 shadow-lg relative" // Added relative for potential future absolute elements inside
+              style={{ clipPath: rippedEdgeClipPath }}
+            >
+              {/* Add some right padding to prevent text hitting the ripped edge */}
+              <div className="pr-6 md:pr-10">
+                {/* Headline */}
+                <h2
+                  className={`text-4xl sm:text-5xl font-extrabold ${yellowColor} mb-4 leading-tight`}
+                  style={{ textShadow: '0 0 15px rgba(250, 204, 21, 0.4)' }}
+                >
+                  Real Kings
+                </h2>
 
-              {/* Stats section omitted as data wasn't available in provided docs */}
+                {/* Description */}
+                <p className="text-neutral-300 mb-8 text-base md:text-lg leading-relaxed">
+                  A long-term, Low-risk, blue-chip stable crypto investment portfolio offering the best passive income.
+                </p>
 
-              {/* Description [cite: 2] */}
-              <p className="text-neutral-300 mb-8 text-base md:text-lg leading-relaxed">
-                A long-term, Low-risk, blue-chip stable crypto investment portfolio offering the best passive income. [cite: 2]
-              </p>
-
-              {/* CTA Button - Styled for Dark Theme */}
-              <Link href="/portfolios/real-kings" legacyBehavior>
-                <a className={`inline-block ${yellowBgColor} ${yellowHoverBgColor} text-black font-bold py-3 px-8 rounded-md transition duration-300 ease-in-out transform hover:scale-105 self-start shadow-lg hover:shadow-yellow-500/30`}>
-                  Know More &rarr;
-                </a>
-              </Link>
+                {/* CTA Button */}
+                <Link href="/portfolios/real-kings" legacyBehavior>
+                  <a className={`inline-block ${yellowBgColor} ${yellowHoverBgColor} text-black font-bold py-3 px-8 rounded-md transition duration-300 ease-in-out transform hover:scale-105 self-start shadow-lg hover:shadow-yellow-500/30`}>
+                    Know More &rarr;
+                  </a>
+                </Link>
+              </div>
             </div>
-          </div>
+          </motion.div>
 
-          {/* Right Column: Image (Order reversed) */}
-          <div className="md:col-span-7 order-1 md:order-2">
+          {/* Right Column: Image (Animated) */}
+          <motion.div
+            className="md:col-span-7 order-1 md:order-2"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={imageVariants}
+          >
             {/* Image Wrapper with styling */}
             <div className="relative rounded-xl shadow-2xl overflow-hidden group transform transition-transform duration-500 hover:scale-[1.02]">
-              <div className="aspect-video md:aspect-[16/10]"> {/* Maintain consistent aspect ratio */}
+              <div className="aspect-video md:aspect-[16/10]">
                 <Image
-                  src="/portfolio-real-kings.jpg" // Your image path for Real Kings
+                  src="/images/image3.jpg" // Image path updated previously
                   alt="Real Kings Portfolio Visual"
                   layout="fill"
                   objectFit="cover"
                   quality={85}
-                  className="rounded-xl" // Match parent rounding
+                  className="rounded-xl"
                 />
               </div>
-              {/* Image Overlay - subtle gradient */}
+              {/* Image Overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent"></div>
             </div>
-          </div>
+          </motion.div>
 
         </div>
       </div>
