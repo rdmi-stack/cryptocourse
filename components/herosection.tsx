@@ -146,22 +146,28 @@ const VisualHero: React.FC = () => {
               <span className="block mt-2 opacity-90">Simply invest, then watch your digital assets grow.</span>
             </motion.p>
             {/* Stats */}
-            <motion.div className="flex flex-wrap gap-5 sm:gap-6 mb-8 justify-center md:justify-start" variants={itemVariants}>
-              {[
-                { value: "93%", label: "Success Rate" },
-                { value: "24/7", label: "Market Analysis" },
-                { value: "$1.2M+", label: "Daily Volume" },
-              ].map((stat) => (
-                <div key={stat.label} className="flex flex-col items-center md:items-start">
-                  <span className="text-yellow-400 text-xl sm:text-2xl font-bold" style={commonTextShadow}>
-                    {stat.value}
-                  </span>
-                  <span className="text-neutral-200 text-xs sm:text-sm" style={commonTextShadow}>
-                    {stat.label}
-                  </span>
-                </div>
-              ))}
-            </motion.div>
+            <motion.div
+  className="grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-6 mb-8 justify-center md:justify-start"
+  variants={itemVariants}
+>
+  {[
+    { value: "93%", label: "Success Rate" },
+    { value: "24/7", label: "Market Analysis" },
+    { value: "$1.2M+", label: "Daily Volume" },
+    { value: "7.8%", label: "Volatility" },
+    { value: "36.2%", label: "Annual CAGR" },
+  ].map((stat) => (
+    <div
+      key={stat.label}
+      className="relative p-4 sm:p-5 rounded-xl bg-white/5 border border-yellow-400/20 shadow-lg backdrop-blur-sm group hover:shadow-yellow-400/30 transition duration-300 ease-in-out"
+    >
+      <div className="absolute inset-0 bg-gradient-to-br from-yellow-300/10 to-yellow-500/10 opacity-0 group-hover:opacity-10 rounded-xl pointer-events-none transition duration-300 ease-in-out" />
+      <div className="text-yellow-400 text-xl sm:text-2xl font-extrabold text-center mb-1 drop-shadow-sm">{stat.value}</div>
+      <div className="text-neutral-200 text-xs sm:text-sm font-medium text-center">{stat.label}</div>
+    </div>
+  ))}
+</motion.div>
+
             {/* Buttons */}
             <motion.div className="flex flex-col sm:flex-row gap-4 items-center justify-center md:justify-start" variants={itemVariants}>
               <motion.div variants={buttonVariants} initial="initial" whileHover="hover" whileTap="tap" className="relative group w-full sm:w-auto">
