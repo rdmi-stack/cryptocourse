@@ -1,22 +1,48 @@
-// components/PortfolioSectionProjectBeta.tsx
 "use client";
 
 import React from 'react';
 import Image from 'next/image';
-import Link from 'next/link'; // Import Link
+import Link from 'next/link';
 import { motion } from 'framer-motion';
 
+// Torn clip path for the image
+const ProjectBetaClipPath: React.FC = () => (
+  <svg width="0" height="0" className="absolute" aria-hidden="true">
+    <defs>
+      <clipPath id="projectBetaTornClip" clipPathUnits="objectBoundingBox">
+        <path d="
+          M0.005,0.005 L0.03,0.000 L0.06,0.005 L0.09,0.000 L0.12,0.007
+          L0.15,0.002 L0.18,0.008 L0.21,0.003 L0.24,0.009 L0.27,0.001
+          L0.30,0.007 L0.33,0.003 L0.36,0.008 L0.39,0.002 L0.42,0.009
+          L0.45,0.003 L0.48,0.007 L0.51,0.002 L0.54,0.008 L0.57,0.003
+          L0.60,0.009 L0.63,0.001 L0.66,0.007 L0.69,0.003 L0.72,0.008
+          L0.75,0.002 L0.78,0.007 L0.81,0.003 L0.84,0.009 L0.87,0.002
+          L0.90,0.007 L0.93,0.003 L0.96,0.008 L0.995,0.003
+
+          L0.998,0.25 L0.993,0.40 L0.998,0.60 L0.994,0.75
+
+          L0.995,0.995 L0.96,0.992 L0.93,0.997 L0.90,0.993
+          L0.87,0.998 L0.84,0.991 L0.81,0.997 L0.78,0.992 L0.75,0.998
+          L0.72,0.993 L0.69,0.997 L0.66,0.992 L0.63,0.998 L0.60,0.991
+          L0.57,0.997 L0.54,0.992 L0.51,0.998 L0.48,0.993 L0.45,0.997
+          L0.42,0.992 L0.39,0.998 L0.36,0.991 L0.33,0.997 L0.30,0.992
+          L0.27,0.998 L0.24,0.993 L0.21,0.997 L0.18,0.992 L0.15,0.998
+          L0.12,0.991 L0.09,0.997 L0.06,0.992 L0.03,0.998 L0.005,0.992
+
+          L0.002,0.75 L0.007,0.60 L0.002,0.40 L0.007,0.25
+          Z
+        " />
+      </clipPath>
+    </defs>
+  </svg>
+);
+
 const PortfolioSectionProjectBeta: React.FC = () => {
-  // --- Colors ---
   const yellowColor = 'text-yellow-400';
   const yellowBgColor = 'bg-yellow-500';
   const yellowHoverBgColor = 'hover:bg-yellow-600';
-  const neutralColor = 'text-neutral-400';
-  const lightNeutralColor = 'text-neutral-300';
 
-
-  // --- Framer Motion Variants ---
-  const textVariants = { // Text on the left
+  const textVariants = {
     hidden: { opacity: 0, x: -50 },
     visible: {
       opacity: 1,
@@ -25,7 +51,7 @@ const PortfolioSectionProjectBeta: React.FC = () => {
     },
   };
 
-  const imageVariants = { // Image on the right
+  const imageVariants = {
     hidden: { opacity: 0, x: 50, scale: 0.95 },
     visible: {
       opacity: 1,
@@ -35,82 +61,78 @@ const PortfolioSectionProjectBeta: React.FC = () => {
     },
   };
 
-  // --- Blobby Border Style ---
-  const blobStyle = {
-    borderRadius: '45% 55% 35% 65% / 50% 40% 60% 50%', // Keep or adjust style
-  };
-
-
-  // --- *** PLACEHOLDER CONTENT - REPLACE BELOW *** ---
   const portfolio = {
     name: "Project Beta",
     tagline: "Volatility Harvesting | Quant Driven | Risk Managed",
-    description: "Employing quantitative models to capitalize on market volatility, Project Beta aims for superior risk-adjusted returns through algorithmic precision.",
-    href: "/portfolios/project-beta", // Update link destination
-    imageSrc: "/images/image7.jpg", // Confirm or update image path
+    description:
+      "Employing quantitative models to capitalize on market volatility, Project Beta aims for superior risk-adjusted returns through algorithmic precision.",
+    href: "/portfolios/project-beta",
+    imageSrc: "/images/image7.jpg",
     imageAlt: "Project Beta Portfolio Visual",
   };
-  // --- *** END PLACEHOLDER CONTENT *** ---
-
 
   return (
     <section className="relative py-20 md:py-28 bg-black text-neutral-100 overflow-hidden">
+      <ProjectBetaClipPath />
+
       <div className="container mx-auto px-6 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 items-center">
 
-          {/* Left Column: Text Content Panel */}
+          {/* Left Column: Text */}
           <motion.div
-            className="md:col-span-5 order-2 md:order-1 flex flex-col justify-center" // Text on the left
+            className="md:col-span-5 order-2 md:order-1 flex flex-col justify-center"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.3 }}
             variants={textVariants}
           >
             <div className="bg-gray-900/70 backdrop-blur-lg border border-gray-700/60 rounded-lg p-6 md:p-8 shadow-xl">
-               {/* Headline */}
               <h2
                 className={`font-serif text-4xl sm:text-5xl font-bold ${yellowColor} mb-4 leading-tight`}
                 style={{ textShadow: '0 0 12px rgba(250, 204, 21, 0.3)' }}
               >
                 {portfolio.name}
               </h2>
-              {/* Tagline */}
-              <p className={`${neutralColor} font-medium mb-6 text-sm sm:text-base`}>
-                 {portfolio.tagline}
+              <p className="text-neutral-400 font-medium mb-6 text-sm sm:text-base">
+                {portfolio.tagline}
               </p>
-              {/* Description */}
-              <p className={`${lightNeutralColor} mb-8 text-base md:text-lg leading-relaxed`}>
+              <p className="text-neutral-300 mb-8 text-base md:text-lg leading-relaxed">
                 {portfolio.description}
               </p>
-              {/* CTA Button */}
               <Link href={portfolio.href} legacyBehavior>
-                 <a className={`inline-block ${yellowBgColor} ${yellowHoverBgColor} text-black font-bold py-3 px-8 rounded-md transition duration-300 ease-in-out transform hover:scale-105 self-start shadow-lg hover:shadow-yellow-500/30`}>
-                   Know More &rarr;
-                 </a>
+                <a className={`inline-block ${yellowBgColor} ${yellowHoverBgColor} text-black font-bold py-3 px-8 rounded-md transition duration-300 ease-in-out transform hover:scale-105 self-start shadow-lg hover:shadow-yellow-500/30`}>
+                  Know More &rarr;
+                </a>
               </Link>
             </div>
           </motion.div>
 
           {/* Right Column: Image */}
           <motion.div
-            className="md:col-span-7 order-1 md:order-2" // Image on the right
+            className="md:col-span-7 order-1 md:order-2"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.3 }}
             variants={imageVariants}
           >
-            <div
-              className="relative shadow-2xl overflow-hidden group transform transition-transform duration-500 hover:scale-[1.03]"
-              style={blobStyle} // Apply the blob border-radius here
-            >
-              <div className="aspect-video md:aspect-[16/10]">
-                <Image
-                  src={portfolio.imageSrc}
-                  alt={portfolio.imageAlt}
-                  layout="fill"
-                  objectFit="cover"
-                  quality={85}
-                />
+            <div className="relative group">
+              <div className="absolute -inset-1 bg-gradient-to-br from-yellow-400/30 via-yellow-300/20 to-black rounded-xl blur-md opacity-60 group-hover:opacity-90 transition-all duration-300 z-0" />
+              <div className="absolute inset-0 border-2 border-yellow-500/60 rounded-lg z-1" />
+              <div
+                className="relative z-10 shadow-2xl transform transition-transform duration-500 group-hover:scale-[1.02]"
+                style={{ clipPath: 'url(#projectBetaTornClip)' }}
+              >
+                <div className="w-full h-auto relative">
+                  <Image
+                    src={portfolio.imageSrc}
+                    alt={portfolio.imageAlt}
+                    width={1200}
+                    height={800}
+                    className="w-full h-auto object-cover"
+                    priority
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+                </div>
               </div>
             </div>
           </motion.div>

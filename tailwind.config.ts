@@ -1,4 +1,3 @@
-// tailwind.config.js
 const { fontFamily } = require('tailwindcss/defaultTheme');
 
 /** @type {import('tailwindcss').Config} */
@@ -11,13 +10,22 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['var(--font-inter)', ...fontFamily.sans], // Use Inter as default sans
-        serif: ['var(--font-playfair)', ...fontFamily.serif], // Use Playfair as default serif
+        sans: ['var(--font-inter)', ...fontFamily.sans],
+        serif: ['var(--font-playfair)', ...fontFamily.serif],
       },
-      // ... other theme extensions
+      keyframes: {
+        shimmer: {
+          '0%': { transform: 'translateX(-100%)' },
+          '100%': { transform: 'translateX(100%)' },
+        },
+      },
+      animation: {
+        shimmer: 'shimmer 1.5s ease-in-out infinite',
+      },
     },
   },
   plugins: [
-    // require('@tailwindcss/aspect-ratio'), // <--- REMOVE OR COMMENT OUT THIS LINE
+    // Add any needed plugins here
+    // e.g., require('@tailwindcss/forms'), require('@tailwindcss/typography')
   ],
 };

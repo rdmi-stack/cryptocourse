@@ -1,13 +1,21 @@
-// components/NewsletterSectionDarkBlue.tsx
-"use client"; // Needed for useState and Framer Motion
+// components/NewsletterSectionFinal.tsx
+"use client";
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from "next/link";
+import Image from "next/image"; // Import Next.js Image
 
-// Animation Variants (retained from original)
+// SVG Icon (Envelope)
+const EnvelopeIcon = () => (
+  <svg className="w-12 h-12 text-yellow-400 mb-6 mx-auto" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" aria-hidden="true">
+    <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+  </svg>
+);
+
+// Animation Variants
 const sectionVariant = {
-  hidden: { opacity: 0, y: 30 },
+  hidden: { opacity: 0, y: 40 },
   visible: {
     opacity: 1,
     y: 0,
@@ -20,142 +28,180 @@ const itemVariant = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } }
 };
 
-// Renamed component to reflect the new dark blue theme
-function NewsletterSectionDarkBlue() {
+// Content from PDF/Screenshots
+const newsletterContent = {
+  icon: <EnvelopeIcon />,
+  headline: "Stay Ahead with Dubai Club & Get Insights the Secrets of the Ultra-Wealthy",
+  description: "Free to Subscribe for weekly market analysis, portfolio updates, Al-driven crypto insights & ultra wealth secrets delivered directly to your inbox.",
+  socialProof: "🤝 Join 10,000+ Smart Crypto Investors", // Emoji included
+  whatYouGetTitle: "What you'll get",
+  whatYouGet: [
+    "Where Smart Money Discovers Its Next Move",
+    "Get Elite Market Research. Real Wealth. No Noise",
+    "The Hidden Strategies Behind Generational Wealth",
+    "The Investment Edge They Don't Want You to Have"
+  ],
+  whatYouGetImage: "/images/newsletter.jpg", // Path to the image user will add
+  privacyNote: "Your privacy matters. Unsubscribe anytime."
+};
+
+function NewsletterSectionFinal() {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState({ type: '', text: '' });
   const [loading, setLoading] = useState(false);
 
-  // Theme colors adjusted for dark blue gradient theme
-  const primaryTextColor = 'text-white'; // Light text for headlines on dark bg
-  const secondaryTextColor = 'text-blue-200'; // Softer light blue for paragraphs
-  const tertiaryTextColor = 'text-gray-400'; // Subtle gray for less emphasis
-
-  const yellowBgColor = 'bg-yellow-500'; // Kept yellow button for strong CTA
+  // Theme colors
+  const primaryTextColor = 'text-white';
+  const secondaryTextColor = 'text-neutral-300'; // Slightly softer white for description
+  const tertiaryTextColor = 'text-neutral-500'; // For privacy note
+  const yellowColor = 'text-yellow-400';
+  const yellowBgColor = 'bg-yellow-500';
   const yellowHoverBgColor = 'hover:bg-yellow-600';
-  const yellowFocusRing = 'focus:ring-yellow-500'; // Kept yellow focus ring
-
-  const inputBgColor = 'bg-slate-800/80'; // Semi-transparent dark bg for input
-  const inputBorderColor = 'border-slate-700';
-  const inputText = 'text-gray-100';
-  const inputPlaceholder = 'placeholder-gray-500';
-  const inputFocusBorderColor = 'focus:border-yellow-600'; // Match focus ring theme
-
-  const buttonTextColor = 'text-black'; // Contrast for yellow button
-  const buttonFocusRingOffset = 'focus:ring-offset-slate-900'; // Offset matches dark bg
-
-  const errorColor = 'text-red-400'; // Lighter red for dark bg
-  const successColor = 'text-green-400'; // Lighter green for dark bg
-
-  const linkColor = 'text-yellow-400'; // Link color to match CTA
-  const linkHoverColor = 'hover:text-yellow-300';
-
+  const inputTextColor = 'text-black'; // Text inside input
+  const inputPlaceholderColor = 'placeholder-gray-500';
+  const buttonTextColor = 'text-black';
+  const errorColor = 'text-red-400';
+  const successColor = 'text-green-400';
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     setLoading(true);
     setMessage({ type: '', text: '' });
 
-    // --- Placeholder signup logic (same as before) ---
     console.log("Subscribing with email:", email);
-    await new Promise(res => setTimeout(res, 1000)); // Simulate API call
-    if (email.includes('@') && email.includes('.')) { // Basic validation
-      setMessage({ type: 'success', text: 'Subscription successful! Check your inbox.' });
+    await new Promise(res => setTimeout(res, 1000));
+    if (email.includes('@') && email.includes('.')) {
+      setMessage({ type: 'success', text: 'Subscription successful! Insights are on their way.' });
       setEmail('');
     } else {
       setMessage({ type: 'error', text: 'Please enter a valid email address.' });
     }
     setLoading(false);
-    // --- End Placeholder ---
   };
 
   return (
     <motion.section
-      // Dark blue gradient background
-      className="relative bg-gradient-to-br from-slate-900 via-blue-950 to-black py-16 sm:py-24 px-4 sm:px-6 lg:px-8 overflow-hidden"
+      className="relative bg-black text-white py-16 sm:py-24 px-4 sm:px-6 lg:px-8 overflow-hidden"
       variants={sectionVariant}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, amount: 0.2 }} // amount: 0.2 makes it trigger a bit earlier
+      viewport={{ once: true, amount: 0.1 }} // Trigger a bit earlier
     >
-      {/* Optional: Subtle dark background pattern or elements */}
-      {/* Example: <div className="absolute inset-0 opacity-5 bg-[url('/path/to/dark-geometric-pattern.svg')] bg-repeat"></div> */}
-      {/* Example: Moving cosmic dust effect (more complex, would require additional libraries) */}
+      <div className="container mx-auto relative z-10">
+        {/* Top Part: CTA */}
+        <div className="max-w-2xl mx-auto text-center mb-16 md:mb-20">
+          <motion.div variants={itemVariant}>
+            {newsletterContent.icon}
+          </motion.div>
+          <motion.h2
+            className={`font-serif text-3xl sm:text-4xl lg:text-5xl font-bold ${yellowColor} mb-4`}
+            style={{ textShadow: '0 0 10px rgba(250, 204, 21, 0.2)' }}
+            variants={itemVariant}
+          >
+            {newsletterContent.headline}
+          </motion.h2>
+          <motion.p className={`mt-3 text-base sm:text-lg ${secondaryTextColor} leading-relaxed`} variants={itemVariant}>
+            {newsletterContent.description}
+          </motion.p>
 
-      <div className="max-w-xl mx-auto text-center relative z-10">
-        <motion.h2
-          className={`font-serif text-4xl sm:text-5xl font-bold ${primaryTextColor} mb-4`}
-          style={{ textShadow: '0 2px 15px rgba(250, 204, 21, 0.1)' }} // Subtle yellow glow for headline
-          variants={itemVariant}
-        >
-          Stay Ahead with Dubai Club Insights
-        </motion.h2>
-        <motion.p className={`mt-4 text-lg ${secondaryTextColor} leading-relaxed`} variants={itemVariant}>
-           Subscribe for weekly market analysis, portfolio updates, and AI-driven crypto insights delivered to your inbox.
-        </motion.p>
-
-        <motion.div className="mt-10" variants={itemVariant}>
-           <form
-            className="relative sm:flex sm:justify-center"
+          <motion.form
+            className="mt-8 sm:flex sm:justify-center max-w-md mx-auto"
             onSubmit={handleSubmit}
-           >
-             <label htmlFor="newsletter-email-address-dark" className="sr-only">
-               Email address
-             </label>
-             <input
-               id="newsletter-email-address-dark" // Unique ID for this form
-               name="email"
-               type="email"
-               autoComplete="email"
-               required
-               value={email}
-               onChange={(e) => setEmail(e.target.value)}
-               className={`w-full sm:max-w-xs px-5 py-3.5 rounded-md ${inputBgColor} ${inputBorderColor} ${inputText} ${inputPlaceholder} focus:outline-none focus:ring-2 ${yellowFocusRing} ${inputFocusBorderColor} transition duration-200 shadow-md hover:border-slate-600`}
-               placeholder="Your Email Address"
-             />
-             <motion.div
-               className="mt-3 rounded-md shadow-sm sm:mt-0 sm:ml-3 sm:flex-shrink-0"
-               whileHover={{ scale: loading ? 1 : 1.05 }}
-               whileTap={{ scale: loading ? 1 : 0.98 }}
-             >
-               <button
-                 type="submit"
-                 disabled={loading}
-                 className={`w-full flex items-center justify-center px-6 py-3.5 border border-transparent text-base font-bold rounded-md ${buttonTextColor} ${yellowBgColor} transition duration-150 ease-in-out shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 ${buttonFocusRingOffset} ${yellowFocusRing} ${
-                   loading ? 'opacity-70 cursor-not-allowed' : `${yellowHoverBgColor} hover:shadow-yellow-500/40`
-                 }`}
-               >
-                 {loading ? 'Subscribing...' : 'Get Insights'}
-               </button>
-             </motion.div>
-           </form>
+            variants={itemVariant}
+          >
+            <label htmlFor="newsletter-email-final" className="sr-only">
+              Email address
+            </label>
+            <input
+              id="newsletter-email-final"
+              name="email"
+              type="email"
+              autoComplete="email"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className={`w-full sm:flex-1 px-5 py-3 rounded-l-md border-0 ${inputTextColor} ${inputPlaceholderColor} bg-white focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-inset`}
+              placeholder="your email" // Placeholder from screenshot
+            />
+            <motion.div
+              className="mt-3 sm:mt-0 sm:flex-shrink-0"
+              whileHover={{ scale: loading ? 1 : 1.05 }}
+              whileTap={{ scale: loading ? 1 : 0.98 }}
+            >
+              <button
+                type="submit"
+                disabled={loading}
+                className={`w-full flex items-center justify-center px-6 py-3 border border-transparent text-base font-bold rounded-r-md ${buttonTextColor} ${yellowBgColor} transition duration-150 ease-in-out shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-black focus:ring-yellow-500 ${
+                  loading ? 'opacity-70 cursor-not-allowed' : `${yellowHoverBgColor} hover:shadow-md`
+                }`}
+              >
+                {loading ? 'Processing...' : 'Get Insights'} {/* Button text from screenshot */}
+              </button>
+            </motion.div>
+          </motion.form>
+
+          <AnimatePresence>
+            {message.text && (
+              <motion.p
+                key="message-final"
+                className={`mt-4 text-sm font-medium ${message.type === 'success' ? successColor : errorColor}`}
+                initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.3 }}
+              >
+                {message.text}
+              </motion.p>
+            )}
+          </AnimatePresence>
+
+          <motion.p className={`mt-6 text-sm ${primaryTextColor} font-medium`} variants={itemVariant}>
+            {newsletterContent.socialProof}
+          </motion.p>
+        </div>
+
+        {/* Bottom Part: "What you'll get" */}
+        <motion.div
+          className="max-w-4xl mx-auto"
+          variants={sectionVariant} // This container can also animate as a whole
+        >
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
+            {/* Left Column: Text */}
+            <motion.div variants={itemVariant}>
+              <h3 className={`text-2xl sm:text-3xl font-bold ${yellowColor} mb-6`}>
+                {newsletterContent.whatYouGetTitle}
+              </h3>
+              <ul className="space-y-3">
+                {newsletterContent.whatYouGet.map((item, index) => (
+                  <motion.li key={index} className={`text-base sm:text-lg ${secondaryTextColor}`} variants={itemVariant}>
+                    {/* Using a simple dash or custom styled bullet if needed */}
+                    <span className={`${yellowColor} mr-2`}>&ndash;</span> {item}
+                  </motion.li>
+                ))}
+              </ul>
+            </motion.div>
+
+            {/* Right Column: Image */}
+            <motion.div className="relative aspect-video md:aspect-auto md:h-full w-full max-w-md mx-auto md:max-w-none" variants={itemVariant}>
+              <Image
+                src={newsletterContent.whatYouGetImage}
+                alt="Dubai Club Insights Graphic"
+                layout="fill"
+                objectFit="contain" // Changed to contain to ensure full image visibility
+                quality={85}
+                className="rounded-lg shadow-xl"
+              />
+            </motion.div>
+          </div>
         </motion.div>
 
-        <AnimatePresence>
-          {message.text && (
-            <motion.p
-              key="message-dark" // Unique key for dark theme message
-              className={`mt-4 text-sm font-medium ${message.type === 'success' ? successColor : errorColor}`}
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.3 }}
-            >
-              {message.text}
-            </motion.p>
-          )}
-        </AnimatePresence>
-
-        <motion.p className={`mt-6 text-xs ${tertiaryTextColor}`} variants={itemVariant}>
-          Your privacy matters. Read our{' '}
+        <motion.p className={`mt-16 text-center text-xs ${tertiaryTextColor}`} variants={itemVariant}>
+          {newsletterContent.privacyNote} Read our{' '}
           <Link href="/privacy-policy" legacyBehavior>
-            <a target="_blank" rel="noopener noreferrer" className={`underline ${linkColor} ${linkHoverColor} transition-colors duration-150`}>Privacy Policy</a>
-          </Link>
-          . Unsubscribe anytime.
+            <a target="_blank" rel="noopener noreferrer" className={`underline ${yellowColor} hover:text-yellow-300 transition-colors duration-150`}>Privacy Policy</a>
+          </Link>.
         </motion.p>
       </div>
     </motion.section>
   );
 }
 
-export default NewsletterSectionDarkBlue; // Export with the new name
+export default NewsletterSectionFinal;

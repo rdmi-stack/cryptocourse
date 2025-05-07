@@ -32,15 +32,16 @@ const Header: React.FC = () => {
     // Base classes: sticky, top, z-index, transition properties
     // Conditional classes: background, backdrop-blur, border based on isScrolled state
     <header
-      className={`
-        sticky top-0 z-50 w-full
-        transition-colors duration-300 ease-in-out
-        ${isScrolled
-          ? 'bg-black/80 backdrop-blur-md border-b border-gray-800/50 shadow-md' // Scrolled state styles
-          : 'bg-transparent border-b border-transparent' // Top/Transparent state styles
-        }
-      `}
-    >
+    className={`
+      fixed top-0 left-0 w-full z-50
+      transition-all duration-300 ease-in-out
+      ${isScrolled
+        ? 'bg-black/80 backdrop-blur-md border-b border-gray-800/50 shadow-md'
+        : 'bg-transparent backdrop-blur-none border-b border-transparent'
+      }
+    `}
+  >
+  
       {/* --- END HEADER STYLING --- */}
 
       <div className="container mx-auto px-4 sm:px-6 py-3">
@@ -76,14 +77,15 @@ const Header: React.FC = () => {
             {/* Subscribe Button */}
             <Link href="/portfolios/10x-alphas" legacyBehavior>
               {/* Button styles are mostly independent of header background */}
-              <a className={`
-                inline-block ${yellowBgColor} ${yellowHoverBgColor}
-                text-black text-sm font-bold
-                py-2 px-4 sm:px-5 rounded-md
-                transition duration-300 ease-in-out transform hover:scale-105 shadow-md
-              `}>
-                Subscribe
-              </a>
+              <a
+  className="relative inline-block overflow-hidden rounded-md bg-yellow-400 px-4 sm:px-5 py-2 text-sm font-bold text-black shadow-lg transition-transform duration-300 ease-in-out hover:scale-105"
+>
+  <span className="relative z-10">Subscribe</span>
+  <span
+    className="absolute top-0 left-[-100%] w-[200%] h-full bg-gradient-to-r from-transparent via-white to-transparent opacity-40 blur-sm animate-shimmer pointer-events-none"
+  />
+</a>
+
             </Link>
           </div>
         </div>
