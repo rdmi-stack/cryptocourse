@@ -115,12 +115,7 @@ const VisualHero: React.FC = () => {
             animate="visible"
           >
             {/* Badge */}
-            <motion.div className="mb-6 mx-auto md:ml-0" variants={itemVariants}>
-              <span className="inline-flex items-center px-3 py-1 rounded-full bg-gradient-to-r from-yellow-500/90 to-yellow-600/90 text-xs font-semibold text-black backdrop-blur-sm">
-                <span className="w-2 h-2 bg-white rounded-full animate-pulse mr-2" />
-                AI-DRIVEN PORTFOLIOS
-              </span>
-            </motion.div>
+        
             {/* Title */}
             <motion.h1
               className="text-4xl sm:text-5xl lg:text-7xl font-extrabold mb-4 leading-tight"
@@ -131,6 +126,7 @@ const VisualHero: React.FC = () => {
               <br />
               <span className="text-white">OF WEALTH</span>
             </motion.h1>
+            
             {/* Tagline */}
             <motion.p
               className="text-lg sm:text-xl lg:text-2xl mb-6 font-medium text-neutral-100"
