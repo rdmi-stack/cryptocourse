@@ -181,14 +181,17 @@ const VisualHero: React.FC = () => {
             </motion.h1>
 
             <motion.p
-              className="text-sm sm:text-base lg:text-lg max-w-lg text-neutral-200 leading-relaxed font-light mx-auto md:mx-0 mb-8"
-              style={commonTextShadow}
-              variants={itemVariants}
-            >
-              Join <span className="font-medium text-yellow-400">Dubai Club</span> and invest in the crypto market through our AI-analyzed,
-              professionally tailored portfolio of premium cryptocurrencies.
-              <span className="block mt-2 opacity-90">Simply invest, then watch your digital assets grow.</span>
-            </motion.p>
+  className="text-sm sm:text-base lg:text-lg max-w-xl text-neutral-200 leading-relaxed font-light mx-auto md:mx-0 mb-8"
+  style={{ ...commonTextShadow }}
+  variants={itemVariants}
+>
+  Join <span className="font-medium text-yellow-400">Dubai Club</span> and invest in the crypto market through our AI-analyzed,&nbsp;
+  <span className="whitespace-nowrap">professionally tailored portfolio of premium cryptocurrencies.</span>
+  <span className="block mt-2 opacity-90">Simply invest, then watch your digital assets grow.</span>
+
+</motion.p>
+
+
 
             <motion.div className="flex flex-wrap gap-5 sm:gap-6 mb-8 justify-center md:justify-start" variants={itemVariants}>
               {[

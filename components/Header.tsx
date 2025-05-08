@@ -54,12 +54,12 @@ const Header: React.FC = () => {
       href: "/crypto-portfolios", // This link can be a general overview page
       icon: ChartBarIcon,
       dropdown: [
-        { label: "10X Alphas", href: "/crypto-portfolios/10x-alphas", icon: ChartBarIcon },
-        { label: "Real Kings", href: "/crypto-portfolios/real-kings", icon: ShieldCheckIcon },
-        { label: "GANGWAR", href: "/crypto-portfolios/gangwar", icon: BoltIcon },
-        { label: "Sky Breakers", href: "/crypto-portfolios/sky-breakers", icon: RocketLaunchIcon },
-        { label: "Project Alpha", href: "/crypto-portfolios/project-alpha", icon: AdjustmentsHorizontalIcon },
-        { label: "Project Beta", href: "/crypto-portfolios/project-beta", icon: VariableIcon },
+        { label: "10X Alphas", href: "/portfolios/10x-alphas", icon: ChartBarIcon },
+        { label: "Real Kings", href: "/portfolios/real-kings", icon: ShieldCheckIcon },
+        { label: "GANGWAR", href: "/portfolios/gangwar", icon: BoltIcon },
+        { label: "Sky Breakers", href: "/portfolios/sky-breakers", icon: RocketLaunchIcon },
+        { label: "Project Alpha", href: "/portfolios/project-alpha", icon: AdjustmentsHorizontalIcon },
+        { label: "Project Beta", href: "/portfolios/project-beta", icon: VariableIcon },
       ],
     },
     { label: "Stocks", href: "/stocks", icon: RectangleStackIcon },
