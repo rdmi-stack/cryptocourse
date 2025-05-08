@@ -1,4 +1,3 @@
-// components/VisualHero.tsx
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
@@ -8,16 +7,16 @@ import { motion, useScroll, useTransform } from "framer-motion";
 
 const VisualHero: React.FC = () => {
   const sectionRef = useRef<HTMLElement>(null);
+  const tickerRef = useRef<HTMLDivElement>(null); // Ref for the ticker to get its height
+
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-    offset: ["start start", "end start"],
+    offset: ["start start", "end start"], // For parallax of background
   });
 
-  // parallax & opacity for background
   const y = useTransform(scrollYProgress, [0, 1], [0, 100]);
   const backgroundImageOpacity = useTransform(scrollYProgress, [0, 1], [1, 0.5]);
 
-  // dynamic gradient on mouse move
   const [gradientPosition, setGradientPosition] = useState({ x: 0, y: 0 });
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -32,7 +31,48 @@ const VisualHero: React.FC = () => {
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
 
-  // animation variants
+  // State for ticker behavior
+  const [isTickerFixed, setIsTickerFixed] = useState(true); // Start as fixed
+
+  useEffect(() => {
+    const heroSection = sectionRef.current;
+    const tickerElement = tickerRef.current;
+
+    if (!heroSection || !tickerElement) return;
+
+    const handleScroll = () => {
+      const heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
+      const tickerHeight = tickerElement.offsetHeight;
+      const scrollPosition = window.scrollY + window.innerHeight; // Position of bottom of viewport relative to document top
+
+      // If the bottom of the viewport is past the bottom of the hero section (minus ticker height),
+      // then the ticker should become absolute within the hero. Otherwise, it's fixed.
+      if (scrollPosition > heroBottom - tickerHeight) {
+        // We've scrolled past the point where the ticker should be fixed.
+        // Now it becomes absolute at the bottom of the hero section.
+        // This happens when the hero section is almost scrolled out of view.
+        // More accurately, when the space left for hero at bottom of screen < ticker height
+        if (window.scrollY > heroSection.offsetTop + heroSection.offsetHeight - window.innerHeight) {
+             // Check if the top of the hero section is above the viewport top
+            if (heroSection.getBoundingClientRect().bottom < tickerHeight + 10 ) { // +10px buffer
+                 setIsTickerFixed(false);
+            } else {
+                 setIsTickerFixed(true);
+            }
+        } else {
+            setIsTickerFixed(true);
+        }
+      } else {
+        setIsTickerFixed(true);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    handleScroll(); // Initial check
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []); // Empty dependency array: runs once on mount and cleans up on unmount
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: { opacity: 1, transition: { staggerChildren: 0.15, delayChildren: 0.3 } },
@@ -56,6 +96,12 @@ const VisualHero: React.FC = () => {
   };
 
   const commonTextShadow = { textShadow: "0px 1px 4px rgba(0,0,0,0.7)" };
+
+  const tickerItems = [
+    "BTC $66,420 +2.4%", "ETH $3,240 +3.1%", "SOL $180 +5.2%",
+    "BNB $580 +1.7%", "ADA $0.65 +4.3%", "XRP $0.55 +2.8%"
+  ];
+  const duplicatedTickerItems = [...tickerItems, ...tickerItems];
 
   return (
     <section
@@ -114,7 +160,6 @@ const VisualHero: React.FC = () => {
             initial="hidden"
             animate="visible"
           >
-            {/* Badge */}
             <motion.div className="mb-6 mx-auto md:ml-0" variants={itemVariants}>
               <span className="inline-flex items-center px-3 py-1 rounded-full bg-gradient-to-r from-yellow-500/90 to-yellow-600/90 text-xs font-semibold text-black backdrop-blur-sm">
                 <span className="w-2 h-2 bg-white rounded-full animate-pulse mr-2"></span>
@@ -123,20 +168,14 @@ const VisualHero: React.FC = () => {
             </motion.div>
 
             <motion.h1
-  className="text-4xl sm:text-5xl lg:text-7xl font-extrabold mb-4 leading-tight"
-  style={commonTextShadow}
-  variants={itemVariants}
->
-  <span className="block text-yellow-400">UNLOCK THE</span>
-  <span className="block">
-  <span className="block whitespace-nowrap text-white">FUTURE OF WEALTH</span>
-  </span>
-</motion.h1>
+              className="text-4xl sm:text-5xl lg:text-7xl font-extrabold mb-4 leading-tight"
+              style={commonTextShadow}
+              variants={itemVariants}
+            >
+              <span className="block text-yellow-400">UNLOCK THE</span>
+              <span className="block text-white">FUTURE OF WEALTH</span>
+            </motion.h1>
 
-
-        
-
-            {/* Description */}
             <motion.p
               className="text-sm sm:text-base lg:text-lg max-w-lg text-neutral-200 leading-relaxed font-light mx-auto md:mx-0 mb-8"
               style={commonTextShadow}
@@ -147,7 +186,6 @@ const VisualHero: React.FC = () => {
               <span className="block mt-2 opacity-90">Simply invest, then watch your digital assets grow.</span>
             </motion.p>
 
-            {/* Stats */}
             <motion.div className="flex flex-wrap gap-5 sm:gap-6 mb-8 justify-center md:justify-start" variants={itemVariants}>
               {[
                 { value: "93%", label: "Success Rate" },
@@ -165,7 +203,6 @@ const VisualHero: React.FC = () => {
               ))}
             </motion.div>
 
-            {/* Buttons */}
             <motion.div className="flex flex-col sm:flex-row gap-4 items-center justify-center md:justify-start" variants={itemVariants}>
               <motion.div variants={buttonVariants} initial="initial" whileHover="hover" whileTap="tap" className="relative group w-full sm:w-auto">
                 <div className="absolute -inset-0.5 bg-gradient-to-r from-yellow-500 to-yellow-300 rounded-lg blur-sm opacity-75 group-hover:opacity-100 transition duration-300"></div>
@@ -214,7 +251,6 @@ const VisualHero: React.FC = () => {
               />
               <div className="absolute bottom-0 left-1/2 -translate-x-1/2 md:left-auto md:translate-x-0 md:right-0 w-full h-[80%] rounded-full bg-gradient-radial from-yellow-500/15 to-transparent blur-3xl"></div>
 
-              {/* Floating price cards */}
               {[
                 { side: "left", pair: "BTC/USDT", pct: "+12.4%", color: "green" },
                 { side: "right", pair: "ETH/USDT", pct: "+8.7%", color: "blue" },
@@ -240,29 +276,35 @@ const VisualHero: React.FC = () => {
         </div>
       </div>
 
-  {/* PRICE TICKER */}
-<div className="absolute bottom-0 left-0 right-0 bg-black/70 backdrop-blur-md border-t border-white/10 py-2.5 overflow-hidden z-20">
-  <div className="whitespace-nowrap flex animate-marquee">
-    {["BTC $66,420 +2.4%", "ETH $3,240 +3.1%", "SOL $180 +5.2%", "BNB $580 +1.7%", "ADA $0.65 +4.3%", "XRP $0.55 +2.8%"]
-      .concat(
-        ["BTC $66,420 +2.4%", "ETH $3,240 +3.1%", "SOL $180 +5.2%", "BNB $580 +1.7%", "ADA $0.65 +4.3%", "XRP $0.55 +2.8%"]
-      )
-      .map((item, idx) => {
-        const [symbol, price, change] = item.split(" ");
-        const isPlus = change.startsWith("+");
-        return (
-          <div key={idx} className="flex items-center mx-4 sm:mx-6" style={{ textShadow: "0px 1px 4px rgba(0,0,0,0.7)" }}>
-            <span className="text-white text-xs sm:text-sm mr-1 sm:mr-2">{symbol}</span>
-            <span className="text-neutral-300 text-xs sm:text-sm">{price}</span>
-            <span className={`${isPlus ? "text-green-400" : "text-red-400"} text-xs sm:text-sm ml-1`}>
-              {change}
-            </span>
-          </div>
-        );
-      })}
-  </div>
-</div>
-
+      {/* PRICE TICKER */}
+      <div
+        ref={tickerRef} // Assign ref to the ticker
+        className={`
+          left-0 right-0 bg-black/70 backdrop-blur-md border-t border-white/10
+          py-2.5 overflow-hidden z-30 transition-all duration-300 ease-in-out
+          ${isTickerFixed ? 'fixed bottom-0' : 'absolute bottom-0'}
+        `}
+        // When not fixed, it's absolute to the main sectionRef (which is relative)
+      >
+        <div className="whitespace-nowrap flex animate-marquee">
+          {duplicatedTickerItems.map((item, idx) => {
+            const parts = item.split(" ");
+            const symbol = parts[0];
+            const price = parts.slice(1, parts.length - 1).join(" ");
+            const change = parts[parts.length - 1];
+            const isPlus = change.startsWith("+");
+            return (
+              <div key={idx} className="flex items-center mx-4 sm:mx-6" style={commonTextShadow}>
+                <span className="text-white text-xs sm:text-sm mr-1 sm:mr-2">{symbol}</span>
+                <span className="text-neutral-300 text-xs sm:text-sm">{price}</span>
+                <span className={`${isPlus ? "text-green-400" : "text-red-400"} text-xs sm:text-sm ml-1`}>
+                  {change}
+                </span>
+              </div>
+            );
+          })}
+        </div>
+      </div>
     </section>
   );
 };
