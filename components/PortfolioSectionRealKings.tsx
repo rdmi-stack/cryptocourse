@@ -6,131 +6,144 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 
+// Define the SVG clip path component for the torn paper effect
+const TornPaperClipPathComponent: React.FC = () => (
+  <svg width="0" height="0" className="absolute" aria-hidden="true">
+    <defs>
+      <clipPath id="portfolioTornEffectKings" clipPathUnits="objectBoundingBox">
+        <path d="
+            M0.005,0.005 L0.03,0.000 L0.06,0.005 L0.09,0.000 L0.12,0.007
+            L0.15,0.002 L0.18,0.008 L0.21,0.003 L0.24,0.009 L0.27,0.001
+            L0.30,0.007 L0.33,0.003 L0.36,0.008 L0.39,0.002 L0.42,0.009
+            L0.45,0.003 L0.48,0.007 L0.51,0.002 L0.54,0.008 L0.57,0.003
+            L0.60,0.009 L0.63,0.001 L0.66,0.007 L0.69,0.003 L0.72,0.008
+            L0.75,0.002 L0.78,0.007 L0.81,0.003 L0.84,0.009 L0.87,0.002
+            L0.90,0.007 L0.93,0.003 L0.96,0.008 L0.995,0.003
+
+            L0.998,0.25 L0.993,0.40 L0.998,0.60 L0.994,0.75
+
+            L0.995,0.995 L0.96,0.992 L0.93,0.997 L0.90,0.993
+            L0.87,0.998 L0.84,0.991 L0.81,0.997 L0.78,0.992 L0.75,0.998
+            L0.72,0.993 L0.69,0.997 L0.66,0.992 L0.63,0.998 L0.60,0.991
+            L0.57,0.997 L0.54,0.992 L0.51,0.998 L0.48,0.993 L0.45,0.997
+            L0.42,0.992 L0.39,0.998 L0.36,0.991 L0.33,0.997 L0.30,0.992
+            L0.27,0.998 L0.24,0.993 L0.21,0.997 L0.18,0.992 L0.15,0.998
+            L0.12,0.991 L0.09,0.997 L0.06,0.992 L0.03,0.998 L0.005,0.992
+
+            L0.002,0.75 L0.007,0.60 L0.002,0.40 L0.007,0.25
+            Z
+        " />
+      </clipPath>
+    </defs>
+  </svg>
+);
+
+// Animation Variants
+const sectionAppearVariant = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1, transition: { duration: 0.5, staggerChildren: 0.2 } }
+};
+
+const itemAppearVariant = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } }
+};
+
 const PortfolioSectionRealKings: React.FC = () => {
-  const yellowColor = 'text-yellow-400'; // For general accent if needed elsewhere
-  const blueColorText = 'text-blue-400'; // Specific for Real Kings title
-  const blueBgColor = 'bg-blue-500';
-  const blueHoverBgColor = 'hover:bg-blue-600';
-
-  const textVariants = {
-    hidden: { opacity: 0, x: -50 },
-    visible: {
-      opacity: 1,
-      x: 0,
-      transition: { duration: 0.6, ease: 'easeOut' },
-    },
-  };
-
-  const imageVariants = {
-    hidden: { opacity: 0, x: 50 },
-    visible: {
-      opacity: 1,
-      x: 0,
-      transition: { duration: 0.6, ease: 'easeOut', delay: 0.1 },
-    },
-  };
-
-  // Ripped Edge for Text Panel (as provided by user)
-  const rippedEdgeClipPath =
-    'polygon(0% 0%, 90% 0%, 94% 6%, 91% 12%, 95% 18%, 90% 24%, 97% 30%, 92% 36%, 96% 42%, 91% 48%, 95% 54%, 90% 60%, 96% 66%, 92% 72%, 97% 78%, 93% 84%, 95% 90%, 91% 96%, 94% 100%, 0% 100%)';
-
-  // Torn paper effect for image (as provided by user)
-  const tornPaperClipPathImage = 'polygon(0% 5%, 3% 0%, 20% 2%, 40% 0%, 60% 2%, 75% 0%, 95% 1%, 100% 5%, 98% 20%, 100% 60%, 99% 82%, 100% 100%, 95% 98%, 65% 100%, 40% 99%, 20% 100%, 5% 98%, 0 100%, 1% 80%, 0% 50%, 2% 30%)';
-
-  // Define an SVG clip-path for cleaner management if preferred in the future,
-  // but using the user's direct polygon for now.
-  // Example:
-  // const SVGClipPathComponent = () => (
-  //   <svg width="0" height="0" className="absolute">
-  //     <defs>
-  //       <clipPath id="realKingsTornEffect" clipPathUnits="objectBoundingBox">
-  //         <path d="M0.00,0.05 L0.03,0.00 L0.20,0.02 ... Z" /> // Convert polygon to path
-  //       </clipPath>
-  //     </defs>
-  //   </svg>
-  // );
-  // Then use: style={{ clipPath: 'url(#realKingsTornEffect)' }}
+  // Colors match 10XAlphasUnique (Yellow Accents)
+  const primaryColor = 'text-yellow-400';
+  const primaryBgColor = 'bg-yellow-500';
+  const primaryHoverBgColor = 'hover:bg-yellow-600';
+  const primaryTextShadow = '0 0 15px rgba(250, 204, 21, 0.4)';
+  const primaryHoverShadow = 'yellow-500/30';
 
   return (
-    <section className="relative py-20 md:py-28 bg-black text-neutral-100 overflow-hidden">
-      {/* Optional: Subtle background pattern (path needs to be valid) */}
+    <motion.section
+      className="relative py-20 md:py-28 bg-black text-neutral-100 overflow-hidden"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.1 }}
+      variants={sectionAppearVariant}
+      aria-labelledby="real-kings-title-main"
+    >
+      <TornPaperClipPathComponent />
       {/* <div
         className="absolute inset-0 opacity-[0.03] bg-[url('/path/to/subtle-pattern.svg')] bg-repeat"
+        aria-hidden="true"
       ></div> */}
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 items-center">
 
+          {/* Left Column: Text Content Panel */}
           <motion.div
-            className="md:col-span-5 order-2 md:order-1 flex flex-col justify-center"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
-            variants={textVariants}
+            className="md:col-span-5 order-1 md:order-1 flex flex-col justify-center" // Text on the left
+            variants={itemAppearVariant}
           >
-            <div
-              className="bg-gray-900/80 backdrop-blur-sm border border-gray-800 rounded-lg p-6 md:p-8 shadow-lg"
-              style={{ clipPath: rippedEdgeClipPath }}
-            >
-              <div className="pr-6 md:pr-10"> {/* Padding to avoid text touching ripped edge */}
-                <h2
-                  className={`text-4xl sm:text-5xl font-extrabold ${blueColorText} mb-4 leading-tight`}
-                  style={{ textShadow: '0 0 15px rgba(59, 130, 246, 0.4)' }} // Blue shadow
-                >
-                  Real Kings
-                </h2>
-                <p className="text-neutral-300 mb-8 text-base md:text-lg leading-relaxed">
-                  The Real Kings Portfolio is crafted for disciplined investors seeking sustainable wealth creation through high-quality, battle-tested crypto assets.
-                </p>
-                <Link href="/portfolios/real-kings" legacyBehavior>
-                  <a className={`inline-block ${blueBgColor} ${blueHoverBgColor} text-white font-bold py-3 px-8 rounded-md transition duration-300 ease-in-out transform hover:scale-105 self-start shadow-lg hover:shadow-blue-500/40`}>
-                    Know More &rarr;
-                  </a>
-                </Link>
+            <div className="bg-gray-900/60 backdrop-blur-sm border border-gray-800 rounded-lg p-6 md:p-8 shadow-lg">
+              <h2
+                id="real-kings-title-main"
+                className={`text-4xl sm:text-5xl font-extrabold ${primaryColor} mb-4 leading-tight`}
+                style={{ textShadow: primaryTextShadow }}
+              >
+                Real Kings
+              </h2>
+              <p className="text-neutral-400 font-medium mb-6 text-sm sm:text-base">
+                Disciplined Investing | Sustainable Wealth | Battle-Tested Assets
+              </p>
+              <div className="grid grid-cols-2 gap-3 sm:gap-4 mb-8 text-sm sm:text-base">
+                <div className="border border-gray-700 bg-gray-800/70 p-3 rounded text-center transition-colors hover:border-yellow-700/50">
+                  <span className="font-semibold block text-neutral-100">Volatility</span>
+                  <span className="text-neutral-300">Low-Medium</span>
+                </div>
+                <div className="border border-gray-700 bg-gray-800/70 p-3 rounded text-center transition-colors hover:border-yellow-700/50">
+                  <span className="font-semibold block text-neutral-100">Strategy</span>
+                  <span className="text-neutral-300">Value Growth</span>
+                </div>
               </div>
+              <p className="text-neutral-300 mb-8 text-base md:text-lg leading-relaxed">
+                The Real Kings Portfolio is crafted for disciplined investors seeking sustainable wealth creation through high-quality, battle-tested crypto assets.
+              </p>
+              <Link href="/portfolios/real-kings" legacyBehavior>
+                <a className={`inline-block ${primaryBgColor} ${primaryHoverBgColor} text-black font-bold py-3 px-8 rounded-md transition duration-300 ease-in-out transform hover:scale-105 self-start shadow-lg hover:shadow-${primaryHoverShadow}`}>
+                  Know More &rarr;
+                </a>
+              </Link>
             </div>
           </motion.div>
 
+          {/* Right Column: Image */}
           <motion.div
-            className="md:col-span-7 order-1 md:order-2"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
-            variants={imageVariants}
+            className="md:col-span-7 order-2 md:order-2" // Image on the right
+            variants={itemAppearVariant}
           >
-            <div className="relative group"> {/* Added group for potential hover effects on border */}
-              {/* Outer border (e.g., blue for Real Kings theme) */}
-              <div className="absolute -inset-1 bg-gradient-to-br from-blue-600 to-purple-600 rounded-xl blur-sm group-hover:blur opacity-70 group-hover:opacity-100 transition-all duration-300" style={{
-                zIndex: 0
+            <div className="relative">
+              <div className="absolute -inset-1 bg-black rounded-lg" style={{
+                transform: 'scale(1.01)',
+                zIndex: 1
               }}></div>
-              <div className="absolute inset-0 border-2 border-blue-500 rounded-lg" style={{
-                zIndex: 1, // Border above blur
-              }}></div>
-              
-              <div 
-                className="relative bg-black overflow-hidden rounded-md shadow-2xl" // Added rounded-md here too
-                style={{
-                  clipPath: tornPaperClipPathImage, // User's provided torn paper effect
-                  zIndex: 2 // Image content above border elements
-                }}
+              <div
+                className="relative z-10 shadow-2xl group transform transition-transform duration-500 hover:scale-[1.02]"
+                style={{ clipPath: 'url(#portfolioTornEffectKings)' }}
               >
                 <div className="aspect-video md:aspect-[16/10] relative">
                   <Image
-                    src="/images/real-kings-section-visual.jpg" // **Distinct image for this section**
-                    alt="Real Kings Portfolio Section Visual"
+                    src="/images/image2.jpg" // Using the same image as 10XAlphasUnique
+                    alt="Real Kings Portfolio Visual"
                     layout="fill"
                     objectFit="cover"
                     quality={85}
-                    className="transform group-hover:scale-105 transition-transform duration-500" // Subtle zoom on hover
+                    priority
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/10"></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent"></div>
                 </div>
               </div>
             </div>
           </motion.div>
+
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 

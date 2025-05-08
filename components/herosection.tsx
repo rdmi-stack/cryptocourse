@@ -122,25 +122,19 @@ const VisualHero: React.FC = () => {
               </span>
             </motion.div>
 
-            {/* Heading */}
             <motion.h1
-              className="text-4xl sm:text-5xl lg:text-7xl font-extrabold mb-4 leading-tight"
-              style={commonTextShadow}
-              variants={itemVariants}
-            >
-              <span className="inline-block text-yellow-400">UNLOCK THE FUTURE</span>
-              <br />
-              <span className="text-white">OF WEALTH</span>
-            </motion.h1>
+  className="text-4xl sm:text-5xl lg:text-7xl font-extrabold mb-4 leading-tight"
+  style={commonTextShadow}
+  variants={itemVariants}
+>
+  <span className="block text-yellow-400">UNLOCK THE</span>
+  <span className="block">
+  <span className="block whitespace-nowrap text-white">FUTURE OF WEALTH</span>
+  </span>
+</motion.h1>
 
-            {/* Tagline */}
-            <motion.p
-              className="text-lg sm:text-xl lg:text-2xl mb-6 font-medium text-neutral-100"
-              style={commonTextShadow}
-              variants={itemVariants}
-            >
-              Smart Crypto Investing for India —<br className="sm:hidden" /> Backed by Data, Driven by Results.
-            </motion.p>
+
+        
 
             {/* Description */}
             <motion.p
@@ -246,27 +240,29 @@ const VisualHero: React.FC = () => {
         </div>
       </div>
 
-      {/* PRICE TICKER */}
-      <div className="absolute bottom-0 left-0 right-0 bg-black/70 backdrop-blur-md border-t border-white/10 py-2.5 overflow-x-hidden z-20">
-        <div className="flex animate-marquee whitespace-nowrap">
-          {Array(3)
-            .fill(["BTC $66,420 +2.4%", "ETH $3,240 +3.1%", "SOL $180 +5.2%", "BNB $580 +1.7%", "ADA $0.65 +4.3%", "XRP $0.55 +2.8%"])
-            .flat()
-            .map((item, idx) => {
-              const [symbol, price, change] = item.split(" ");
-              const isPlus = change.startsWith("+");
-              return (
-                <div key={idx} className="flex items-center mx-4 sm:mx-6" style={commonTextShadow}>
-                  <span className="text-white text-xs sm:text-sm mr-1 sm:mr-2">{symbol}</span>
-                  <span className="text-neutral-300 text-xs sm:text-sm">{price}</span>
-                  <span className={`${isPlus ? "text-green-400" : "text-red-400"} text-xs sm:text-sm ml-1`}>
-                    {change}
-                  </span>
-                </div>
-              );
-            })}
-        </div>
-      </div>
+  {/* PRICE TICKER */}
+<div className="absolute bottom-0 left-0 right-0 bg-black/70 backdrop-blur-md border-t border-white/10 py-2.5 overflow-hidden z-20">
+  <div className="whitespace-nowrap flex animate-marquee">
+    {["BTC $66,420 +2.4%", "ETH $3,240 +3.1%", "SOL $180 +5.2%", "BNB $580 +1.7%", "ADA $0.65 +4.3%", "XRP $0.55 +2.8%"]
+      .concat(
+        ["BTC $66,420 +2.4%", "ETH $3,240 +3.1%", "SOL $180 +5.2%", "BNB $580 +1.7%", "ADA $0.65 +4.3%", "XRP $0.55 +2.8%"]
+      )
+      .map((item, idx) => {
+        const [symbol, price, change] = item.split(" ");
+        const isPlus = change.startsWith("+");
+        return (
+          <div key={idx} className="flex items-center mx-4 sm:mx-6" style={{ textShadow: "0px 1px 4px rgba(0,0,0,0.7)" }}>
+            <span className="text-white text-xs sm:text-sm mr-1 sm:mr-2">{symbol}</span>
+            <span className="text-neutral-300 text-xs sm:text-sm">{price}</span>
+            <span className={`${isPlus ? "text-green-400" : "text-red-400"} text-xs sm:text-sm ml-1`}>
+              {change}
+            </span>
+          </div>
+        );
+      })}
+  </div>
+</div>
+
     </section>
   );
 };

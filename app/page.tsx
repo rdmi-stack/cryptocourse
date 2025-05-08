@@ -48,12 +48,8 @@ export default async function HomePage() {
       {/* --- About Section --- */}
       <AboutSection />
 
-      {/* --- CTA Section --- */}
-      <CallToActionSection />
 
-      {/* --- NEW: 10X Alphas Detail Section --- */}
-      <PortfolioSection10XAlphasDetail />
-      {/* --- END: 10X Alphas Detail Section --- */}
+
 
       {/* --- Newsletter Section --- */}
       <NewsletterSection />
