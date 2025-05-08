@@ -5,6 +5,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, useScroll, useTransform } from "framer-motion";
 
+
+
+
+
 const VisualHero: React.FC = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const tickerRef = useRef<HTMLDivElement>(null); // Ref for the ticker to get its height
