@@ -1,14 +1,34 @@
 const { fontFamily } = require('tailwindcss/defaultTheme');
 
-/** @type {import('tailwindcss').Config} */
+const bpsColors = {
+  darkBlue: '#0A2351',
+  orange: '#DD6B20',
+  lightBlueText: '#E0F2FE',
+  darkBlueText: '#082f49',
+  orangeHover: '#C25A1A',
+  darkBlueHover: '#071A3D',
+  vibrantOrange: '#F97316',
+  vibrantOrangeHover: '#EA580C',
+};
+
 module.exports = {
   content: [
+    './app/**/*.{js,ts,jsx,tsx,mdx}',
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
-    './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
     extend: {
+      colors: {
+        'bps-darkBlue': bpsColors.darkBlue,
+        'bps-orange': bpsColors.orange,
+        'bps-lightBlueText': bpsColors.lightBlueText,
+        'bps-darkBlueText': bpsColors.darkBlueText,
+        'bps-orangeHover': bpsColors.orangeHover,
+        'bps-darkBlueHover': bpsColors.darkBlueHover,
+        'bps-vibrantOrange': bpsColors.vibrantOrange,
+        'bps-vibrantOrangeHover': bpsColors.vibrantOrangeHover,
+      },
       fontFamily: {
         sans: ['var(--font-inter)', ...fontFamily.sans],
         serif: ['var(--font-playfair)', ...fontFamily.serif],
@@ -18,24 +38,11 @@ module.exports = {
           '0%': { transform: 'translateX(-100%)' },
           '100%': { transform: 'translateX(100%)' },
         },
-        marquee: {
-          '0%': { transform: 'translateX(100%)' },
-          '100%': { transform: 'translateX(-100%)' },
-        },
       },
       animation: {
-        shimmer: 'shimmer 2.5s linear infinite',
-        marquee: 'marquee 25s linear infinite',
-      },
-      boxShadow: {
-        redGlow: '0 4px 20px rgba(255, 0, 0, 0.4)',
-        yellowGlow: '0 0 20px rgba(255, 215, 0, 0.4)',
+        shimmer: 'shimmer 2s linear infinite',
       },
     },
   },
-  plugins: [
-    // Add Tailwind plugins if required:
-    // require('@tailwindcss/forms'),
-    // require('@tailwindcss/typography'),
-  ],
+  plugins: [],
 };

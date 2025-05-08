@@ -244,12 +244,13 @@ const VisualHero: React.FC = () => {
           {/* RIGHT: Image + Floating Stats */}
           {/* MODIFIED SECTION FOR LARGER IMAGE */}
           <div className="md:col-span-5 flex relative w-full h-auto md:h-full items-end justify-center md:items-stretch mt-8 md:mt-0">
-            <motion.div
-              className="relative w-full max-w-[300px] sm:max-w-[450px] h-[40vh] sm:h-[45vh] md:w-[140%] lg:w-[155%] xl:w-[170%] md:h-[125%] md:absolute md:bottom-0 md:right-[-5%] lg:right-[-10%] xl:right-[-15%]" // Adjusted widths, height and right offsets
-              variants={imageVariants}
-              initial="hidden"
-              animate="visible"
-            >
+          <motion.div
+  className="relative w-[200%] h-[200%] md:absolute md:bottom-0 md:right-[-50%] lg:right-[-60%] xl:right-[-70%]"
+  variants={imageVariants}
+  initial="hidden"
+  animate="visible"
+>
+
               <Image
                 src="/images/hero.png"
                 alt="Crypto Trading Expert"

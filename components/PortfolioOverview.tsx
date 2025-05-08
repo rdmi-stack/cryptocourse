@@ -128,10 +128,13 @@ const PortfolioSection10XAlphasUnique: React.FC = () => {
                 Focused on high-quality crypto assets engineered to generate alpha returns with exponential growth potential for long-term wealth building.
               </p>
               <Link href="/portfolios/10x-alphas" legacyBehavior>
-                <a className={`inline-block ${yellowBgColor} ${yellowHoverBgColor} text-black font-bold py-3 px-8 rounded-md transition duration-300 ease-in-out transform hover:scale-105 self-start shadow-lg hover:shadow-yellow-500/30`}>
-                  Know More &rarr;
-                </a>
-              </Link>
+  <a
+    className={`btn-shimmer relative inline-block ${yellowBgColor} ${yellowHoverBgColor} text-black font-bold py-3 px-8 rounded-md transition duration-300 ease-in-out transform hover:scale-105 self-start shadow-lg hover:shadow-yellow-500/30 overflow-hidden`}
+  >
+    <span className="relative z-10">Know More &rarr;</span>
+  </a>
+</Link>
+
             </div>
           </div>
 

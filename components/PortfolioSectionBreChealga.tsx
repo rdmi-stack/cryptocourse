@@ -116,14 +116,15 @@ const PortfolioSectionGangwar: React.FC = () => {
             <div className="bg-gray-900/60 backdrop-blur-sm border border-gray-800 rounded-lg p-6 md:p-8 shadow-lg">
               <h2
                 id="gangwar-title-main"
-                className={`text-4xl sm:text-5xl font-extrabold ${primaryColor} mb-3 uppercase leading-tight`} // Uppercase as per original
+                className="text-4xl sm:text-5xl font-extrabold text-yellow-400 mb-3 uppercase leading-tight"
                 style={{ textShadow: primaryTextShadow }}
               >
                 GANGWAR
               </h2>
-              <p className={`text-sm ${primaryColor} font-semibold tracking-wider mb-6`}> {/* Subtitle style from original */}
-                High-Risk High Return | Technical Precision | Tactical Momentum Strategy
-              </p>
+              <p className="text-sm text-yellow-400 font-semibold tracking-wider mb-6">
+  High-Risk High Return | Technical Precision | Tactical Momentum Strategy
+</p>
+
               {/* Stats Section */}
               <div className="grid grid-cols-2 gap-3 sm:gap-4 mb-8 text-sm sm:text-base">
                 <div className={`border border-gray-700 bg-gray-800/70 p-3 rounded text-center transition-colors hover:border-red-700/50`}> {/* Red hover border */}
@@ -139,10 +140,12 @@ const PortfolioSectionGangwar: React.FC = () => {
                 A fearless, technically optimized crypto strategy for seasoned risk-takers aiming to dominate volatility and seize explosive upside.
               </p>
               <Link href="/portfolios/gangwar" legacyBehavior>
-                <a className={`inline-flex items-center justify-center ${primaryBgColor} ${primaryHoverBgColor} text-white font-bold py-3 px-8 rounded-md transition duration-300 ease-in-out transform hover:scale-105 self-start shadow-lg hover:shadow-${primaryHoverShadow}`}>
-                  Explore GANGWAR &rarr;
-                </a>
-              </Link>
+  <a className="btn-shimmer relative inline-flex items-center justify-center bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-3 px-8 rounded-md transition duration-300 ease-in-out transform hover:scale-105 self-start shadow-lg hover:shadow-yellow-500/40 overflow-hidden">
+    <span className="relative z-10">Explore GANGWAR →</span>
+  </a>
+</Link>
+
+
             </div>
           </motion.div>
 

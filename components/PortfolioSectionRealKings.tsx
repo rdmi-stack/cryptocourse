@@ -105,10 +105,13 @@ const PortfolioSectionRealKings: React.FC = () => {
                 The Real Kings Portfolio is crafted for disciplined investors seeking sustainable wealth creation through high-quality, battle-tested crypto assets.
               </p>
               <Link href="/portfolios/real-kings" legacyBehavior>
-                <a className={`inline-block ${primaryBgColor} ${primaryHoverBgColor} text-black font-bold py-3 px-8 rounded-md transition duration-300 ease-in-out transform hover:scale-105 self-start shadow-lg hover:shadow-${primaryHoverShadow}`}>
-                  Know More &rarr;
-                </a>
-              </Link>
+  <a
+    className={`btn-shimmer relative inline-block ${primaryBgColor} ${primaryHoverBgColor} text-black font-bold py-3 px-8 rounded-md transition duration-300 ease-in-out transform hover:scale-105 self-start shadow-lg hover:shadow-${primaryHoverShadow} overflow-hidden`}
+  >
+    <span className="relative z-10">Know More →</span>
+  </a>
+</Link>
+
             </div>
           </motion.div>
 

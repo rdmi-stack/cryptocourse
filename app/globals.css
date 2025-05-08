@@ -101,3 +101,63 @@ body {
     transform: translateX(100%) rotate(6deg);
   }
 }
+.btn-shimmer {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate; /* Prevent shimmer from overlapping inner shadows or effects */
+}
+
+.btn-shimmer::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 250%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.35) 45%,
+    rgba(255, 255, 255, 0.6) 50%,
+    rgba(255, 255, 255, 0.35) 55%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  animation: shimmer-effect 2.2s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+
+@keyframes shimmer-effect {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.shimmer-overlay {
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.8) 50%,
+    transparent 100%
+  );
+  animation: shimmer 2s linear infinite;
+  mix-blend-mode: overlay;
+  opacity: 0.9;
+  filter: blur(4px);
+  transform: rotate(6deg);
+  pointer-events: none;
+  z-index: 0;
+}

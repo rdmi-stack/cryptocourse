@@ -119,9 +119,12 @@ const PortfolioSection10XAlphasDetail: React.FC = () => {
             </p>
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Link href="/subscribe?portfolio=10x-alphas" legacyBehavior>
-                <a className={`${yellowBg} ${yellowHover} text-black font-bold py-3 px-8 rounded-md inline-block shadow-lg transition`}>
-                  Subscribe Now
-                </a>
+              <a
+  className={`btn-shimmer relative inline-block ${yellowBg} ${yellowHover} text-black font-bold py-3 px-8 rounded-md shadow-lg transition overflow-hidden`}
+>
+  <span className="relative z-10">Subscribe Now</span>
+</a>
+
               </Link>
             </motion.div>
           </motion.div>

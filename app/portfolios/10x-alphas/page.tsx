@@ -212,12 +212,15 @@ const Portfolio10XAlphasPage: React.FC = () => {
                   ₹999 <span className="text-lg font-normal text-neutral-400">/ 3 Months</span>
                 </p>
                 <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} className="w-full">
-                  <Link href="/subscribe?portfolio=10x-alphas" legacyBehavior>
-                    <a className="relative inline-block w-full max-w-xs overflow-hidden rounded-lg bg-yellow-400 px-8 py-3.5 text-lg font-bold text-black shadow-lg hover:bg-yellow-500 transition-colors duration-300">
-                      <span className="relative z-10">Subscribe Now</span>
-                      <span className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-transparent via-white/50 to-transparent opacity-60 blur-[3px] animate-shimmer" />
-                    </a>
-                  </Link>
+                <Link href="/subscribe?portfolio=10x-alphas" legacyBehavior>
+  <a className="relative inline-block w-full max-w-xs overflow-hidden rounded-lg bg-yellow-400 px-8 py-3.5 text-lg font-bold text-black shadow-lg hover:bg-yellow-500 transition duration-300 group">
+    <span className="relative z-10">Subscribe Now</span>
+
+    {/* Shimmer Overlay */}
+    <span className="absolute top-0 left-0 w-full h-full shimmer-overlay" />
+  </a>
+</Link>
+
                 </motion.div>
               </motion.div>
             </div>
