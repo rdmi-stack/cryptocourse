@@ -1,4 +1,3 @@
-// app/portfolios/10x-alphas/page.tsx
 "use client"; // Required for Framer Motion and useState
 
 import React, { useState } from 'react';
@@ -12,13 +11,13 @@ const sectionVariant = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, ease: "easeOut", staggerChildren: 0.2 }
+    transition: { duration: 0.6, ease: "easeOut", staggerChildren: 0.15 } // Slightly reduced stagger
   }
 };
 
 const itemVariant = {
   hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } } // Added ease for consistency
 };
 
 // SVG clip path component for the torn paper effect
@@ -57,17 +56,16 @@ const TornPaperClipPathComponent: React.FC = () => (
 const portfolioStats = [
   { label: 'Rebalance Freq.', value: 'Need Basis' },
   { label: 'Volatility', value: 'Medium' },
-  { label: '2Y CAGR', value: '122%' } // Note: This is a historical figure
+  { label: '2Y CAGR', value: '122%' }
 ];
 
 const Portfolio10XAlphasPage: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'overview' | 'methodology'>('overview');
   const [email, setEmail] = useState('');
 
-  const yellowColor = 'text-yellow-400'; // Main accent yellow
-  const yellowHighlightColor = 'text-yellow-500'; // Slightly deeper yellow for highlights
+  const yellowColor = 'text-yellow-400';
+  const yellowHighlightColor = 'text-yellow-500';
 
-  // Updated Content for 10X ALPHAS from screenshots
   const shortDescription = "A long-term, high-conviction crypto strategy engineered to unlock exponential alpha returns by harnessing the disruptive power of blockchain innovation and digital assets.";
   const tagline = "Fundamentals-Backed | High-Growth Crypto | Long-Term Alpha Generation";
   const overviewParagraph1 = "A long-term, high-conviction crypto strategy engineered to unlock exponential alpha returns by harnessing the disruptive power of blockchain innovation and digital assets.";
@@ -76,12 +74,11 @@ const Portfolio10XAlphasPage: React.FC = () => {
     "A concentrated 10-crypto portfolio selected from leading L1/L2 protocols, DeFi, AI, and Web3 infrastructure projects.",
     "Focus on tokens with strong network activity, adoption trends, and breakthrough narratives.",
     "Targets early-stage and mid-cap cryptos with exponential upside, backed by strong fundamentals and community traction.",
-    "Strategic weekly rebalancing to capture emerging trends and avoid stagnation.", // Updated as per "Overview of ALL" screenshot
+    "Strategic weekly rebalancing to capture emerging trends and avoid stagnation.",
     "Optimized for alpha generation in volatile and bullish crypto market phases, with adaptive risk controls."
   ];
   const overviewConclusion = "Elevate your crypto investing journey with a precision-built, high-alpha strategy that blends long-term conviction with active momentum capture.";
 
-  // Methodology content (matches screenshots, no changes from original user code)
   const methodologyDefiningUniverse = "The 10X ALPHAS strategy draws from a curated universe of high-quality crypto assets across the infrastructure, DeFi, real-world assets (RWA), modular blockchains, and AI-powered ecosystems.";
   const methodologyResearch = "The research methodology blends deep fundamental analysis, macro narrative alignment, and quantitative scoring models to surface the most promising growth assets.";
   const methodologyScreening = "From the initial universe, the portfolio selects 10-12 high-conviction tokens using a multi-factor filtering approach.";
@@ -90,7 +87,6 @@ const Portfolio10XAlphasPage: React.FC = () => {
 
   const handleNewsletterSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Handle newsletter subscription logic here
     console.log('Newsletter email submitted:', email);
     alert(`Thank you for subscribing with ${email}!`);
     setEmail('');
@@ -98,16 +94,6 @@ const Portfolio10XAlphasPage: React.FC = () => {
 
   return (
     <>
-      {/* Add this to your globals.css or tailwind.config.js keyframes/animation utility for the shimmer effect */}
-      {/*
-        @keyframes shimmer {
-          0% { transform: translateX(-100%); }
-          100% { transform: translateX(100%); }
-        }
-        .animate-shimmer {
-          animation: shimmer 2s infinite linear;
-        }
-      */}
       <style jsx global>{`
         @keyframes shimmer {
           0% { transform: translateX(-100%); }
@@ -116,17 +102,28 @@ const Portfolio10XAlphasPage: React.FC = () => {
         .animate-shimmer {
           animation: shimmer 2s infinite linear;
         }
+        .shimmer-overlay { /* Ensure overflow is hidden on the parent if needed, Link has overflow-hidden which is good */
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0) 100%);
+            transform: translateX(-100%);
+            animation: shimmer 1.5s infinite linear; /* Matched to CSS keyframes */
+            pointer-events: none; /* Allow clicks to pass through */
+        }
       `}</style>
 
-      <div className="bg-gradient-to-b from-black via-gray-950 to-black text-neutral-200 overflow-x-hidden">
+      <div className="bg-gradient-to-b from-black via-gray-950 to-black text-neutral-200 overflow-x-hidden"> {/* overflow-x-hidden is good */}
         <TornPaperClipPathComponent />
 
         {/* 1. Hero Section */}
         <motion.section
-          className="relative py-20 md:py-28 lg:py-36" // Increased padding
+          className="relative py-20 md:py-28 lg:py-36"
           initial="hidden"
           animate="visible"
-          variants={{ visible: { transition: { staggerChildren: 0.2 } } }}
+          variants={sectionVariant} // Uses updated sectionVariant
         >
           <div className="container mx-auto px-4 sm:px-6">
             <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center">
@@ -135,18 +132,18 @@ const Portfolio10XAlphasPage: React.FC = () => {
                 variants={itemVariant}
               >
                 <div
-                  className="relative z-10 shadow-2xl group transform transition-transform duration-500 hover:scale-[1.02]"
+                  className="relative z-10 shadow-2xl group transform transition-transform duration-500 hover:scale-[1.02]" // Standard CSS hover
                   style={{ clipPath: 'url(#portfolioTornEffectHero)' }}
                 >
                   <div className="aspect-[4/3] md:aspect-[16/10] lg:aspect-[4/3] relative">
                     <Image
-                      src="/images/image3.jpg" // Placeholder image, update as needed
+                      src="/images/image3.jpg"
                       alt="10X Alphas Portfolio Visual"
                       layout="fill"
                       objectFit="cover"
                       quality={90}
                       priority
-                      className="rounded-md" // Soften edges if tear effect doesn't cover
+                      className="rounded-md"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/10 opacity-70 group-hover:opacity-60 transition-opacity duration-300"></div>
                   </div>
@@ -154,23 +151,23 @@ const Portfolio10XAlphasPage: React.FC = () => {
               </motion.div>
               <motion.div
                 className="md:col-span-7 lg:col-span-7 order-2 flex flex-col justify-center text-center md:text-left"
-                variants={sectionVariant} // Use sectionVariant for parent animation
+                variants={itemVariant} // Individual item animation
               >
                 <motion.h1
                   className={`font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold ${yellowColor} mb-4`}
-                  style={{ textShadow: `0 0 25px rgba(250, 204, 21, 0.5), 0 0 10px rgba(250, 204, 21, 0.3)` }} // Enhanced text shadow
+                  style={{ textShadow: `0 0 25px rgba(250, 204, 21, 0.5), 0 0 10px rgba(250, 204, 21, 0.3)` }}
                   variants={itemVariant}
                 >
                   10X Alphas
                 </motion.h1>
                 <motion.p
-                  className="text-lg md:text-xl text-neutral-300 mb-6 max-w-xl mx-auto md:mx-0" // Slightly lighter text
+                  className="text-lg md:text-xl text-neutral-300 mb-6 max-w-xl mx-auto md:mx-0"
                   variants={itemVariant}
                 >
                   {shortDescription}
                 </motion.p>
                 <motion.p
-                  className={`text-sm font-medium ${yellowHighlightColor} tracking-wider`} // Using deeper yellow
+                  className={`text-sm font-medium ${yellowHighlightColor} tracking-wider`}
                   variants={itemVariant}
                 >
                   {tagline}
@@ -182,7 +179,7 @@ const Portfolio10XAlphasPage: React.FC = () => {
 
         {/* 2. Stats & Pricing Section */}
         <motion.section
-          className="py-12 md:py-16 bg-black/50 backdrop-blur-md border-t border-b border-gray-800/60" // Enhanced glassmorphism
+          className="py-12 md:py-16 bg-black/50 backdrop-blur-md border-t border-b border-gray-800/60"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
@@ -190,37 +187,35 @@ const Portfolio10XAlphasPage: React.FC = () => {
         >
           <div className="container mx-auto px-4 sm:px-6">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
-              <motion.div className="lg:col-span-2 grid grid-cols-1 sm:grid-cols-3 gap-6" variants={itemVariant}>
+              {/* Stats Cards Container - direct child for staggering if needed */}
+              <div className="lg:col-span-2 grid grid-cols-1 sm:grid-cols-3 gap-6">
                 {portfolioStats.map((stat) => (
                   <motion.div
                     key={stat.label}
                     className="bg-gradient-to-br from-gray-800/70 via-gray-900/80 to-gray-800/70 border border-gray-700/70 p-5 rounded-xl shadow-lg text-center flex flex-col items-center justify-center hover:border-yellow-500/70 transition-all duration-300 transform hover:scale-105"
-                    variants={itemVariant}
+                    variants={itemVariant} // Each card animates as an item
                   >
                     <span className="block text-sm uppercase text-neutral-400 tracking-wider mb-1.5">{stat.label}</span>
                     <span className={`block text-3xl font-bold ${stat.value.includes('%') ? yellowColor : 'text-neutral-100'}`}>{stat.value}</span>
                   </motion.div>
                 ))}
-              </motion.div>
+              </div>
 
               <motion.div
                 className="lg:col-span-1 bg-gradient-to-br from-yellow-500/15 via-yellow-600/10 to-black/30 backdrop-blur-md border border-yellow-600/50 rounded-xl shadow-xl p-6 text-center flex flex-col justify-center items-center"
-                variants={itemVariant}
+                variants={itemVariant} // This whole block animates as one item
               >
                 <p className="text-lg text-neutral-200 mb-2">Get access starting from</p>
                 <p className={`text-4xl font-bold ${yellowColor} mb-5`}>
                   ₹999 <span className="text-lg font-normal text-neutral-400">/ 3 Months</span>
                 </p>
                 <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} className="w-full">
-                <Link href="/subscribe?portfolio=10x-alphas" legacyBehavior>
-  <a className="relative inline-block w-full max-w-xs overflow-hidden rounded-lg bg-yellow-400 px-8 py-3.5 text-lg font-bold text-black shadow-lg hover:bg-yellow-500 transition duration-300 group">
-    <span className="relative z-10">Subscribe Now</span>
-
-    {/* Shimmer Overlay */}
-    <span className="absolute top-0 left-0 w-full h-full shimmer-overlay" />
-  </a>
-</Link>
-
+                  <Link href="/subscribe?portfolio=10x-alphas" legacyBehavior>
+                    <a className="relative inline-block w-full max-w-xs overflow-hidden rounded-lg bg-yellow-400 px-8 py-3.5 text-lg font-bold text-black shadow-lg hover:bg-yellow-500 transition duration-300 group">
+                      <span className="relative z-10">Subscribe Now</span>
+                      <span className="absolute top-0 left-0 w-full h-full shimmer-overlay" />
+                    </a>
+                  </Link>
                 </motion.div>
               </motion.div>
             </div>
@@ -258,7 +253,7 @@ const Portfolio10XAlphasPage: React.FC = () => {
                 transition={{ duration: 0.35, ease: "easeInOut" }}
               >
                 {activeTab === 'overview' && (
-                  <motion.div variants={sectionVariant} initial="hidden" animate="visible">
+                  <motion.div variants={sectionVariant} initial="hidden" animate="visible"> {/* Re-trigger stagger for content */}
                     <DetailSectionHeading className="mt-0 text-center md:text-left">10X ALPHAS Portfolio Overview</DetailSectionHeading>
                     <motion.p className="text-neutral-300 leading-relaxed mb-6" variants={itemVariant}>{overviewParagraph1}</motion.p>
                     <motion.p className="text-neutral-300 leading-relaxed mb-6" variants={itemVariant}>{overviewParagraph2}</motion.p>
@@ -276,7 +271,7 @@ const Portfolio10XAlphasPage: React.FC = () => {
                 )}
 
                 {activeTab === 'methodology' && (
-                  <motion.div variants={sectionVariant} initial="hidden" animate="visible">
+                  <motion.div variants={sectionVariant} initial="hidden" animate="visible"> {/* Re-trigger stagger for content */}
                      <DetailSectionHeading className="mt-0 text-center md:text-left">10X ALPHAS Methodology</DetailSectionHeading>
                      <MethodologySubSection title="Defining the Universe" content={methodologyDefiningUniverse} />
                      <MethodologySubSection title="Research" content={methodologyResearch} />
@@ -319,7 +314,7 @@ const Portfolio10XAlphasPage: React.FC = () => {
             <motion.form
               onSubmit={handleNewsletterSubmit}
               className="flex flex-col sm:flex-row gap-4 max-w-lg mx-auto mb-6"
-              variants={itemVariant}
+              variants={itemVariant} // Form animates as one item
             >
               <input
                 type="email"
@@ -345,7 +340,6 @@ const Portfolio10XAlphasPage: React.FC = () => {
               </svg>
               Join 10,000+ Smart Crypto Investors
             </motion.p>
-            {/* "What you'll get" part is cut off in screenshot, so not adding detailed list here */}
           </div>
         </motion.section>
 
@@ -355,22 +349,20 @@ const Portfolio10XAlphasPage: React.FC = () => {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.5 }}
-            variants={sectionVariant}
+            variants={sectionVariant} // Animate footer as a section
         >
-            <p className="text-neutral-400 text-sm">
+            <motion.p className="text-neutral-400 text-sm" variants={itemVariant}> {/* Animate text as an item */}
                 "Built for India. Inspired by Dubai. Powered by Wealth." ❤️
-            </p>
+            </motion.p>
         </motion.footer>
-
       </div>
     </>
   );
 };
 
-// Helper Component for Tabs
 interface TabButtonProps { label: string; isActive: boolean; onClick: () => void; }
 const TabButton: React.FC<TabButtonProps> = ({ label, isActive, onClick }) => {
-  const yellowBgForLine = 'bg-yellow-500'; // Consistent with yellow accent
+  const yellowBgForLine = 'bg-yellow-500';
   return (
     <button
       onClick={onClick}
@@ -380,31 +372,30 @@ const TabButton: React.FC<TabButtonProps> = ({ label, isActive, onClick }) => {
       {label}
       {isActive && (
         <motion.div
-          className={`absolute bottom-[-1px] left-0 right-0 h-1 ${yellowBgForLine}`} // Increased thickness slightly
+          className={`absolute bottom-[-1px] left-0 right-0 h-1 ${yellowBgForLine}`}
           layoutId="underline"
           initial={false}
-          transition={{ type: "spring", stiffness: 400, damping: 30 }}
+          transition={{ type: "spring", stiffness: 350, damping: 30 }} // Slightly softer spring
         />
       )}
     </button>
   );
 };
 
-// Reusable Heading Component for Detail Sections
 const DetailSectionHeading: React.FC<{ children: React.ReactNode, className?: string, id?: string }> = ({ children, className = '', id }) => (
-  <h2
+  <motion.h2 // Wrap with motion for itemVariant
     id={id}
     className={`font-serif text-3xl md:text-4xl font-bold text-yellow-400 mt-10 mb-6 ${className}`}
-    style={{ textShadow: '0 0 15px rgba(250, 204, 21, 0.3)' }} // Softer shadow
+    style={{ textShadow: '0 0 15px rgba(250, 204, 21, 0.3)' }}
+    variants={itemVariant} // Animates as an item within its parent section
   >
     {children}
-  </h2>
+  </motion.h2>
 );
 
-// Helper Component for Methodology Sub-Sections
 const MethodologySubSection: React.FC<{ title: string, content: string }> = ({ title, content }) => (
-  <motion.div className="mb-8" variants={itemVariant}> {/* Increased bottom margin */}
-    <h4 className="text-xl font-semibold text-yellow-500/90 mb-2.5">{title}</h4> {/* Slightly adjusted margin and color */}
+  <motion.div className="mb-8" variants={itemVariant}>
+    <h4 className="text-xl font-semibold text-yellow-500/90 mb-2.5">{title}</h4>
     <p className="text-neutral-300 leading-relaxed">{content}</p>
   </motion.div>
 );
