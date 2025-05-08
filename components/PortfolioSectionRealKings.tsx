@@ -128,7 +128,7 @@ const PortfolioSectionRealKings: React.FC = () => {
               >
                 <div className="aspect-video md:aspect-[16/10] relative">
                   <Image
-                    src="/images/image2.jpg" // Using the same image as 10XAlphasUnique
+                    src="/images/real-kings-section-visual.jpg" // Using the same image as 10XAlphasUnique
                     alt="Real Kings Portfolio Visual"
                     layout="fill"
                     objectFit="cover"
