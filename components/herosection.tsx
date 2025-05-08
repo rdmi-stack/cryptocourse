@@ -172,13 +172,14 @@ const VisualHero: React.FC = () => {
             </motion.div>
 
             <motion.h1
-              className="text-4xl sm:text-5xl lg:text-7xl font-extrabold mb-4 leading-tight"
-              style={commonTextShadow}
-              variants={itemVariants}
-            >
-              <span className="block text-yellow-400">UNLOCK THE</span>
-              <span className="block text-white">FUTURE OF WEALTH</span>
-            </motion.h1>
+  className="text-4xl sm:text-5xl lg:text-7xl font-extrabold mb-4 leading-tight text-center md:text-left"
+  style={commonTextShadow}
+  variants={itemVariants}
+>
+  <span className="text-yellow-400">UNLOCK THE</span><br />
+  <span className="whitespace-nowrap text-white">FUTURE OF WEALTH</span>
+</motion.h1>
+
 
             <motion.p
   className="text-sm sm:text-base lg:text-lg max-w-xl text-neutral-200 leading-relaxed font-light mx-auto md:mx-0 mb-8"
