@@ -91,14 +91,16 @@ const PortfolioSectionGangwar: React.FC = () => {
                 style={{ clipPath: 'url(#portfolioTornEffectGangwar)' }} // Use the GANGWAR specific clipPath ID
               >
                 <div className="aspect-video md:aspect-[16/10] relative"> {/* Aspect ratio for the image container */}
-                  <Image
-                    src="/images/gangwar-section-visual.jpg" // **IMPORTANT: REPLACE WITH YOUR GANGWAR IMAGE PATH**
-                    alt="GANGWAR Portfolio Visual"
-                    layout="fill"
-                    objectFit="cover"
-                    quality={85}
-                    priority
-                  />
+                <Image
+  src="/images/gangwar-section-visual.jpg"
+  alt="GANGWAR Portfolio Visual"
+  layout="fill"
+  objectFit="cover"
+  objectPosition="top center" // key fix here
+  quality={85}
+  priority
+/>
+
                   {/* Optional overlay gradient on image */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent"></div>
                 </div>

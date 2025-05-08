@@ -39,7 +39,6 @@ export default async function HomePage() {
       <PortfolioSectionRealKings />
       <PortfolioSectionBreChealga />
       <PortfolioSectionSkyBreakers />
-      <PortfolioSectionProjectAlpha />
       <PortfolioSectionProjectBeta />
 
       {/* --- How It Works Section --- */}

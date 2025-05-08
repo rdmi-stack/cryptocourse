@@ -95,17 +95,20 @@ const PortfolioSectionSkyBreakers: React.FC = () => {
               >
                 {/* Aspect ratio container for the image */}
                 <div className="aspect-video md:aspect-[16/10] relative bg-neutral-800"> {/* Added a fallback bg color for the aspect box */}
-                  <Image
-                    src="/images/sky-breakers-section-visual.jpg" // **IMPORTANT: REPLACE WITH YOUR SKY BREAKERS IMAGE PATH**
-                    alt="Sky Breakers Portfolio Visual"
-                    layout="fill"
-                    objectFit="cover" // 'cover' will fill the dimensions, potentially cropping if aspect ratios differ.
-                                     // 'contain' would show the whole image but might leave empty space.
-                                     // 'fill' would stretch. 'none' or 'scale-down' are other options.
-                    quality={85}
-                    priority
-                    className="rounded-lg" // Apply rounded-lg also to Image if clipPath is on parent, helps with anti-aliasing on edges
-                  />
+                <div className="relative w-full h-auto bg-neutral-800 rounded-lg overflow-hidden">
+  <Image
+    src="/images/sky-breakers-section-visual.jpg"
+    alt="Sky Breakers Portfolio Visual"
+    width={800}
+    height={500}
+    objectFit="contain"
+    quality={85}
+    priority
+    className="w-full h-auto rounded-lg"
+  />
+</div>
+
+
                   {/* Optional overlay gradient on image */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent"></div>
                 </div>
