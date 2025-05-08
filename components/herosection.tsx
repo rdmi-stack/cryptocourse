@@ -49,15 +49,8 @@ const VisualHero: React.FC = () => {
       const tickerHeight = tickerElement.offsetHeight;
       const scrollPosition = window.scrollY + window.innerHeight; // Position of bottom of viewport relative to document top
 
-      // If the bottom of the viewport is past the bottom of the hero section (minus ticker height),
-      // then the ticker should become absolute within the hero. Otherwise, it's fixed.
       if (scrollPosition > heroBottom - tickerHeight) {
-        // We've scrolled past the point where the ticker should be fixed.
-        // Now it becomes absolute at the bottom of the hero section.
-        // This happens when the hero section is almost scrolled out of view.
-        // More accurately, when the space left for hero at bottom of screen < ticker height
         if (window.scrollY > heroSection.offsetTop + heroSection.offsetHeight - window.innerHeight) {
-             // Check if the top of the hero section is above the viewport top
             if (heroSection.getBoundingClientRect().bottom < tickerHeight + 10 ) { // +10px buffer
                  setIsTickerFixed(false);
             } else {
@@ -75,7 +68,7 @@ const VisualHero: React.FC = () => {
     handleScroll(); // Initial check
 
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []); // Empty dependency array: runs once on mount and cleans up on unmount
+  }, []);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -172,27 +165,24 @@ const VisualHero: React.FC = () => {
             </motion.div>
 
             <motion.h1
-  className="text-4xl sm:text-5xl lg:text-7xl font-extrabold mb-4 leading-tight text-center md:text-left"
-  style={commonTextShadow}
-  variants={itemVariants}
->
-  <span className="text-yellow-400">UNLOCK THE</span><br />
-  <span className="whitespace-nowrap text-white">FUTURE OF WEALTH</span>
-</motion.h1>
+              className="text-4xl sm:text-5xl lg:text-7xl font-extrabold mb-4 leading-tight text-center md:text-left"
+              style={commonTextShadow}
+              variants={itemVariants}
+            >
+              <span className="text-yellow-400">UNLOCK THE</span><br />
+              <span className="whitespace-nowrap text-white">FUTURE OF WEALTH</span>
+            </motion.h1>
 
 
             <motion.p
-  className="text-sm sm:text-base lg:text-lg max-w-xl text-neutral-200 leading-relaxed font-light mx-auto md:mx-0 mb-8"
-  style={{ ...commonTextShadow }}
-  variants={itemVariants}
->
-  Join <span className="font-medium text-yellow-400">Dubai Club</span> and invest in the crypto market through our AI-analyzed,&nbsp;
-  <span className="whitespace-nowrap">professionally tailored portfolio of premium cryptocurrencies.</span>
-  <span className="block mt-2 opacity-90">Simply invest, then watch your digital assets grow.</span>
-
-</motion.p>
-
-
+              className="text-sm sm:text-base lg:text-lg max-w-xl text-neutral-200 leading-relaxed font-light mx-auto md:mx-0 mb-8"
+              style={{ ...commonTextShadow }}
+              variants={itemVariants}
+            >
+              Join <span className="font-medium text-yellow-400">Dubai Club</span> and invest in the crypto market through our AI-analyzed,&nbsp;
+              <span className="whitespace-nowrap">professionally tailored portfolio of premium cryptocurrencies.</span>
+              <span className="block mt-2 opacity-90">Simply invest, then watch your digital assets grow.</span>
+            </motion.p>
 
             <motion.div className="flex flex-wrap gap-5 sm:gap-6 mb-8 justify-center md:justify-start" variants={itemVariants}>
               {[
@@ -212,38 +202,50 @@ const VisualHero: React.FC = () => {
             </motion.div>
 
             <motion.div className="flex flex-col sm:flex-row gap-4 items-center justify-center md:justify-start" variants={itemVariants}>
-              <motion.div variants={buttonVariants} initial="initial" whileHover="hover" whileTap="tap" className="relative group w-full sm:w-auto">
-                <div className="absolute -inset-0.5 bg-gradient-to-r from-yellow-500 to-yellow-300 rounded-lg blur-sm opacity-75 group-hover:opacity-100 transition duration-300"></div>
-                <Link
-                  href="/#portfolios"
-                  className="relative flex items-center justify-center bg-gradient-to-br from-yellow-400 to-yellow-600 text-gray-900 font-bold py-3.5 px-8 rounded-lg transition duration-300 ease-in-out w-full"
-                >
-                  <span>Get Started</span>
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
-                    <path
-                      fillRule="evenodd"
-                      d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </Link>
-              </motion.div>
+            <motion.div
+  variants={buttonVariants}
+  initial="initial"
+  whileHover="hover"
+  whileTap="tap"
+  className="relative group w-full sm:w-auto overflow-hidden rounded-lg"
+>
+  {/* Shimmer overlay */}
+  <span className="absolute top-0 left-[-75%] w-[200%] h-full bg-gradient-to-r from-transparent via-white/60 to-transparent opacity-80 blur-sm transform rotate-6 animate-shimmer pointer-events-none z-20"></span>
+
+  <Link
+  href="/#portfolios"
+  className="btn-shimmer relative z-30 flex items-center justify-center bg-gradient-to-br from-yellow-400 to-yellow-600 text-gray-900 font-bold py-3.5 px-8 w-full transition duration-300 ease-in-out rounded-lg"
+>
+  <span className="relative z-10">Get Started</span>
+  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2 relative z-10" viewBox="0 0 20 20" fill="currentColor">
+    <path
+      fillRule="evenodd"
+      d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z"
+      clipRule="evenodd"
+    />
+  </svg>
+</Link>
+
+</motion.div>
+
 
               <motion.div variants={buttonVariants} initial="initial" whileHover="hover" whileTap="tap" className="w-full sm:w-auto">
-                <Link
-                  href="/about"
-                  className="inline-flex items-center justify-center text-white hover:text-yellow-400 font-medium py-3.5 px-6 border border-white/20 hover:border-yellow-400/40 rounded-lg transition duration-300 ease-in-out backdrop-blur-sm bg-white/10 w-full"
-                >
-                  <span>Learn More</span>
-                </Link>
+              <Link
+  href="/about"
+  className="btn-shimmer inline-flex items-center justify-center text-white hover:text-yellow-400 font-medium py-3.5 px-6 border border-white/20 hover:border-yellow-400/40 rounded-lg transition duration-300 ease-in-out backdrop-blur-sm bg-white/10 w-full"
+>
+  <span className="relative z-10">Learn More</span>
+</Link>
+
               </motion.div>
             </motion.div>
           </motion.div>
 
           {/* RIGHT: Image + Floating Stats */}
+          {/* MODIFIED SECTION FOR LARGER IMAGE */}
           <div className="md:col-span-5 flex relative w-full h-auto md:h-full items-end justify-center md:items-stretch mt-8 md:mt-0">
             <motion.div
-              className="relative w-full max-w-[300px] sm:max-w-[450px] h-[40vh] sm:h-[45vh] md:w-[120%] lg:w-[130%] xl:w-[140%] md:h-[110%] md:absolute md:bottom-0 md:right-[-10%] lg:right-[-15%] xl:right-[-20%]"
+              className="relative w-full max-w-[300px] sm:max-w-[450px] h-[40vh] sm:h-[45vh] md:w-[140%] lg:w-[155%] xl:w-[170%] md:h-[125%] md:absolute md:bottom-0 md:right-[-5%] lg:right-[-10%] xl:right-[-15%]" // Adjusted widths, height and right offsets
               variants={imageVariants}
               initial="hidden"
               animate="visible"
@@ -292,7 +294,6 @@ const VisualHero: React.FC = () => {
           py-2.5 overflow-hidden z-30 transition-all duration-300 ease-in-out
           ${isTickerFixed ? 'fixed bottom-0' : 'absolute bottom-0'}
         `}
-        // When not fixed, it's absolute to the main sectionRef (which is relative)
       >
         <div className="whitespace-nowrap flex animate-marquee">
           {duplicatedTickerItems.map((item, idx) => {

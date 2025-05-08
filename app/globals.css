@@ -66,3 +66,38 @@ body {
   }
 }
 
+
+
+.btn-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-shimmer::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 200%;
+  height: 100%;
+  background-image: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.6),
+    transparent
+  );
+  opacity: 0.8;
+  transform: rotate(6deg);
+  animation: shimmer-effect 2.5s linear infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+
+@keyframes shimmer-effect {
+  0% {
+    transform: translateX(-100%) rotate(6deg);
+  }
+  100% {
+    transform: translateX(100%) rotate(6deg);
+  }
+}

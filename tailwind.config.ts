@@ -24,13 +24,18 @@ module.exports = {
         },
       },
       animation: {
-        shimmer: 'shimmer 1.5s ease-in-out infinite',
+        shimmer: 'shimmer 2.5s linear infinite',
         marquee: 'marquee 25s linear infinite',
+      },
+      boxShadow: {
+        redGlow: '0 4px 20px rgba(255, 0, 0, 0.4)',
+        yellowGlow: '0 0 20px rgba(255, 215, 0, 0.4)',
       },
     },
   },
   plugins: [
-    // Add any needed plugins here
-    // e.g., require('@tailwindcss/forms'), require('@tailwindcss/typography')
+    // Add Tailwind plugins if required:
+    // require('@tailwindcss/forms'),
+    // require('@tailwindcss/typography'),
   ],
 };
