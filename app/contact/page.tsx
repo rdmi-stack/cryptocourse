@@ -199,7 +199,7 @@ export default function ContactPage() {
                       <option value="inquiry">General Inquiry</option>
                       <option value="support">Technical Support</option>
                       <option value="portfolio">Portfolio Consultation</option>
-                      <option value="gangwar">GANGWAR Strategy</option>
+                      <option value="DubaiClub">Crypto Investment</option>
                       <option value="other">Other</option>
                     </select>
                   </div>
@@ -269,7 +269,7 @@ export default function ContactPage() {
                       </div>
                       <div>
                         <h3 className="text-xl font-semibold text-neutral-100">Email Us</h3>
-                        <p className="text-neutral-300 mt-1">contact@yourcompany.com</p>
+                        <p className="text-neutral-300 mt-1">contact@dubaiclub.com</p>
                         <p className="text-neutral-400 text-sm mt-1">We'll respond within 24 hours</p>
                       </div>
                     </div>
@@ -298,8 +298,7 @@ export default function ContactPage() {
                       </div>
                       <div>
                         <h3 className="text-xl font-semibold text-neutral-100">Office Location</h3>
-                        <p className="text-neutral-300 mt-1">123 Crypto Street</p>
-                        <p className="text-neutral-300">New York, NY 10001</p>
+                        <p className="text-neutral-300 mt-1">India</p>
                       </div>
                     </div>
                     
@@ -358,9 +357,9 @@ export default function ContactPage() {
           >
             {/* FAQ Item 1 */}
             <div className="bg-gray-900/60 backdrop-blur-sm border border-gray-800 rounded-lg p-6 shadow-lg">
-              <h3 className="text-xl font-bold mb-3 text-yellow-400">How quickly can I get started with GANGWAR?</h3>
+              <h3 className="text-xl font-bold mb-3 text-yellow-400">How quickly can I get started with DubaiClub?</h3>
               <p className="text-neutral-300">
-                After your initial consultation, you can typically get set up with our GANGWAR strategy within 24-48 hours, depending on your existing portfolio structure and market conditions.
+                After your initial consultation, you can typically get set up with our DubaiClub strategy within 24-48 hours, depending on your existing portfolio structure and market conditions.
               </p>
             </div>
             
@@ -368,7 +367,7 @@ export default function ContactPage() {
             <div className="bg-gray-900/60 backdrop-blur-sm border border-gray-800 rounded-lg p-6 shadow-lg">
               <h3 className="text-xl font-bold mb-3 text-yellow-400">What's the minimum investment for your strategies?</h3>
               <p className="text-neutral-300">
-                Our recommended minimum for the GANGWAR strategy is $10,000 to ensure proper diversification and risk management across multiple positions.
+                Our recommended minimum for the DubaiClub strategy is $10,000 to ensure proper diversification and risk management across multiple positions.
               </p>
             </div>
             
@@ -501,12 +500,12 @@ export default function ContactPage() {
               Ready to Dominate the Market?
             </h2>
             <p className="text-xl text-neutral-300 mb-8">
-              Join the elite traders using our GANGWAR strategy to seize opportunities others miss.
+              Join the elite traders using our DubaiClub strategy to seize opportunities others miss.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <Link href="/portfolios/gangwar" legacyBehavior>
+              <Link href="/portfolios" legacyBehavior>
                 <a className="btn-shimmer relative inline-flex items-center justify-center bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-4 px-8 rounded-md transition duration-300 ease-in-out transform hover:scale-105 shadow-lg hover:shadow-yellow-500/40 overflow-hidden">
-                  <span className="relative z-10">Explore GANGWAR</span>
+                  <span className="relative z-10">Explore Portfolio</span>
                   <div className="button-shimmer"></div>
                 </a>
               </Link>
