@@ -1,50 +1,77 @@
+/* app/globals.css */
+
+/* 1. Tailwind Directives */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
+/* 2. Root Variables & Theming (Light/Dark Mode) */
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #ffffff; /* Light mode background */
+    --foreground: #171717; /* Light mode text */
+    /* You can add other theme variables here */
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --background: #0a0a0a; /* Dark mode background */
+      --foreground: #ededed; /* Dark mode text */
+      /* Override or add other dark mode variables */
+    }
+  }
+
+  /* 3. Base Body Styles */
+  body {
+    color: var(--foreground);
+    background: var(--background);
+    font-family: Arial, Helvetica, sans-serif; /* Consider using a Tailwind font utility or a more modern stack */
+  }
+
+  /* 4. Essential Full Height Setup for Next.js Layouts */
+  html,
+  body,
+  body > div#__next, /* Target Next.js's main wrapper */
+  body > div#__next > * { /* Target direct child of __#next (often your <main> or layout div) */
+    height: 100%;
+    margin: 0; /* Ensure no default margins interfere with full height */
+    padding: 0; /* Ensure no default paddings interfere */
+  }
+
+  html {
+    overflow-x: hidden; /* Prevent horizontal scrollbars globally */
+  }
+
+  /* Optional: Better default box-sizing for all elements */
+  *, *::before, *::after {
+    box-sizing: border-box;
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-}
-/* In your global CSS or a relevant CSS module */
+/* 5. Custom Utilities & Animations */
+
+/* Torn Paper Effect */
+/* Note: .torn-paper-effect requires an SVG with id="portfolioTornEffect" to be defined in your HTML/SVG assets.
+   Example:
+   <svg width="0" height="0">
+     <defs>
+       <clipPath id="portfolioTornEffect" clipPathUnits="objectBoundingBox">
+         <path d="M0,0 L1,0 L1,0.9 L0.95,0.95 L0.9,0.92 L... Z" /> // Your complex path
+       </clipPath>
+     </defs>
+   </svg>
+*/
 .torn-paper-effect {
   clip-path: url(#portfolioTornEffect);
 }
 
-@media (max-width: 767px) { /* Adjust breakpoint as needed for 'md' */
-  .torn-paper-effect-mobile-none { /* New class to remove it */
-    clip-path: none !important; /* Or set to a simple rectangle if preferred */
+@media (max-width: 767px) { /* 'md' breakpoint in Tailwind is typically 768px, adjust if needed */
+  .torn-paper-effect-mobile-none {
+    clip-path: none !important;
   }
 }
 
-
-@keyframes shimmer {
-  0% {
-    transform: translateX(-100%);
-  }
-  100% {
-    transform: translateX(100%);
-  }
-}
-
-.animate-shimmer {
-  animation: shimmer 2.5s linear infinite;
-}
-
-/* globals.css or wherever you define base styles */
+/* Torn Edge Effect (Polygon based) */
 .torn-edge {
   clip-path: polygon(
     0% 0%, 100% 0%, 100% 92%, 97% 98%, 94% 93%, 91% 98%, 87% 92%, 84% 97%,
@@ -55,109 +82,85 @@ body {
   );
 }
 
+
+/* General Shimmer Animation & Utility */
 @layer utilities {
-  @keyframes shimmer {
+  @keyframes base-shimmer { /* Renamed to avoid conflict if other shimmers are different */
     0% { transform: translateX(-100%); }
     100% { transform: translateX(100%); }
   }
 
-  .animate-shimmer {
-    animation: shimmer 2s infinite linear;
+  .animate-shimmer { /* Use this for elements that need the base-shimmer */
+    animation: base-shimmer 2s infinite linear;
+    /* Consider adding overflow: hidden; to the element using this directly
+       or to a wrapper if the shimmering element is pseudo or absolutely positioned */
   }
 }
 
 
-
+/* Button Shimmer Effect */
 .btn-shimmer {
   position: relative;
   overflow: hidden;
+  isolation: isolate; /* Prevents shimmer from overlapping inner content/shadows */
 }
 
 .btn-shimmer::after {
   content: "";
   position: absolute;
   top: 0;
-  left: -75%;
-  width: 200%;
-  height: 100%;
-  background-image: linear-gradient(
-    120deg,
-    transparent,
-    rgba(255, 255, 255, 0.6),
-    transparent
-  );
-  opacity: 0.8;
-  transform: rotate(6deg);
-  animation: shimmer-effect 2.5s linear infinite;
-  pointer-events: none;
-  z-index: 1;
-}
-
-@keyframes shimmer-effect {
-  0% {
-    transform: translateX(-100%) rotate(6deg);
-  }
-  100% {
-    transform: translateX(100%) rotate(6deg);
-  }
-}
-.btn-shimmer {
-  position: relative;
-  overflow: hidden;
-  isolation: isolate; /* Prevent shimmer from overlapping inner shadows or effects */
-}
-
-.btn-shimmer::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -150%;
-  width: 250%;
+  left: -150%; /* Start off-screen to the left */
+  width: 250%; /* Wide enough to sweep across */
   height: 100%;
   background: linear-gradient(
     120deg,
     rgba(255, 255, 255, 0) 0%,
-    rgba(255, 255, 255, 0.35) 45%,
-    rgba(255, 255, 255, 0.6) 50%,
-    rgba(255, 255, 255, 0.35) 55%,
+    rgba(255, 255, 255, 0.35) 45%, /* Softer edge */
+    rgba(255, 255, 255, 0.6) 50%,  /* Brightest part of shimmer */
+    rgba(255, 255, 255, 0.35) 55%, /* Softer edge */
     rgba(255, 255, 255, 0) 100%
   );
-  animation: shimmer-effect 2.2s ease-in-out infinite;
-  pointer-events: none;
-  z-index: 1;
+  animation: btn-shimmer-effect 2.2s ease-in-out infinite;
+  pointer-events: none; /* Allows clicks to pass through to the button */
+  z-index: 1; /* Ensure it's above the button's content but respects `isolation` */
+  /* If you want the static 6-degree rotate from your original examples: */
+  /* transform: rotate(6deg); */
+  /* If so, the animation keyframes might need adjustment if they also include rotate */
 }
 
-@keyframes shimmer-effect {
+@keyframes btn-shimmer-effect {
   0% {
-    transform: translateX(-100%);
+    transform: translateX(-75%) /* Adjust if needed based on width/left and desired sweep starting point */;
   }
   100% {
-    transform: translateX(100%);
+    transform: translateX(75%) /* Adjust for full sweep */;
   }
 }
 
-
-@keyframes shimmer {
-  0% {
-    transform: translateX(-100%);
-  }
-  100% {
-    transform: translateX(100%);
-  }
+/* Shimmer Overlay Effect (for larger areas) */
+.shimmer-overlay-effect { /* Renamed class for clarity */
+  position: relative; /* Often needed for pseudo-elements or absolute children */
+  overflow: hidden; /* To contain the shimmer */
 }
 
-.shimmer-overlay {
+.shimmer-overlay-effect::before { /* Using ::before or ::after */
+  content: "";
+  position: absolute;
+  top: -50%; /* Adjust to cover area considering rotation */
+  left: -50%;
+  width: 200%;
+  height: 200%;
   background: linear-gradient(
-    120deg,
-    transparent 0%,
-    rgba(255, 255, 255, 0.8) 50%,
-    transparent 100%
+    120deg, /* Angle of the shimmer */
+    transparent 30%,
+    rgba(255, 255, 255, 0.6) 50%, /* Brighter shimmer for overlay */
+    transparent 70%
   );
-  animation: shimmer 2s linear infinite;
-  mix-blend-mode: overlay;
-  opacity: 0.9;
-  filter: blur(4px);
-  transform: rotate(6deg);
+  animation: base-shimmer 2.5s linear infinite; /* Can reuse base-shimmer or have a specific one */
+  mix-blend-mode: overlay; /* Blending mode for effect */
+  opacity: 0.7; /* Adjusted opacity */
+  /* filter: blur(4px); // Optional blur, can be performance intensive */
+  transform: rotate(10deg); /* Slight rotation for dynamic feel */
   pointer-events: none;
-  z-index: 0;
+  z-index: 0; /* Typically behind content unless it's an overlay effect on top */
 }
