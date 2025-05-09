@@ -148,7 +148,7 @@ const PortfolioSectionSkyBreakers: React.FC = () => {
               </p>
               <Link href="/portfolios/sky-breakers" legacyBehavior>
                 <a className={`inline-flex items-center justify-center ${primaryBgColor} ${primaryHoverBgColor} text-black font-bold py-3 px-8 rounded-md transition duration-300 ease-in-out transform hover:scale-105 self-start shadow-lg hover:shadow-${primaryHoverShadow}`}>
-                  Discover Sky Breakers &rarr;
+                  Explore Sky Breakers &rarr;
                 </a>
               </Link>
             </div>

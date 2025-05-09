@@ -131,7 +131,7 @@ const PortfolioSection10XAlphasUnique: React.FC = () => {
   <a
     className={`btn-shimmer relative inline-block ${yellowBgColor} ${yellowHoverBgColor} text-black font-bold py-3 px-8 rounded-md transition duration-300 ease-in-out transform hover:scale-105 self-start shadow-lg hover:shadow-yellow-500/30 overflow-hidden`}
   >
-    <span className="relative z-10">Know More &rarr;</span>
+    <span className="relative z-10">Explore 10x Alphas &rarr;</span>
   </a>
 </Link>
 

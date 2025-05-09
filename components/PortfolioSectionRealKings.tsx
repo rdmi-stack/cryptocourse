@@ -108,7 +108,7 @@ const PortfolioSectionRealKings: React.FC = () => {
   <a
     className={`btn-shimmer relative inline-block ${primaryBgColor} ${primaryHoverBgColor} text-black font-bold py-3 px-8 rounded-md transition duration-300 ease-in-out transform hover:scale-105 self-start shadow-lg hover:shadow-${primaryHoverShadow} overflow-hidden`}
   >
-    <span className="relative z-10">Know More →</span>
+    <span className="relative z-10">Explore Real King →</span>
   </a>
 </Link>
 

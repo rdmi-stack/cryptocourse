@@ -152,7 +152,7 @@ const PortfolioSectionProjectBeta: React.FC = () => {
               </p>
               <Link href={portfolio.href} legacyBehavior>
                 <a className={`inline-flex items-center justify-center ${primaryBgColor} ${primaryHoverBgColor} text-black font-bold py-3 px-8 rounded-md transition duration-300 ease-in-out transform hover:scale-105 self-start shadow-lg hover:shadow-${primaryHoverShadow}`}>
-                  Know More &rarr;
+                  Explore Project Beta &rarr;
                 </a>
               </Link>
             </div>
