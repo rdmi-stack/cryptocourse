@@ -48,7 +48,7 @@ const StockTicker = () => {
   );
 };
 
-// Main page component - assumes layout already has header and footer
+// Main page component - designed to work with your existing layout
 export default function StocksComingSoonPage() {
   const [countdown, setCountdown] = useState({ days: 30, hours: 0, minutes: 0, seconds: 0 });
 
@@ -68,19 +68,19 @@ export default function StocksComingSoonPage() {
   }, []);
 
   return (
-    // Main content container - leaves space for header and footer
-    <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-blue-900 text-white min-h-[calc(100vh-theme(spacing.header)-theme(spacing.footer))] pt-20 pb-16">
+    // Main content - without any height constraints that might override layout
+    <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-blue-900 w-full">
       {/* Background grid lines */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(86,106,127,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(86,106,127,0.1)_1px,transparent_1px)] bg-[size:50px_50px]"></div>
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(86,106,127,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(86,106,127,0.1)_1px,transparent_1px)] bg-[size:50px_50px] pointer-events-none"></div>
       
-      {/* Glowing orbs for atmosphere */}
-      <div className="absolute top-1/3 -left-20 w-72 h-72 bg-blue-500/20 rounded-full blur-3xl animate-pulse"></div>
-      <div className="absolute bottom-1/3 right-0 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl animate-pulse" style={{animationDelay: '2s'}}></div>
+      {/* Glowing orbs for atmosphere - with z-index to ensure they don't interfere */}
+      <div className="absolute top-1/3 -left-20 w-72 h-72 bg-blue-500/20 rounded-full blur-3xl animate-pulse pointer-events-none z-0"></div>
+      <div className="absolute bottom-1/3 right-0 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl animate-pulse pointer-events-none z-0" style={{animationDelay: '2s'}}></div>
       
-      {/* Main content area */}
-      <div className="relative z-10 container mx-auto px-4 flex flex-col items-center text-center">
+      {/* Main content area - with proper padding */}
+      <div className="relative z-10 container mx-auto px-4 py-20 flex flex-col items-center text-center">
         {/* Top section - Coming Soon and description */}
-        <div className="mt-8 md:mt-16">
+        <div className="mt-8">
           <h1 className="text-5xl md:text-7xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-amber-500 mb-4">
             COMING SOON
           </h1>
@@ -89,7 +89,7 @@ export default function StocksComingSoonPage() {
             Dubai Club <span className="text-yellow-400">Stocks</span>
           </h2>
           
-          <p className="text-lg md:text-xl text-gray-300 max-w-2xl mb-8">
+          <p className="text-lg md:text-xl text-gray-300 max-w-2xl mb-8 mx-auto">
             We're building a premium stock market insights platform with real-time data, 
             expert analysis, and advanced trading tools to help you make smarter investment decisions.
           </p>
@@ -122,11 +122,10 @@ export default function StocksComingSoonPage() {
           />
         </div>
         
-        {/* Stock ticker */}
-        <StockTicker />
+        
         
         {/* Notification signup */}
-        <div className="w-full max-w-md mb-8 mt-4">
+        <div className="w-full max-w-md mb-10 mt-4">
           <div className="flex flex-col sm:flex-row gap-2">
             <input 
               type="email" 
@@ -141,7 +140,7 @@ export default function StocksComingSoonPage() {
         
         <Link
           href="/"
-          className="bg-slate-800/70 hover:bg-slate-700/80 text-white font-medium py-3 px-8 rounded-lg shadow-lg transition-all duration-200 ease-in-out hover:scale-105 text-base border border-slate-700/50 hover:border-slate-600/50 mb-8"
+          className="bg-slate-800/70 hover:bg-slate-700/80 text-white font-medium py-3 px-8 rounded-lg shadow-lg transition-all duration-200 ease-in-out hover:scale-105 text-base border border-slate-700/50 hover:border-slate-600/50 mb-16"
         >
           Return to Homepage
         </Link>
