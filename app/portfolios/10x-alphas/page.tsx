@@ -283,9 +283,7 @@ const Portfolio10XAlphasPage: React.FC = () => {
               </motion.div>
             </AnimatePresence>
 
-            <motion.p className="text-center text-neutral-400 mt-16 text-sm italic" variants={itemVariant}>
-              Would you like versions tailored for different risk profiles (e.g., conservative, balanced, aggressive) or for short-term swing portfolios? Let us know!
-            </motion.p>
+          
           </div>
         </motion.section>
 
