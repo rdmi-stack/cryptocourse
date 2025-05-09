@@ -3,88 +3,110 @@
 
 import Link from 'next/link';
 import React from 'react'; // Import React if not already present
+import Image from 'next/image'; // Import Next.js Image component
 
-// Since this is a Client Component, 'metadata' cannot be exported directly from here.
-// You would handle metadata in a parent Server Component (e.g., layout.tsx) or
-// use document.title for very simple cases if this page had no server-side layout.
-// For simplicity, we'll omit the static metadata export here.
-
-// Component for the animated gradient background styles
-// It's defined here because styled-jsx needs to be in a client environment.
-const AnimatedGradientBackgroundStyles: React.FC = () => {
-  return (
-    <style jsx global>{`
-      .gradient-animate-bg {
-        background: linear-gradient(-45deg, #0f172a, #1e293b, #334155, #0f172a);
-        background-size: 400% 400%;
-        animation: gradientBG 25s ease infinite;
-      }
-      @keyframes gradientBG {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
-      }
-      /* Ensure html and body take full height for the gradient to cover.
-         It's often better to put these in global.css if they affect all pages.
-         If this is the only page with this full-height gradient, this is okay. */
-      html, body {
-        height: 100%;
-        margin: 0;
-        overflow-x: hidden; /* Prevent horizontal scroll from gradient animation */
-      }
-      body > div#__next { /* Target Next.js main wrapper */
-        height: 100%;
-      }
-    `}</style>
-  );
-};
+// Optional: If you want to use a custom font, ensure it's configured in your project
+// For example, in your globals.css or layout.tsx
 
 // Main page component
-export default function StocksComingSoonPage() {
-  // currentYear can be calculated client-side or passed if needed from server
+export default function StocksComingSoonPageV2() {
   const currentYear = new Date().getFullYear();
 
   return (
     <>
-      <AnimatedGradientBackgroundStyles />
-      
-      <div className="gradient-animate-bg text-white min-h-screen flex flex-col items-center justify-center p-6 text-center relative overflow-hidden">
-        {/* Optional: Particle effect. 
-          If you add a <ParticlesComponent /> here, that component
-          would also need "use client" at its top if it uses client-side hooks.
-        */}
-        {/* <ParticlesComponent /> */}
+      {/*
+        It's generally better to put global styles affecting html/body
+        in a global CSS file (e.g., app/globals.css) or in your layout.tsx.
+        However, if this page is unique in its styling requirements, it can be here.
+        For this example, we'll assume some base styling for full height might be in globals.css
+      */}
+      <style jsx global>{`
+        body, html, #__next {
+          margin: 0;
+          padding: 0;
+          height: 100%;
+          overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+      `}</style>
 
-        <div className="relative z-10"> {/* Content should be above particles if used */}
-          <div className="mb-8">
-            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-gray-200 uppercase tracking-wider [text-shadow:_0_0_8px_rgba(209,213,219,0.2)]">
-              Stocks
-            </h1>
-          </div>
+      <div className="relative min-h-screen flex flex-col items-center justify-center text-white overflow-hidden">
+        {/* Background Image with Overlay */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/images/stocks.jpeg" // Path to your image in the public folder
+            alt="Stock market indicators and professionals"
+            layout="fill"
+            objectFit="cover"
+            quality={90} // Adjust quality as needed
+            priority // Load image faster
+          />
+          <div className="absolute inset-0 bg-slate-900 opacity-75"></div> {/* Dark overlay */}
+        </div>
 
-          <div className="relative inline-block mb-4">
-            <div className="absolute -top-2 sm:-top-4 -left-4 -right-4 -bottom-2 sm:-bottom-4 bg-yellow-400/5 rounded-full blur-3xl opacity-60 animate-pulse duration-[4000ms]"></div>
-            <h2 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-black uppercase tracking-tighter leading-none [text-shadow:_0_0_10px_rgba(255,255,255,0.2),_0_0_20px_rgba(255,255,255,0.15),_0_0_40px_rgba(250,204,21,0.35)]">
+        {/* Content */}
+        <div className="relative z-10 flex flex-col items-center justify-center p-6 text-center space-y-8 sm:space-y-12">
+          {/* Title */}
+          <h1 className="text-5xl sm:text-6xl md:text-7xl font-extrabold uppercase tracking-wide text-gray-100
+                         [text-shadow:0_2px_4px_rgba(0,0,0,0.3),_0_0_20px_rgba(250,204,21,0.3)]">
+            Stocks
+          </h1>
+
+          {/* Coming Soon Banner */}
+          <div className="relative inline-block">
+            {/* Optional: Subtle glow effect */}
+            <div className="absolute -inset-2 sm:-inset-3 bg-yellow-400/10 rounded-full blur-2xl opacity-70 animate-pulse duration-[3500ms]"></div>
+            <h2 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-black uppercase tracking-tighter leading-none
+                           [text-shadow:0_0_10px_rgba(255,255,255,0.3),_0_0_25px_rgba(250,204,21,0.4),_0_0_50px_rgba(250,204,21,0.2)]
+                           text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-yellow-400 to-amber-500">
               Coming Soon
             </h2>
           </div>
 
-          <p className="mt-8 sm:mt-10 text-lg sm:text-xl md:text-2xl text-gray-300 max-w-2xl [text-shadow:_0_0_8px_rgba(209,213,219,0.15)]">
-            We&apos;re currently fine-tuning our new Stocks section to bring you the best experience.
-            Exciting features and insights are on the way!
+          {/* Informative Text */}
+          <p className="text-lg sm:text-xl md:text-2xl text-gray-200 max-w-xl
+                         [text-shadow:0_1px_3px_rgba(0,0,0,0.2)]">
+            Our expert team is meticulously crafting a state-of-the-art Stocks platform.
+            Get ready for powerful analytics and seamless trading.
           </p>
 
-          <div className="mt-12">
+          {/* Call to Action */}
+          <div className="mt-10 sm:mt-12">
             <Link
               href="/" // Link to your homepage
-              className="bg-yellow-500 hover:bg-yellow-600 text-slate-900 font-semibold py-3.5 px-8 rounded-lg shadow-lg transition-transform duration-200 ease-in-out hover:scale-105 text-base sm:text-lg focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-opacity-75"
+              className="bg-yellow-500 hover:bg-yellow-600 text-slate-900 font-semibold py-3.5 px-10 rounded-lg shadow-xl
+                         transition-all duration-300 ease-in-out
+                         hover:scale-105 hover:shadow-yellow-500/40
+                         text-base sm:text-lg
+                         focus:outline-none focus:ring-4 focus:ring-yellow-400 focus:ring-opacity-60"
             >
-              Go to Homepage
+              Return to Homepage
             </Link>
           </div>
+
+          {/* Optional: Placeholder for "Get Notified" email input
+          <div className="mt-8 w-full max-w-md">
+            <p className="text-gray-300 mb-3">Be the first to know when we launch:</p>
+            <form className="flex flex-col sm:flex-row gap-3">
+              <input
+                type="email"
+                placeholder="Enter your email"
+                className="flex-grow px-4 py-3 rounded-md bg-slate-700/50 border border-slate-600 focus:ring-2 focus:ring-yellow-500 outline-none placeholder-gray-400 text-white"
+              />
+              <button
+                type="submit"
+                className="bg-teal-500 hover:bg-teal-600 text-white font-semibold py-3 px-6 rounded-md shadow-md
+                           transition-colors duration-200 ease-in-out
+                           focus:outline-none focus:ring-2 focus:ring-teal-400 focus:ring-opacity-75"
+              >
+                Notify Me
+              </button>
+            </form>
+          </div>
+          */}
         </div>
 
-        <footer className="absolute bottom-6 sm:bottom-8 text-gray-500 text-sm z-10">
+        {/* Footer */}
+        <footer className="absolute bottom-5 sm:bottom-6 text-gray-400 text-xs sm:text-sm z-10 [text-shadow:0_1px_2px_rgba(0,0,0,0.5)]">
           &copy; {currentYear} Dubai Club. All Rights Reserved.
         </footer>
       </div>
