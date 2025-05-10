@@ -12,6 +12,7 @@ import AboutSection from '@/components/AboutSection';
 import CallToActionSection from '@/components/CallToActionSection';
 import PortfolioSectionProjectAlpha from '@/components/PortfolioSectionProjectAlpha';
 import PortfolioSectionProjectBeta from '@/components/PortfolioSectionProjectBeta';
+import StickyWhatsAppButton from '@/components/StickyWhatsAppButton';
 
 // --- NEW IMPORT for 10X Alphas Detail Section ---
 import PortfolioSection10XAlphasDetail from '@/components/PortfolioSection10XAlphasDetail';
@@ -47,7 +48,7 @@ export default async function HomePage() {
       {/* --- About Section --- */}
       <AboutSection />
 
-
+ <StickyWhatsAppButton />
 
 
       {/* --- Newsletter Section --- */}
