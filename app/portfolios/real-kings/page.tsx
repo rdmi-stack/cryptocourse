@@ -124,7 +124,7 @@ const PortfolioRealKingsPage: React.FC = () => {
               >
                 <div className="aspect-[4/3] md:aspect-[16/10] lg:aspect-[4/3] relative">
                   <Image
-                    src="/images/real-kings-hero.jpg" // **NEW IMAGE for Real Kings**
+                    src="/images/real-kings-section-visual.jpg" // **NEW IMAGE for Real Kings**
                     alt="Real Kings Portfolio Visual"
                     layout="fill"
                     objectFit="cover"

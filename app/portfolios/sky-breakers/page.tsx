@@ -56,7 +56,7 @@ const HeroTornPaperClipPathComponent: React.FC = () => (
 // Stats Data for SKY BREAKERS
 const portfolioStatsSkyBreakers = [
   { label: 'Risk Profile', value: 'Very High' },
-  { label: 'Primary Strategy', value: 'Disruptive Innovation' },
+{ label: 'Primary Strategy', value: '(Very Big Move Potential)' },
   { label: 'Investment Horizon', value: 'Long-Term / Cycle' }
 ];
 
@@ -122,7 +122,7 @@ const PortfolioSkyBreakersPage: React.FC = () => {
               >
                 <div className="aspect-[4/3] md:aspect-[16/10] lg:aspect-[4/3] relative">
                   <Image
-                    src="/images/sky-breakers-hero.jpg" // **NEW IMAGE for SKY BREAKERS Hero**
+                    src="/images/sky-breakers-section-visual.jpg" // **NEW IMAGE for SKY BREAKERS Hero**
                     alt="SKY BREAKERS Portfolio Visual"
                     layout="fill"
                     objectFit="cover"
@@ -195,10 +195,11 @@ const PortfolioSkyBreakersPage: React.FC = () => {
               </p>
               <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} className="w-full">
                 <Link href="/subscribe?portfolio=sky-breakers" legacyBehavior>
-                  <a className={`relative inline-block w-full max-w-xs overflow-hidden rounded-lg ${tealColor.replace('text-','bg-')} px-8 py-3.5 text-lg font-bold text-black shadow-lg hover:bg-teal-500 transition-colors duration-300`}>
-                    <span className="relative z-10">Subscribe Now</span>
-                    <span className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-transparent via-white/50 to-transparent opacity-60 blur-[3px] animate-shimmer" />
-                  </a>
+                <a className="relative inline-block w-full max-w-xs overflow-hidden rounded-lg bg-blue-500 px-8 py-3.5 text-lg font-bold text-white shadow-lg hover:bg-blue-600 transition-colors duration-300">
+  <span className="relative z-10">Subscribe Now</span>
+  <span className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-transparent via-white/50 to-transparent opacity-60 blur-[3px] animate-shimmer" />
+</a>
+
                 </Link>
               </motion.div>
             </motion.div>
@@ -247,7 +248,7 @@ const PortfolioSkyBreakersPage: React.FC = () => {
                   <motion.ul className="list-none space-y-3 text-neutral-300 leading-relaxed mb-8" variants={itemVariant}>
                     {keyHighlights.map((highlight, i) => (
                       <motion.li key={i} className="flex items-start" variants={itemVariant}>
-                        <span className={`mr-3 mt-1 flex-shrink-0 w-2.5 h-2.5 rounded-full ${tealColor.replace('text-','bg-')}`}></span>
+<span className="mr-3 mt-1 flex-shrink-0 w-2.5 h-2.5 rounded-full bg-blue-400"></span>
                         {highlight}
                       </motion.li>
                     ))}
