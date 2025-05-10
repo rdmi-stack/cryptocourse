@@ -340,53 +340,55 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* FAQs Section */}
+   {/* FAQs Section */}
       <section className="py-16 md:py-24 bg-gradient-to-b from-gray-900 to-black">
         <div className="container mx-auto px-6">
-          <motion.div 
+          <motion.div
             className="text-center max-w-4xl mx-auto mb-16"
             variants={itemVariants}
           >
             <h2 className="text-4xl font-bold mb-4 text-yellow-400">Frequently Asked Questions</h2>
             <p className="text-neutral-300">Find quick answers to common questions</p>
           </motion.div>
-          
-          <motion.div 
+
+          <motion.div
             className="grid gap-6 md:grid-cols-2 max-w-5xl mx-auto"
             variants={itemVariants}
           >
             {/* FAQ Item 1 */}
             <div className="bg-gray-900/60 backdrop-blur-sm border border-gray-800 rounded-lg p-6 shadow-lg">
-              <h3 className="text-xl font-bold mb-3 text-yellow-400">How quickly can I get started with DubaiClub?</h3>
+              <h3 className="text-xl font-bold mb-3 text-yellow-400">What is Dubai Club?</h3>
               <p className="text-neutral-300">
-                After your initial consultation, you can typically get set up with our DubaiClub strategy within 24-48 hours, depending on your existing portfolio structure and market conditions.
+                Dubai Club is an exclusive crypto model portfolios and other financial secrets decoding platform for serious investors and traders. We offer premium insights, AI-driven crypto model portfolios, real-time alerts, and market research on like Bitcoin, Ethereum, altcoins, and other emerging assets. Our mission is to provide actionable intelligence and investment strategies that help our members achieve financial success.
               </p>
             </div>
-            
+
             {/* FAQ Item 2 */}
             <div className="bg-gray-900/60 backdrop-blur-sm border border-gray-800 rounded-lg p-6 shadow-lg">
-              <h3 className="text-xl font-bold mb-3 text-yellow-400">What's the minimum investment for your strategies?</h3>
+              <h3 className="text-xl font-bold mb-3 text-yellow-400">How do I join Dubai Club?</h3>
               <p className="text-neutral-300">
-                Our recommended minimum for the DubaiClub strategy is $10,000 to ensure proper diversification and risk management across multiple positions.
+                Joining Dubai Club is simple! Click on the “Subscribe” button, sign up, and gain immediate access to our premium crypto model portfolios, portfolio strategies, and exclusive research.
               </p>
             </div>
-            
+
             {/* FAQ Item 3 */}
             <div className="bg-gray-900/60 backdrop-blur-sm border border-gray-800 rounded-lg p-6 shadow-lg">
-              <h3 className="text-xl font-bold mb-3 text-yellow-400">How are your performance fees structured?</h3>
+              <h3 className="text-xl font-bold mb-3 text-yellow-400">What makes Dubai Club different from other crypto signal services?</h3>
               <p className="text-neutral-300">
-                We operate on a performance-based model with a 2% management fee and 20% performance fee on profits, ensuring our incentives are aligned with your success.
+                Dubai Club is powered by AI-driven research, which uses advanced algorithms to analyse market data, predict trends, and suggest trades and portfolios. Unlike other services that rely purely on human analysis, our platform combines quantitative analysis with fundamental research, ensuring you get the most reliable analysis and insights.
               </p>
             </div>
-            
+
             {/* FAQ Item 4 */}
             <div className="bg-gray-900/60 backdrop-blur-sm border border-gray-800 rounded-lg p-6 shadow-lg">
-              <h3 className="text-xl font-bold mb-3 text-yellow-400">What support do you provide after onboarding?</h3>
+              <h3 className="text-xl font-bold mb-3 text-yellow-400">Is Dubai Club available outside of India?</h3>
               <p className="text-neutral-300">
-                All clients receive 24/7 emergency support, weekly performance reports, monthly strategy calls, and access to our exclusive market intelligence platform.
+                Yes! While we tailor many of our insights to the Indian market, Dubai Club is accessible to anyone globally. Crypto is a borderless asset, and our research is beneficial to investors in any country. And our Dubai Club inspire from Dubai.
               </p>
             </div>
           </motion.div>
+        </div>
+      </section>
           
           <motion.div 
             className="text-center mt-12"
