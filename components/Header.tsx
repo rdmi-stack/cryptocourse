@@ -58,8 +58,6 @@ const Header: React.FC = () => {
         { label: "Real Kings", href: "/portfolios/real-kings", icon: ShieldCheckIcon },
         { label: "GANGWAR", href: "/portfolios/gangwar", icon: BoltIcon },
         { label: "Sky Breakers", href: "/portfolios/sky-breakers", icon: RocketLaunchIcon },
-        { label: "Project Alpha", href: "/portfolios/project-alpha", icon: AdjustmentsHorizontalIcon },
-        { label: "Project Beta", href: "/portfolios/project-beta", icon: VariableIcon },
       ],
     },
     { label: "Stocks", href: "/stocks", icon: RectangleStackIcon },
@@ -221,12 +219,13 @@ const Header: React.FC = () => {
                   Login
                 </a>
               </Link>
-              <Link
+            <Link
   href="/portfolios"
-  className="btn-shimmer relative inline-block rounded-md px-4 sm:px-5 py-2 text-sm font-bold text-black shadow-lg bg-yellow-400 transition-transform duration-300 ease-in-out hover:scale-105"
+  className="btn-shimmer relative inline-block w-full text-center rounded-md px-4 sm:px-5 py-3 text-sm font-bold text-black shadow-lg bg-yellow-400 transition-transform duration-300 ease-in-out hover:scale-105"
 >
   <span className="relative z-10">Subscribe</span>
 </Link>
+
 
 
             </div>
@@ -305,9 +304,9 @@ const Header: React.FC = () => {
                 Login
               </a>
             </Link>
-            <Link
+        <Link
   href="/portfolios"
-  className="btn-shimmer relative inline-block rounded-md px-4 sm:px-5 py-2 text-sm font-bold text-black shadow-lg bg-yellow-400 transition-transform duration-300 ease-in-out hover:scale-105"
+  className="btn-shimmer relative inline-block w-full text-center rounded-md px-4 sm:px-5 py-3 text-sm font-bold text-black shadow-lg bg-yellow-400 transition-transform duration-300 ease-in-out hover:scale-105"
 >
   <span className="relative z-10">Subscribe</span>
 </Link>

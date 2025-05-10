@@ -18,9 +18,9 @@ const Footer: React.FC = () => {
     { href: '/', label: 'Home' },
     { href: '/portfolios', label: 'Crypto Portfolios' },
     { href: '/stocks', label: 'Stocks' },
-    { href: '/newsletter', label: 'Newsletter' }, // Assuming lowercase route
+    { href: '/Newsletter', label: 'Newsletter' }, // Assuming lowercase route
     { href: '/tools', label: 'Tools' },
-    { href: '/wealth-update', label: 'Wealth Update' }, // Assuming lowercase route
+    { href: '/wealth-updates', label: 'Wealth Update' }, // Assuming lowercase route
     { href: '/prime-community', label: 'Prime Community' }
   ];
   const supportLinks = [ { href: '/about', label: 'About us' }, { href: '/careers', label: 'Career' }];
