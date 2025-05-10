@@ -204,7 +204,74 @@ const PortfolioGangwarPage: React.FC = () => {
                     <span className="relative z-10">Subscribe Now</span>
                     <span className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-transparent via-white/40 to-transparent opacity-50 blur-[3px] animate-shimmer" />
                   </a>
-                </Link>
+                </Link>  {/* Social Sharing */}
+<div className="mt-4 flex justify-center gap-4">
+  {/* Twitter */}
+  <a
+    href="https://twitter.com/intent/tweet?text=Check%20out%20the%20Real%20Kings%20Crypto%20Portfolio%20on%20Dubai%20Club&url=https://dubaiclub.in/portfolios/real-kings"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="text-blue-400 hover:text-blue-500 transition"
+    aria-label="Share on Twitter"
+  >
+    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M23 3a10.9 10.9 0 01-3.14 1.53A4.48 4.48 0 0022.4.36a9.27 9.27 0 01-2.9 1.1A4.52 4.52 0 0016.1 0c-2.66 0-4.8 2.24-4.8 5 0 .39.04.76.13 1.12C7.69 5.92 4.07 3.94 1.64.93a4.93 4.93 0 00-.65 2.5c0 1.7.87 3.2 2.2 4.08A4.48 4.48 0 01.96 7v.06c0 2.37 1.64 4.35 3.8 4.8a4.52 4.52 0 01-2.17.09c.62 2 2.44 3.44 4.6 3.48A9.06 9.06 0 010 19.5 12.8 12.8 0 006.29 21c7.55 0 11.68-6.42 11.68-11.98 0-.18 0-.36-.01-.53A8.58 8.58 0 0023 3z"/>
+    </svg>
+  </a>
+
+  {/* LinkedIn */}
+  <a
+    href="https://www.linkedin.com/sharing/share-offsite/?url=https://dubaiclub.in/portfolios/real-kings"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="text-blue-600 hover:text-blue-700 transition"
+    aria-label="Share on LinkedIn"
+  >
+    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M4.98 3.5a2.49 2.49 0 11-4.97 0 2.49 2.49 0 014.97 0zM.13 8.5h4.88V24H.13V8.5zM9.63 8.5h-4.8V24h4.8V15.5c0-4.4 5.67-4.75 5.67 0V24h4.8V14c0-7.9-8.47-7.6-10.47-3.7V8.5z"/>
+    </svg>
+  </a>
+
+  {/* WhatsApp */}
+  <a
+    href="https://api.whatsapp.com/send?text=Check%20out%20Real%20Kings%20Crypto%20Portfolio%20on%20Dubai%20Club%3A%20https%3A%2F%2Fdubaiclub.in%2Fportfolios%2Freal-kings"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="text-green-400 hover:text-green-500 transition"
+    aria-label="Share on WhatsApp"
+  >
+   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 32 32">
+  <path d="M16.01 0C7.167 0 0 7.162 0 15.994c0 2.82.742 5.537 2.148 7.948L0 32l8.283-2.146a15.947 15.947 0 007.727 1.975h.002C24.855 31.829 32 24.681 32 15.994 32 7.162 24.853 0 16.01 0zm0 29.434a13.317 13.317 0 01-6.822-1.845l-.49-.287-4.912 1.273 1.307-4.787-.319-.49a13.332 13.332 0 01-2.085-7.113c0-7.37 6.006-13.36 13.37-13.36 7.36 0 13.366 5.99 13.366 13.36 0 7.372-6.006 13.36-13.37 13.36zm7.278-9.918c-.395-.198-2.34-1.156-2.702-1.287-.362-.132-.625-.198-.888.198s-1.016 1.287-1.247 1.553c-.228.264-.458.297-.853.099-.39-.198-1.648-.607-3.14-1.937-1.16-1.034-1.944-2.31-2.174-2.7-.228-.396-.024-.608.174-.805.18-.178.398-.462.597-.693.198-.228.264-.396.396-.66.132-.264.066-.495-.033-.693-.099-.198-.888-2.14-1.218-2.928-.321-.771-.648-.666-.888-.675l-.757-.015c-.264 0-.693.099-1.056.495s-1.388 1.357-1.388 3.303 1.422 3.826 1.62 4.092c.198.264 2.796 4.269 6.773 5.993.947.408 1.686.651 2.264.834.951.303 1.818.261 2.502.159.763-.114 2.34-.955 2.67-1.875.33-.924.33-1.715.231-1.875-.099-.165-.363-.264-.758-.462z" />
+</svg>
+
+  </a>
+
+  {/* Facebook */}
+  <a
+    href="https://www.facebook.com/sharer/sharer.php?u=https://dubaiclub.in/portfolios/real-kings"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="text-blue-500 hover:text-blue-600 transition"
+    aria-label="Share on Facebook"
+  >
+    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M22.675 0H1.325C.593 0 0 .593 0 1.326v21.348C0 23.407.593 24 1.325 24H12.82v-9.294H9.692V11.01h3.127V8.41c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.464.099 2.795.143v3.24l-1.918.001c-1.504 0-1.796.715-1.796 1.763v2.312h3.591l-.467 3.696h-3.124V24h6.126C23.407 24 24 23.407 24 22.674V1.326C24 .593 23.407 0 22.675 0z"/>
+    </svg>
+  </a>
+
+  {/* Instagram (link to brand profile, as Instagram doesn't allow direct sharing) */}
+  <a
+    href="https://www.instagram.com/dubaiclub" // Replace with your actual IG handle
+    target="_blank"
+    rel="noopener noreferrer"
+    className="text-pink-500 hover:text-pink-600 transition"
+    aria-label="Instagram"
+  >
+    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M7.75 2A5.75 5.75 0 002 7.75v8.5A5.75 5.75 0 007.75 22h8.5A5.75 5.75 0 0022 16.25v-8.5A5.75 5.75 0 0016.25 2h-8.5zm0 1.5h8.5A4.25 4.25 0 0120.5 7.75v8.5a4.25 4.25 0 01-4.25 4.25h-8.5A4.25 4.25 0 013.5 16.25v-8.5A4.25 4.25 0 017.75 3.5zm8.25 1.75a.75.75 0 100 1.5.75.75 0 000-1.5zM12 7a5 5 0 100 10 5 5 0 000-10zm0 1.5a3.5 3.5 0 110 7 3.5 3.5 0 010-7z"/>
+    </svg>
+  </a>
+</div>
               </motion.div>
             </motion.div>
           </div>
