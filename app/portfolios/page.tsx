@@ -24,6 +24,7 @@ export default function PortfoliosPage() {
           </h1>
 
           <div className="space-y-16 sm:space-y-24">
+                  <PortfolioOverview />
             <PortfolioSectionRealKings />
             <PortfolioSectionBreChealga />
             <PortfolioSectionSkyBreakers />

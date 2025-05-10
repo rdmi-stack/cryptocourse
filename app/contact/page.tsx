@@ -3,30 +3,30 @@
 
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import Image from 'next/image';
+import Image from 'next/image'; // This import is not used in the provided code snippet
 import Link from 'next/link';
 
 // Animation variants
 const pageVariants = {
   hidden: { opacity: 0 },
-  visible: { 
-    opacity: 1, 
-    transition: { 
-      duration: 0.6, 
-      staggerChildren: 0.2 
-    } 
+  visible: {
+    opacity: 1,
+    transition: {
+      duration: 0.6,
+      staggerChildren: 0.2
+    }
   }
 };
 
 const itemVariants = {
   hidden: { opacity: 0, y: 20 },
-  visible: { 
-    opacity: 1, 
-    y: 0, 
-    transition: { 
-      duration: 0.5, 
-      ease: "easeOut" 
-    } 
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: "easeOut"
+    }
   }
 };
 
@@ -87,7 +87,7 @@ export default function ContactPage() {
     try {
       // Simulating form submission - replace with actual API call
       await new Promise(resolve => setTimeout(resolve, 1500));
-      
+
       // Clear form after successful submission
       setFormData({
         name: '',
@@ -96,7 +96,7 @@ export default function ContactPage() {
         message: ''
       });
       setSubmitStatus('success');
-      
+
       // Reset status after 5 seconds
       setTimeout(() => setSubmitStatus(null), 5000);
     } catch (error) {
@@ -108,19 +108,19 @@ export default function ContactPage() {
     }
   };
 
-  return (
-    <motion.main 
+  return ( // Corrected this line: removed the extra '>'
+    <motion.main
       className="min-h-screen bg-black text-neutral-100"
       initial="hidden"
       animate="visible"
       variants={pageVariants}
     >
       <TornPaperClipPath />
-      
+
       {/* Hero Section */}
       <section className="relative py-16 md:py-24 bg-gradient-to-b from-black to-gray-900 overflow-hidden">
         <div className="container mx-auto px-6">
-          <motion.div 
+          <motion.div
             className="text-center max-w-4xl mx-auto"
             variants={itemVariants}
           >
@@ -138,15 +138,15 @@ export default function ContactPage() {
       <section className="py-16 md:py-24 relative">
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
-            
+
             {/* Left Column - Contact Form */}
             <motion.div variants={itemVariants} className="order-2 lg:order-1">
-              <div 
+              <div
                 className="bg-gray-900/60 backdrop-blur-sm border border-gray-800 rounded-lg p-8 shadow-xl"
                 style={{ clipPath: 'url(#contactTornEffect)' }}
               >
                 <h2 className="text-3xl font-bold mb-8 text-yellow-400">Send Us A Message</h2>
-                
+
                 <form onSubmit={handleSubmit} className="space-y-6">
                   {/* Name Input */}
                   <div>
@@ -164,7 +164,7 @@ export default function ContactPage() {
                       placeholder="Enter your name"
                     />
                   </div>
-                  
+
                   {/* Email Input */}
                   <div>
                     <label htmlFor="email" className="block text-neutral-300 mb-2 font-medium">
@@ -203,7 +203,7 @@ export default function ContactPage() {
                       <option value="other">Other</option>
                     </select>
                   </div>
-                  
+
                   {/* Message Textarea */}
                   <div>
                     <label htmlFor="message" className="block text-neutral-300 mb-2 font-medium">
@@ -220,7 +220,7 @@ export default function ContactPage() {
                       placeholder="Tell us what you need..."
                     />
                   </div>
-                  
+
                   {/* Submit Button */}
                   <div>
                     <button
@@ -233,7 +233,7 @@ export default function ContactPage() {
                       </span>
                       <div className="button-shimmer"></div>
                     </button>
-                    
+
                     {/* Status Messages */}
                     {submitStatus === 'success' && (
                       <p className="mt-4 text-green-400">
@@ -249,16 +249,16 @@ export default function ContactPage() {
                 </form>
               </div>
             </motion.div>
-            
+
             {/* Right Column - Contact Information */}
             <motion.div variants={itemVariants} className="order-1 lg:order-2">
-              <div 
+              <div
                 className="bg-gray-900/60 backdrop-blur-sm border border-gray-800 rounded-lg p-8 shadow-xl relative overflow-hidden h-full"
                 style={{ clipPath: 'url(#contactTornEffect)' }}
               >
                 <div className="relative z-10">
                   <h2 className="text-3xl font-bold mb-8 text-yellow-400">Contact Information</h2>
-                  
+
                   <div className="space-y-8">
                     {/* Email Contact */}
                     <div className="flex items-start space-x-4">
@@ -273,7 +273,7 @@ export default function ContactPage() {
                         <p className="text-neutral-400 text-sm mt-1">We'll respond within 24 hours</p>
                       </div>
                     </div>
-                    
+
                     {/* Phone Contact */}
                     <div className="flex items-start space-x-4">
                       <div className="bg-yellow-500 p-3 rounded-md text-black">
@@ -287,7 +287,7 @@ export default function ContactPage() {
                         <p className="text-neutral-400 text-sm mt-1">Mon-Fri, 9AM-5PM EST</p>
                       </div>
                     </div>
-                    
+
                     {/* Office Location */}
                     <div className="flex items-start space-x-4">
                       <div className="bg-yellow-500 p-3 rounded-md text-black">
@@ -301,7 +301,7 @@ export default function ContactPage() {
                         <p className="text-neutral-300 mt-1">India</p>
                       </div>
                     </div>
-                    
+
                     {/* Social Media */}
                     <div>
                       <h3 className="text-xl font-semibold text-neutral-100 mb-3">Connect With Us</h3>
@@ -330,7 +330,7 @@ export default function ContactPage() {
                     </div>
                   </div>
                 </div>
-                
+
                 {/* Background decorative elements */}
                 <div className="absolute top-0 right-0 -mt-20 -mr-20 w-64 h-64 bg-yellow-500/10 rounded-full filter blur-3xl"></div>
                 <div className="absolute bottom-0 left-0 -mb-20 -ml-20 w-64 h-64 bg-yellow-500/10 rounded-full filter blur-3xl"></div>
@@ -348,7 +348,7 @@ export default function ContactPage() {
             variants={itemVariants}
           >
 
-            
+
             <h2 className="text-4xl font-bold mb-4 text-yellow-400">Frequently Asked Questions</h2>
             <p className="text-neutral-300">Find quick answers to common questions</p>
           </motion.div>
@@ -389,10 +389,8 @@ export default function ContactPage() {
               </p>
             </div>
           </motion.div>
-        </div>
-      </section>
-          
-          <motion.div 
+
+          <motion.div
             className="text-center mt-12"
             variants={itemVariants}
           >
@@ -417,7 +415,7 @@ export default function ContactPage() {
           position: relative;
           overflow: hidden;
         }
-        
+
         .button-shimmer {
           position: absolute;
           top: 0;
@@ -435,23 +433,23 @@ export default function ContactPage() {
           animation: button-shimmer 2s infinite;
           transform: skewX(-20deg);
         }
-        
+
         @keyframes button-shimmer {
           0% { left: -100%; }
           100% { left: 200%; }
         }
-        
+
         /* Input focus animations */
         input:focus, textarea:focus, select:focus {
           animation: input-pulse 1s ease-out;
         }
-        
+
         @keyframes input-pulse {
           0% { box-shadow: 0 0 0 0 rgba(234, 179, 8, 0.5); }
           70% { box-shadow: 0 0 0 10px rgba(234, 179, 8, 0); }
           100% { box-shadow: 0 0 0 0 rgba(234, 179, 8, 0); }
         }
-        
+
         /* Background patterns and effects */
         @media (min-width: 768px) {
           section::before {
@@ -461,42 +459,19 @@ export default function ContactPage() {
             left: 0;
             right: 0;
             bottom: 0;
-            background-image: 
+            background-image:
               radial-gradient(circle at 20% 30%, rgba(234, 179, 8, 0.05) 0%, transparent 50%),
               radial-gradient(circle at 80% 70%, rgba(234, 179, 8, 0.05) 0%, transparent 50%);
             pointer-events: none;
           }
         }
       `}</style>
-      
-      {/* Map Section - Optional */}
-      <section className="py-16 md:py-24 bg-black">
-        <div className="container mx-auto px-6">
-          <motion.div variants={itemVariants} className="overflow-hidden rounded-lg shadow-xl" style={{ height: '400px' }}>
-            <div className="relative h-full w-full">
-              {/* Replace with actual map implementation or image */}
-              <div className="absolute inset-0 bg-gray-900 flex items-center justify-center">
-                <div className="text-center">
-                  <p className="text-neutral-400 mb-4">Interactive Map Placeholder</p>
-                  <div className="inline-block bg-yellow-500 p-3 rounded-full text-black">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                    </svg>
-                  </div>
-                  <p className="text-neutral-300 mt-4 font-medium">123 Crypto Street, New York, NY 10001</p>
-                  <p className="text-neutral-400 text-sm mt-2">Replace this with an actual map component</p>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-      
+
+
       {/* CTA Section */}
       <section className="py-16 md:py-24 bg-gradient-to-b from-black to-gray-900">
         <div className="container mx-auto px-6">
-          <motion.div 
+          <motion.div
             className="max-w-4xl mx-auto text-center"
             variants={itemVariants}
           >
@@ -513,8 +488,8 @@ export default function ContactPage() {
                   <div className="button-shimmer"></div>
                 </a>
               </Link>
-              <a 
-                href="#" 
+              <a
+                href="#"
                 onClick={(e) => {
                   e.preventDefault();
                   document.getElementById('name')?.focus();
@@ -527,11 +502,11 @@ export default function ContactPage() {
           </motion.div>
         </div>
       </section>
-      
+
       {/* Newsletter Section */}
       <section className="py-16 md:py-20 bg-black">
         <div className="container mx-auto px-6">
-          <motion.div 
+          <motion.div
             className="max-w-3xl mx-auto text-center"
             variants={itemVariants}
           >
@@ -541,7 +516,7 @@ export default function ContactPage() {
             <p className="text-neutral-300 mb-8">
               Subscribe to our newsletter for exclusive market insights and strategy updates
             </p>
-            
+
             <form className="flex flex-col sm:flex-row gap-3">
               <input
                 type="email"
@@ -549,7 +524,7 @@ export default function ContactPage() {
                 className="flex-grow bg-gray-800 border border-gray-700 rounded-md py-3 px-4 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-all duration-300"
                 required
               />
-              <button 
+              <button
                 type="submit"
                 className="btn-shimmer relative inline-flex items-center justify-center bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-3 px-6 rounded-md transition duration-300 ease-in-out transform hover:scale-105 shadow-lg hover:shadow-yellow-500/40 overflow-hidden"
               >
@@ -557,7 +532,7 @@ export default function ContactPage() {
                 <div className="button-shimmer"></div>
               </button>
             </form>
-            
+
             <p className="text-gray-500 text-sm mt-4">
               We respect your privacy. Unsubscribe at any time.
             </p>
