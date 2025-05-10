@@ -347,6 +347,8 @@ export default function ContactPage() {
             className="text-center max-w-4xl mx-auto mb-16"
             variants={itemVariants}
           >
+
+            
             <h2 className="text-4xl font-bold mb-4 text-yellow-400">Frequently Asked Questions</h2>
             <p className="text-neutral-300">Find quick answers to common questions</p>
           </motion.div>
