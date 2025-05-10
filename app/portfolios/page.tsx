@@ -7,6 +7,7 @@ import PortfolioSectionSkyBreakers from '@/components/PortfolioSectionSkyBreaker
 import PortfolioSectionProjectAlpha from '@/components/PortfolioSectionProjectAlpha';
 import PortfolioSectionProjectBeta from '@/components/PortfolioSectionProjectBeta';
 import PortfolioSection10XAlphasDetail from '@/components/PortfolioSection10XAlphasDetail';
+import PortfolioOverview from '@/components/PortfolioOverview';
 
 // Import the NewsletterSection component
 import NewsletterSection from "@/components/NewsletterSection";
@@ -28,7 +29,6 @@ export default function PortfoliosPage() {
             <PortfolioSectionRealKings />
             <PortfolioSectionBreChealga />
             <PortfolioSectionSkyBreakers />
-            <PortfolioSectionProjectAlpha />
             <PortfolioSectionProjectBeta />
           </div>
         </div>
