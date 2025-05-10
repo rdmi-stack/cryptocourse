@@ -290,7 +290,6 @@ export default function ContactPage() {
                     </div>
 
                  
-
                     {/* Social Media */}
                     <div>
                       <h3 className="text-xl font-semibold text-neutral-100 mb-3">Connect With Us</h3>

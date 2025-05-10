@@ -197,9 +197,9 @@ const PortfolioRealKingsPage: React.FC = () => {
               </p>
               <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} className="w-full">
                 <Link href="/subscribe?portfolio=real-kings" legacyBehavior>
-                  <a className={`relative inline-block w-full max-w-xs overflow-hidden rounded-lg ${blueColor.replace('text-','bg-')} px-8 py-3.5 text-lg font-bold text-black shadow-lg hover:bg-blue-500 transition-colors duration-300`}>
+<a className="relative inline-block w-full max-w-xs overflow-hidden rounded-lg bg-blue-500 px-8 py-3.5 text-lg font-bold text-white shadow-lg hover:bg-blue-600 transition-all duration-300">
                     <span className="relative z-10">Subscribe Now</span>
-                    <span className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-transparent via-white/50 to-transparent opacity-60 blur-[3px] animate-shimmer" />
+<span className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-transparent via-white/50 to-transparent opacity-60 blur-[3px] animate-shimmer" />
                   </a>
                 </Link>
               </motion.div>
