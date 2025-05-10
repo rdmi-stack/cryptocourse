@@ -53,11 +53,11 @@ const TornPaperClipPathComponent: React.FC = () => (
   </svg>
 );
 
-// Stats Data for GANGWAR
+// MODIFIED Stats Data for GANGWAR based on client feedback
 const portfolioStatsGangwar = [
-  { label: 'Risk Profile', value: 'High' },
-  { label: 'Primary Strategy', value: 'Aggressive Momentum' },
-  { label: 'Rebalance Frequency', value: 'Dynamic (Weekly/Monthly)' }
+  { label: 'Risk Profile', value: 'High', subValue: 'High-risk, high-reward' },
+  { label: 'Primary Strategy', value: 'Aggressive Momentum' }, // No subValue indicated for this one in feedback
+  { label: 'Rebalance Frequency', value: 'Dynamic', subValue: '(Weekly/Monthly)' }
 ];
 
 const PortfolioGangwarPage: React.FC = () => {
@@ -67,7 +67,7 @@ const PortfolioGangwarPage: React.FC = () => {
   const redColor = 'text-red-500'; // Accent color for GANGWAR
   const redHighlightColor = 'text-red-600';
 
-  // Content for GANGWAR from screenshots
+  // Content for GANGWAR
   const heroTitle = "GANGWAR";
   const shortDescription = "A fearless, technically optimized crypto strategy built for seasoned risk-takers aiming to dominate volatility and seize explosive upside opportunities in the digital asset battlefield.";
   const tagline = "High-Risk High Return | Technical Precision | Tactical Momentum Strategy";
@@ -119,7 +119,7 @@ const PortfolioGangwarPage: React.FC = () => {
               >
                 <div className="aspect-[4/3] md:aspect-[16/10] lg:aspect-[4/3] relative">
                   <Image
-                    src="/images/gangwar-hero.jpg" // **NEW IMAGE for GANGWAR Hero**
+                    src="/images/gangwar-section-visual.jpg"
                     alt="GANGWAR Portfolio Visual"
                     layout="fill"
                     objectFit="cover"
@@ -136,8 +136,8 @@ const PortfolioGangwarPage: React.FC = () => {
               variants={sectionVariant}
             >
               <motion.h1
-                className={`font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold ${redColor} mb-4 uppercase`} // Added uppercase for aggressive feel
-                style={{ textShadow: `0 0 25px rgba(239, 68, 68, 0.5), 0 0 10px rgba(220, 38, 38, 0.3)` }} // Red shadow
+                className={`font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold ${redColor} mb-4 uppercase`}
+                style={{ textShadow: `0 0 25px rgba(239, 68, 68, 0.5), 0 0 10px rgba(220, 38, 38, 0.3)` }}
                 variants={itemVariant}
               >
                 {heroTitle}
@@ -149,7 +149,7 @@ const PortfolioGangwarPage: React.FC = () => {
                 {shortDescription}
               </motion.p>
               <motion.p
-                className={`text-sm font-semibold ${redHighlightColor} tracking-wider`} // Bolder font
+                className={`text-sm font-semibold ${redHighlightColor} tracking-wider`}
                 variants={itemVariant}
               >
                 {tagline}
@@ -161,7 +161,7 @@ const PortfolioGangwarPage: React.FC = () => {
 
       {/* 2. Stats & Pricing Section */}
       <motion.section
-        className="py-12 md:py-16 bg-black/60 backdrop-blur-md border-t border-b border-gray-800/70" // Darker, more intense
+        className="py-12 md:py-16 bg-black/60 backdrop-blur-md border-t border-b border-gray-800/70"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.3 }}
@@ -173,17 +173,25 @@ const PortfolioGangwarPage: React.FC = () => {
               {portfolioStatsGangwar.map((stat) => (
                 <motion.div
                   key={stat.label}
-                  className="bg-gradient-to-br from-gray-800/80 via-gray-900/90 to-gray-800/80 border border-gray-700/80 p-5 rounded-xl shadow-lg text-center flex flex-col items-center justify-center hover:border-red-500/80 transition-all duration-300 transform hover:scale-105" // Red hover border
+                  className="bg-gradient-to-br from-gray-800/80 via-gray-900/90 to-gray-800/80 border border-gray-700/80 p-5 rounded-xl shadow-lg text-center flex flex-col items-center justify-center hover:border-red-500/80 transition-all duration-300 transform hover:scale-105 min-h-[150px] sm:min-h-[160px]" // Added min-height for consistency
                   variants={itemVariant}
                 >
                   <span className="block text-sm uppercase text-neutral-400 tracking-wider mb-1.5">{stat.label}</span>
-                  <span className={`block text-3xl font-bold ${stat.label === 'Risk Profile' ? redColor : 'text-neutral-100'}`}>{stat.value}</span>
+                  <span className={`block text-3xl font-bold ${stat.label === 'Risk Profile' ? redColor : 'text-neutral-100'}`}>
+                    {stat.value}
+                  </span>
+                  {/* MODIFIED: Render subValue if it exists */}
+                  {stat.subValue && (
+                    <span className="block text-base text-neutral-300 mt-0.5">
+                      {stat.subValue}
+                    </span>
+                  )}
                 </motion.div>
               ))}
             </motion.div>
 
             <motion.div
-              className={`lg:col-span-1 bg-gradient-to-br from-red-600/20 via-red-700/15 to-black/40 backdrop-blur-md border border-red-600/60 rounded-xl shadow-xl p-6 text-center flex flex-col justify-center items-center`} // Red accents
+              className={`lg:col-span-1 bg-gradient-to-br from-red-600/20 via-red-700/15 to-black/40 backdrop-blur-md border border-red-600/60 rounded-xl shadow-xl p-6 text-center flex flex-col justify-center items-center`}
               variants={itemVariant}
             >
               <p className="text-lg text-neutral-200 mb-2">Get access starting from</p>
@@ -345,9 +353,9 @@ const PortfolioGangwarPage: React.FC = () => {
 // Helper Components (modified to accept accent color)
 interface TabButtonProps { label: string; isActive: boolean; onClick: () => void; activeColor?: 'yellow' | 'blue' | 'red'; }
 const TabButton: React.FC<TabButtonProps> = ({ label, isActive, onClick, activeColor = 'yellow' }) => {
-  const colorClass = `text-${activeColor}-500`; // e.g. text-red-500
-  const bgColorClass = `bg-${activeColor}-500`; // e.g. bg-red-500
-  const hoverColorClass = `hover:text-${activeColor}-500/80`;
+  const colorClass = `text-${activeColor}-500`;
+  const bgColorClass = `bg-${activeColor}-500`;
+  const hoverColorClass = `hover:text-${activeColor}-400`; // Adjusted hover to be slightly lighter variant
 
   return (
     <button
@@ -359,7 +367,7 @@ const TabButton: React.FC<TabButtonProps> = ({ label, isActive, onClick, activeC
       {isActive && (
         <motion.div
           className={`absolute bottom-[-1px] left-0 right-0 h-1 ${bgColorClass}`}
-          layoutId="underline"
+          layoutId="underline-gangwar" // Unique layoutId per page/tab group
           initial={false}
           transition={{ type: "spring", stiffness: 400, damping: 30 }}
         />
@@ -383,7 +391,7 @@ const DetailSectionHeading: React.FC<{ children: React.ReactNode, className?: st
 };
 
 const MethodologySubSection: React.FC<{ title: string, content: string, accentColor?: 'yellow' | 'blue' | 'red' }> = ({ title, content, accentColor = 'yellow' }) => {
-  const colorClass = `text-${accentColor}-600`; // Slightly darker for sub-heading
+  const colorClass = `text-${accentColor}-500`; // Using the primary accent color for consistency
   return (
     <motion.div className="mb-8" variants={itemVariant}>
       <h4 className={`text-xl font-semibold ${colorClass} mb-2.5`}>{title}</h4>

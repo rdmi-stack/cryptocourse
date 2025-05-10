@@ -46,10 +46,6 @@ export default async function HomePage() {
 
       {/* --- About Section --- */}
       <AboutSection />
-
-
-
-      {/* --- Newsletter Section --- */}
       <NewsletterSection />
 
       {/* The Footer component would typically be rendered via layout.tsx */}
