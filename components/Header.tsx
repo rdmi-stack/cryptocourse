@@ -51,7 +51,7 @@ const Header: React.FC = () => {
   const navItems: NavItem[] = [
     {
       label: "Crypto Portfolios",
-      href: "/crypto-portfolios", // This link can be a general overview page
+      href: "/portfolios", // This link can be a general overview page
       icon: ChartBarIcon,
       dropdown: [
         { label: "10X Alphas", href: "/portfolios/10x-alphas", icon: ChartBarIcon },
