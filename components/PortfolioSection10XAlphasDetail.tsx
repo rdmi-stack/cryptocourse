@@ -100,7 +100,7 @@ const PortfolioSection10XAlphasDetail: React.FC = () => {
                 className={`bg-gray-800/70 border border-gray-700/50 p-4 rounded-lg text-center flex flex-col justify-center ${
                   i === 2 ? 'col-span-2 sm:col-span-1' : ''
                 }`}
-                variants={itemVariant} // This will be animated by the parent sectionVariant's staggerChildren
+                variants={itemVariant}
               >
                 <span className="text-xs uppercase text-neutral-400 mb-1">{stat.label}</span>
                 <span className="text-xl font-semibold text-neutral-100">{stat.value}</span>
@@ -110,9 +110,17 @@ const PortfolioSection10XAlphasDetail: React.FC = () => {
 
           {/* Pricing & CTA */}
           <motion.div
-            className="lg:col-span-1 bg-gradient-to-br from-gray-900/90 to-gray-800/95 backdrop-blur-sm border border-yellow-600/40 rounded-xl shadow-xl p-6 text-center flex flex-col items-center"
-            variants={itemVariant} // This will be animated by the parent sectionVariant's staggerChildren
+            className="lg:col-span-1 bg-gradient-to-br from-gray-900/90 to-gray-800/95 backdrop-blur-sm border border-yellow-600/40 rounded-xl shadow-xl p-6 text-center flex flex-col items-center relative" // Added relative positioning
+            variants={itemVariant}
           >
+            {/* LIMITED TIME OFFER TAG */}
+            <div className="absolute -top-3 -right-3 z-10">
+              <div className="transform rotate-[10deg] bg-yellow-500 text-black text-xs font-semibold py-1 px-3 rounded-md shadow-lg overflow-hidden limited-offer-tag">
+                LIMITED TIME OFFER
+              </div>
+            </div>
+            {/* END LIMITED TIME OFFER TAG */}
+
             <p className="text-lg text-neutral-200 mb-2">Get access starting from</p>
             <p className="text-4xl font-bold text-yellow-400 mb-5">
               ₹999 <span className="text-lg font-normal text-neutral-400">/ 3 Months</span>
@@ -120,11 +128,11 @@ const PortfolioSection10XAlphasDetail: React.FC = () => {
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Link href="/subscribe?portfolio=10x-alphas" legacyBehavior>
               <a
-  className={`btn-shimmer relative inline-block ${yellowBg} ${yellowHover} text-black font-bold py-3 px-8 rounded-md shadow-lg transition overflow-hidden`}
->
-  <span className="relative z-10">Subscribe Now</span>
-</a>
-
+                className={`btn-shimmer relative inline-block ${yellowBg} ${yellowHover} text-black font-bold py-3 px-8 rounded-md shadow-lg transition overflow-hidden`}
+              >
+                <span className="relative z-10">Subscribe Now</span>
+                {/* If your btn-shimmer class requires an inner div for its shimmer, ensure it's present or its CSS targets the <a> tag directly */}
+              </a>
               </Link>
             </motion.div>
           </motion.div>
@@ -155,16 +163,16 @@ const PortfolioSection10XAlphasDetail: React.FC = () => {
           </div>
 
           {/* Tab Panels */}
-          <AnimatePresence initial={false} mode="wait"> {/* Changed exitBeforeEnter to mode="wait" */}
+          <AnimatePresence initial={false} mode="wait">
             {activeTab === 'overview' && (
               <motion.div
                 key="overview"
-                variants={tabPanelVariant} // Use new tabPanelVariant
+                variants={tabPanelVariant}
                 initial="hidden"
                 animate="visible"
                 exit="exit"
               >
-                <motion.div variants={itemVariant}> {/* Wrap heading for animation */}
+                <motion.div variants={itemVariant}>
                   <DetailSectionHeading className="text-center">Overview</DetailSectionHeading>
                 </motion.div>
                 <motion.p className="text-neutral-300 mb-6" variants={itemVariant}>
@@ -180,12 +188,6 @@ const PortfolioSection10XAlphasDetail: React.FC = () => {
                   Key highlights:
                 </motion.h3>
                 <motion.ul className="list-disc pl-5 space-y-3 text-neutral-300 mb-8" variants={itemVariant}>
-                  {/* Each li could also be motion.li with itemVariant if finer control is needed,
-                      but animating the ul as one block with itemVariant is often sufficient.
-                      If you want individual li animations, ensure ul has staggerChildren in its variant
-                      and li elements are motion.li with their own variant.
-                      For simplicity, current approach animates ul as one item.
-                  */}
                   <li>A concentrated 10-crypto portfolio selected from leading L1/L2 protocols, DeFi, AI, and Web3 infrastructure projects.</li>
                   <li>Focus on tokens with strong network activity, adoption trends, and breakthrough narratives.</li>
                   <li>Targets early-stage and mid-cap cryptos with exponential upside.</li>
@@ -201,12 +203,12 @@ const PortfolioSection10XAlphasDetail: React.FC = () => {
             {activeTab === 'methodology' && (
               <motion.div
                 key="methodology"
-                variants={tabPanelVariant} // Use new tabPanelVariant
+                variants={tabPanelVariant}
                 initial="hidden"
                 animate="visible"
                 exit="exit"
               >
-                <motion.div variants={itemVariant}> {/* Wrap heading for animation */}
+                <motion.div variants={itemVariant}>
                   <DetailSectionHeading className="text-center">Methodology</DetailSectionHeading>
                 </motion.div>
                 <motion.div className="bg-gray-900/40 border border-gray-700 rounded-lg p-6" variants={itemVariant}>
@@ -227,6 +229,34 @@ const PortfolioSection10XAlphasDetail: React.FC = () => {
           </AnimatePresence>
         </div>
       </motion.section>
+
+      <style jsx>{`
+        .limited-offer-tag::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: -150%; /* Start further left for a better effect on a small, rotated tag */
+          width: 100%; /* Shimmer width relative to tag width */
+          height: 100%;
+          background: linear-gradient(
+            to right,
+            transparent 0%,
+            rgba(255, 255, 255, 0.4) 50%, /* Adjust opacity for shimmer intensity */
+            transparent 100%
+          );
+          transform: skewX(-25deg); /* Angle of the shimmer */
+          animation: limited-offer-shimmer 2.5s infinite; /* Speed of the shimmer */
+        }
+
+        @keyframes limited-offer-shimmer {
+          0% {
+            left: -150%;
+          }
+          100% {
+            left: 150%; /* Ensure it fully traverses the tag */
+          }
+        }
+      `}</style>
     </>
   );
 };
