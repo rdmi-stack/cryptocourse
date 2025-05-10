@@ -76,8 +76,9 @@ const PortfolioSectionRealKings: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 items-center">
 
           {/* Left Column: Text Content Panel */}
-          <motion.div
-            className="md:col-span-5 order-1 md:order-1 flex flex-col justify-center" // Text on the left
+       <motion.div
+  className="md:col-span-5 order-2 md:order-1 flex flex-col justify-center"
+
             variants={itemAppearVariant}
           >
             <div className="bg-gray-900/60 backdrop-blur-sm border border-gray-800 rounded-lg p-6 md:p-8 shadow-lg">
@@ -116,8 +117,9 @@ const PortfolioSectionRealKings: React.FC = () => {
           </motion.div>
 
           {/* Right Column: Image */}
-          <motion.div
-            className="md:col-span-7 order-2 md:order-2" // Image on the right
+       <motion.div
+  className="md:col-span-7 order-1 md:order-2"
+
             variants={itemAppearVariant}
           >
             <div className="relative">

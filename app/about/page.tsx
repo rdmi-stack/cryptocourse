@@ -50,7 +50,7 @@ const AboutPage: React.FC = () => {
       >
         <div className="absolute inset-0 z-0 opacity-15">
           <Image
-            src="/about-hero-bg.jpg" // Replace with a suitable abstract/team/office background
+            src="/images/herobg.jpg" // Replace with a suitable abstract/team/office background
             alt="About Dubai Club Background"
             layout="fill"
             objectFit="cover"
