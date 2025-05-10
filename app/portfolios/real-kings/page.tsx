@@ -70,7 +70,7 @@ const PortfolioRealKingsPage: React.FC = () => {
   // Content for REAL KINGS from screenshots
   const heroTitle = "Real Kings";
   const shortDescription = "The Real Kings Portfolio is crafted for disciplined investors seeking sustainable wealth creation through high-quality, battle-tested crypto assets.";
-  const tagline = "Blue-Chip Crypto | Passive Income | Long-Term Wealth Preservation";
+const tagline = "Blue-Chip Crypto | Passive Income | Long-Term Wealth Preservation";
 
   const overviewParagraph1 = "The Real Kings Portfolio is crafted for disciplined investors seeking sustainable wealth creation through high-quality, battle-tested crypto assets.";
   const overviewParagraph2 = "Focused on capital preservation, yield generation, and long-term growth, this portfolio represents the gold standard in crypto investing – with minimal risk and maximum peace of mind.";
