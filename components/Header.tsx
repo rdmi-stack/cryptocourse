@@ -63,7 +63,7 @@ const Header: React.FC = () => {
       ],
     },
     { label: "Stocks", href: "/stocks", icon: RectangleStackIcon },
-    { label: "Newsletter", href: "/newsletter", icon: RectangleStackIcon },
+    { label: "Newsletter", href: "/Newsletter", icon: RectangleStackIcon },
     { label: "Tools", href: "/tools", icon: RectangleStackIcon }, // Assuming Tools might have an icon
     { label: "Wealth Secret", href: "/wealth-secret", icon: SparklesIcon }, // Assuming Wealth Secret might have an icon
     { label: "Prime Community", href: "/prime-community", icon: PuzzlePieceIcon }, // Assuming Prime Community might have an icon
