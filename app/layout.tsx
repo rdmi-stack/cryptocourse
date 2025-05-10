@@ -6,6 +6,7 @@ import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header"; // Import the Header component
+import StickyWhatsAppButton from '@/components/StickyWhatsAppButton'; // Adjust path if necessary
 
 // Configure fonts
 const inter = Inter({
@@ -37,6 +38,8 @@ export default function RootLayout({
       <body className={`flex flex-col min-h-screen bg-black font-sans`}> {/* Use font-sans (Inter) as default */}
         <Header /> {/* Add Header component at the top */}
         {/* Changed wrapper div to main tag for semantics */}
+         <StickyWhatsAppButton />
+
         <main className="flex-grow">{children}</main>
         <Footer /> {/* Footer remains at the bottom */}
       </body>
